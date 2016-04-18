@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <!-- indexpage -->
+    <definition name="indexPage" template="/jsp/index.jsp">
+        <put-attribute name="main" value="/jsp/main.jsp"/>
+    </definition>
+
+    <definition name="*.*.page" template="/jsp/index.jsp">
+        <put-attribute name="main" value="/jsp/{1}/{2}.jsp"/>
+    </definition>
+</tiles-definitions>

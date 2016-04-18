@@ -1,0 +1,44 @@
+body {
+  background-color: #F5F5F5; }
+
+.panel {
+  border: 1px solid #E5E5E5;
+  background-color: white;
+  padding: 15px; }
+
+.search-from .form-group {
+  margin-right: 40px; }
+
+.x-btn {
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-right: 20px; }
+
+.explanation {
+  background-color: #42C9A5;
+  padding: 7px 10px;
+  font-weight: bold;
+  color: white; }
+
+.right {
+  float: right; }
+
+.x-pie {
+  height: 250px; }
+
+.x-column {
+  height: 300px; }
+
+.switch-arrow {
+  cursor: pointer;
+  position: absolute;
+  top: 42%;
+  z-index: 100; }
+
+.switch-arrow-left {
+  left: -10px; }
+
+.switch-arrow-right {
+  right: -10px; }
+
+/*# sourceMappingURL=style.css.map */
