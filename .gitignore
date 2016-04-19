@@ -8,6 +8,7 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 drug-platform.iml
+drug-platform-build.iml
 .idea/
 drug-platform-web/drug-platform-web.iml
 drug-platform-web/target/

@@ -17,18 +17,32 @@ var Main = function () {
     }
 
     var initDatepicker = function () {
-        $(".x-datepicker-month").datepicker({
-            format: "yyyy-mm",
+        $(".x-datepicker-day").datepicker({
+            format: "yyyy-mm-dd",
             language: "zh-CN",
-            minViewMode: 1,
             autoclose: true
         });
+    }
+
+    var searchFormInit = function () {
+        $(".dept select").on('change', function () {
+
+            var deptCode = $(this).children("option:selected").val()
+            if (deptCode == 'none') {
+                $(this).parent().siblings('.dept-ward').addClass("hide");
+            } else {
+                //加载科室相应病区
+                $(this).parent().siblings('.dept-ward').removeClass("hide");
+
+            }
+        })
     }
 
     return {
         init: function () {
             initSidebar();
             initDatepicker();
+            searchFormInit();
         }
     }
 }();

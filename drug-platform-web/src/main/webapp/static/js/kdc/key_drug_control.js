@@ -4,6 +4,7 @@
 $(function () {
     path('用药指标监控', '重点药品监控');
     initBtn();
+    bindDrugMonitorData('');
 })
 
 function initBtn() {

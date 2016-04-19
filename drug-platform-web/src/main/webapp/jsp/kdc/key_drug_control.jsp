@@ -190,7 +190,7 @@
             </div>
         </div>
     </div>
-    <div class="panel">
+    <div id="panel-0" class="panel">
         <table id="drugList" class="table table-bordered">
             <thead>
             <tr>
@@ -234,6 +234,7 @@
         </table>
         <%--<ul class="pagination-sm right thandrugs-pagination"></ul>--%>
     </div>
+    <div id="panel-1"></div>
 </div>
 <script src="<c:url value="/static/js/kdc/key_drug_control.js"/>"></script>
 </body>
