@@ -1,0 +1,4 @@
+取药及处方查询
+drugs_take_records.jsp 取药记录
+outpatient_inpatient_records.jsp 门诊病人住院记录
+single_variety_prescription.jsp 单品种处方

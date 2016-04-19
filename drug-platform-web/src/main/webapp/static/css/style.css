@@ -36,9 +36,58 @@ body {
   z-index: 100; }
 
 .switch-arrow-left {
-  left: -10px; }
+  left: 5px; }
 
 .switch-arrow-right {
-  right: -10px; }
+  right: 5px; }
+
+.x-breadcrumb {
+  background-color: white;
+  border: 1px solid #E5E5E5; }
+
+.x-prom {
+  position: relative;
+  top: 8px;
+  padding: 0 50px;
+  margin-top: 10px;
+  font-size: 2em;
+  font-weight: 600;
+  line-height: 200px; }
+
+.input-inline {
+  display: inline-block;
+  width: auto; }
+
+.x-glyphicon-remove {
+  color: #FF5400;
+  cursor: pointer; }
+
+.similar-drugs-panel {
+  width: 99%;
+  border-radius: 2px;
+  padding: 10px;
+  border: 1px solid #E5E5E5; }
+
+.added-drugs {
+  min-height: 50px; }
+
+.similar-drug {
+  border: 1px solid #E5E5E5;
+  padding: 6px 15px;
+  border-radius: 2px;
+  display: inline-block;
+  margin-bottom: 5px;
+  cursor: pointer; }
+
+.similar-drug.disabled {
+  background-color: #D7D7D7;
+  cursor: default; }
+
+.similar-drug-selected {
+  border: 1px solid #E5E5E5;
+  padding: 6px 15px;
+  border-radius: 2px;
+  display: inline-block;
+  margin-bottom: 5px; }
 
 /*# sourceMappingURL=style.css.map */

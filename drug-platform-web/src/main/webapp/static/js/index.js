@@ -32,3 +32,19 @@ var Main = function () {
         }
     }
 }();
+
+//显示当前页面路径
+function path(main_tilte, sub_title) {
+    $(".main_title").html(main_tilte);
+    $(".sub_title").html(sub_title);
+}
+
+function back() {
+    if (panel_index <= 0) {
+        return;
+    } else {
+        $("#panel-" + panel_index).addClass("hide");
+        panel_index = panel_index - 1;
+        $("#panel-" + panel_index).removeClass("hide");
+    }
+}

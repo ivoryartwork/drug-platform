@@ -3,7 +3,7 @@
  */
 var panel_index = 0;
 
-$("#thanDrugsPagination").twbsPagination({
+$(".thandrugs-pagination").twbsPagination({
     totalPages: 10,
     visiblePages: 7,
     first: '首页',
@@ -15,8 +15,8 @@ $("#thanDrugsPagination").twbsPagination({
     }
 });
 $(function () {
-    //allThanDrugs();
-    departmentThanDrugs();
+    path('用药指标监控','药费比');
+    allThanDrugs();
     initBtn();
 })
 
@@ -148,14 +148,4 @@ function switchToWard(name) {
     $("#panel-2").removeClass("hide");
     $("#panel-2 .title-name").html(name);
     wardThanDrugs();
-}
-
-function back() {
-    if (panel_index <= 0) {
-        return;
-    } else {
-        $("#panel-" + panel_index).addClass("hide");
-        panel_index = panel_index - 1;
-        $("#panel-" + panel_index).removeClass("hide");
-    }
 }

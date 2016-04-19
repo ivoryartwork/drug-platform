@@ -1,2 +1,11 @@
 用药指标监控页面描述
 than_drugs.jsp  药费比
+drugs_amount.jsp 药品用量
+drugs_outpatient.jsp 门诊次均药费
+ahe.jsp 住院次均药费
+aud.jsp 抗菌药物使用强度
+uaa.jsp 住院抗菌药物使用率
+poap.jsp 门诊抗菌药物处方比例
+paed.jsp 急诊抗菌药物处方比例
+ipuaa.jsp i类切口预防使用抗菌药物比例
+target_value_set.jsp 目标值设置

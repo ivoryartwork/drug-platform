@@ -54,24 +54,24 @@
             <ul class="nav nav-sidebar">
                 <li class="active"><a>用药指标监控</a></li>
                 <li><a href="than_drugs.html">药费比</a></li>
-                <li><a href="#">药品用量</a></li>
-                <li><a href="#">门诊次均药费</a></li>
-                <li><a href="#">住院次均药费</a></li>
-                <li><a href="#">抗菌药物使用强度</a></li>
-                <li><a href="#">住院抗菌药物使用率</a></li>
-                <li><a href="#">门诊抗菌药物处方比例</a></li>
-                <li><a href="#">急诊抗菌药物处方比例</a></li>
-                <li><a href="#">I类切口预防使用抗菌药物比例</a></li>
-                <li><a href="#">目标值设置</a></li>
+                <li><a href="drugs_amount.html">药品用量</a></li>
+                <li><a href="drugs_outpatient.html">门诊次均药费</a></li>
+                <li><a href="ahe.html">住院次均药费</a></li>
+                <li><a href="aud.html">抗菌药物使用强度</a></li>
+                <li><a href="uaa.html">住院抗菌药物使用率</a></li>
+                <li><a href="poap.html">门诊抗菌药物处方比例</a></li>
+                <li><a href="paed.html">急诊抗菌药物处方比例</a></li>
+                <li><a href="ipuaa.html">I类切口预防使用抗菌药物比例</a></li>
+                <li><a href="target_value_set.html">目标值设置</a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li class="active"><a>重点药品监控</a></li>
+                <li class="active"><a href="key_drug_control.html">重点药品监控</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li class="active"><a>取药及处方查询</a></li>
-                <li><a href="">取药记录查询</a></li>
-                <li><a href="">门诊病人住院记录</a></li>
-                <li><a href="">单品种处方查询</a></li>
+                <li><a href="drugs_take_records.html">取药记录查询</a></li>
+                <li><a href="outpatient_inpatient_records.html">门诊病人住院记录</a></li>
+                <li><a href="single_variety_prescription.html">单品种处方查询</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li class="active"><a>用药排名</a></li>
@@ -103,6 +103,12 @@
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="row">
+                <ol class="breadcrumb x-breadcrumb">
+                    <li><a class="main_title">检测数据</a></li>
+                    <li><a class="sub_title">体重历史数据</a></li>
+                </ol>
+            </div>
             <tiles:insertAttribute name="main"/>
         </div>
     </div>
