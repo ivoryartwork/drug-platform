@@ -26,7 +26,9 @@
     <script src="<c:url value="/static/js/bootstrap/datepicker/js/bootstrap-datepicker.min.js"/>"></script>
     <script src="<c:url value="/static/js/bootstrap/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"/>"></script>
     <script src="<c:url value="/static/js/highcharts/highcharts.js"/>"></script>
+    <script src="<c:url value="/static/js/highcharts/modules/exporting.js"/>"></script>
     <script src="<c:url value="/static/js/jquery.twbsPagination.min.js"/>"></script>
+    <script src="<c:url value="/static/js/s_api.js"/>"></script>
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">

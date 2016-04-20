@@ -27,6 +27,18 @@ $(function (ch) {
                     }
                 }
             },
+            exporting: {
+                buttons: {
+                    contextButton: {
+                        menuItems: [{
+                            text: '导出png图片',
+                            onclick: function () {
+                                this.exportChart();
+                            }
+                        }]
+                    }
+                }
+            },
             series: [{
                 type: 'pie',
                 data: data
@@ -53,6 +65,18 @@ $(function (ch) {
                 title: {
                     text: unit
                 }
+            },
+            exporting: {
+                buttons: {
+                    contextButton: {
+                        menuItems: [{
+                            text: '导出png图片',
+                            onclick: function () {
+                                this.exportChart();
+                            }
+                        }]
+                    }
+                },
             },
             plotOptions: {
                 column: {

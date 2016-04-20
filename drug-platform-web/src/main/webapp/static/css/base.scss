@@ -79,3 +79,16 @@ body {
   color: #FF5400;
   cursor: pointer;
 }
+
+.x-export-btn {
+  background-color: white;
+  border-radius: 2px;
+  width: 50px;
+  text-align: center;
+  height: 20px;
+  line-height: 20px;
+}
+
+.x-export-btn:hover {
+  text-decoration: none;
+}
