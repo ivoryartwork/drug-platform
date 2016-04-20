@@ -1,4 +1,4 @@
-package com.drug.platform.controller;
+package com.drug.platform.controller.mmi;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -8,14 +8,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 
 /**
  * Created by Yaochao on 2016/4/20.
  * 药费比接口
  */
 @RestController
-@RequestMapping("/s/thanDrugs")
+@RequestMapping("/mmi/thanDrugs")
 public class ThanDrugsController {
 
     /**

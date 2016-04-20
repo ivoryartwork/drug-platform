@@ -6,7 +6,7 @@ $(function (s) {
 
     s.thanDrugs.global = function (params, callback) {
         $.ajax({
-            url: 's/thanDrugs/global',
+            url: 'mmi/thanDrugs/global',
             data: params,
             type: 'get',
             success: function (data) {
@@ -17,7 +17,7 @@ $(function (s) {
 
     s.thanDrugs.dept = function (params, callback) {
         $.ajax({
-            url: 's/thanDrugs/dept',
+            url: 'mmi/thanDrugs/dept',
             data: params,
             type: 'get',
             success: function (data) {
@@ -28,7 +28,19 @@ $(function (s) {
 
     s.thanDrugs.ward = function (params, callback) {
         $.ajax({
-            url: 's/thanDrugs/ward',
+            url: 'mmi/thanDrugs/ward',
+            data: params,
+            type: 'get',
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
+
+    s.drugTakeRecords = {};
+    s.drugTakeRecords.byTime = function (params, callback) {
+        $.ajax({
+            url: 'tmpi/drugTakeRecords/byTime',
             data: params,
             type: 'get',
             success: function (data) {
