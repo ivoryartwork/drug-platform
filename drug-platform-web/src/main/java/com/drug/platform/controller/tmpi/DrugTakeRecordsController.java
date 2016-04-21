@@ -58,4 +58,37 @@ public class DrugTakeRecordsController {
         data.put("records", records);
         return data.toJSONString();
     }
+
+    /**
+     * 按药品查看取药记录
+     *
+     * @param beginDate
+     * @param endDate
+     * @param citizenhood
+     * @param patientId
+     * @param request
+     * @return
+     */
+    @RequestMapping("/byDrug")
+    public String byDrug(@RequestParam String beginDate, @RequestParam String endDate, @RequestParam String citizenhood,
+                         @RequestParam String patientId, HttpServletRequest request) {
+        JSONObject data = new JSONObject();
+
+        JSONArray records = new JSONArray();
+        JSONObject record = new JSONObject();
+        record.put("id", 1);
+        record.put("drugType", "抗肿瘤药物");
+        record.put("drugCode", "T123255");
+        record.put("drugName", "阿莫西林");
+        record.put("specifications", "0.2g沙发上");//规格
+        record.put("unit", "盒");
+        record.put("takeTimes", "5");//取药次数
+        record.put("availableDays", "6");//取药次数
+        record.put("number", 4);
+        record.put("ia", "265"); //计价金额
+        record.put("pa", "265"); //实收金额
+        records.add(record);
+        data.put("records", records);
+        return data.toJSONString();
+    }
 }

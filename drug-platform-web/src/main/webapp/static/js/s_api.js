@@ -48,4 +48,15 @@ $(function (s) {
             }
         });
     }
+
+    s.drugTakeRecords.byDrug = function (params, callback) {
+        $.ajax({
+            url: 'tmpi/drugTakeRecords/byDrug',
+            data: params,
+            type: 'get',
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
 }(window.S = {}))
