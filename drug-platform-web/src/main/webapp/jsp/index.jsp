@@ -31,6 +31,11 @@
     <script src="<c:url value="/static/js/s_api.js"/>"></script>
 </head>
 <body>
+<script>
+    var userInfo = {
+        userName: '${sessionScope.session_user.userName}'
+    }
+</script>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -44,8 +49,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">当前用户：刘玉（管理员）</a></li>
-                <li><a href="#">退出</a></li>
+                <li><a href="#">当前用户：${sessionScope.session_user.userName}</a></li>
+                <li><a href="logout.html">退出</a></li>
             </ul>
         </div>
     </div>
@@ -55,50 +60,50 @@
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li class="active"><a>用药指标监控</a></li>
-                <li><a href="than_drugs.html">药费比</a></li>
-                <li><a href="drugs_amount.html">药品用量</a></li>
-                <li><a href="drugs_outpatient.html">门诊次均药费</a></li>
-                <li><a href="ahe.html">住院次均药费</a></li>
-                <li><a href="aud.html">抗菌药物使用强度</a></li>
-                <li><a href="uaa.html">住院抗菌药物使用率</a></li>
-                <li><a href="poap.html">门诊抗菌药物处方比例</a></li>
-                <li><a href="paed.html">急诊抗菌药物处方比例</a></li>
-                <li><a href="ipuaa.html">I类切口预防使用抗菌药物比例</a></li>
-                <li><a href="target_value_set.html">目标值设置</a></li>
+                <li class="sidebar-item"><a href="than_drugs.html">药费比</a></li>
+                <li class="sidebar-item"><a href="drugs_amount.html">药品用量</a></li>
+                <li class="sidebar-item"><a href="drugs_outpatient.html">门诊次均药费</a></li>
+                <li class="sidebar-item"><a href="ahe.html">住院次均药费</a></li>
+                <li class="sidebar-item"><a href="aud.html">抗菌药物使用强度</a></li>
+                <li class="sidebar-item"><a href="uaa.html">住院抗菌药物使用率</a></li>
+                <li class="sidebar-item"><a href="poap.html">门诊抗菌药物处方比例</a></li>
+                <li class="sidebar-item"><a href="paed.html">急诊抗菌药物处方比例</a></li>
+                <li class="sidebar-item"><a href="ipuaa.html">I类切口预防使用抗菌药物比例</a></li>
+                <li class="sidebar-item"><a href="target_value_set.html">目标值设置</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li class="active"><a href="key_drug_control.html">重点药品监控</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li class="active"><a>取药及处方查询</a></li>
-                <li><a href="drugs_take_records.html">取药记录查询</a></li>
-                <li><a href="outpatient_inpatient_records.html">门诊病人住院记录</a></li>
-                <li><a href="single_variety_prescription.html">单品种处方查询</a></li>
+                <li class="sidebar-item"><a href="drugs_take_records.html">取药记录查询</a></li>
+                <li class="sidebar-item"><a href="outpatient_inpatient_records.html">门诊病人住院记录</a></li>
+                <li class="sidebar-item"><a href="single_variety_prescription.html">单品种处方查询</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li class="active"><a>用药排名</a></li>
-                <li><a href="">单品种药品用量排名</a></li>
-                <li><a href="">处方金额排名</a></li>
+                <li class="sidebar-item"><a href="">单品种药品用量排名</a></li>
+                <li class="sidebar-item"><a href="">处方金额排名</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li class="active"><a>月报表</a></li>
-                <li><a href="">科室药费比</a></li>
-                <li><a href="">科室门诊次均药费</a></li>
-                <li><a href="">病区住院次均药费</a></li>
-                <li><a href="">病区抗菌药物使用强度</a></li>
-                <li><a href="">病区住院抗菌药物使用率</a></li>
-                <li><a href="">科室门诊抗菌药物处方比例</a></li>
-                <li><a href="">急诊抗菌药物处方比例</a></li>
-                <li><a href="">I类切口预防使用抗菌药物比例</a></li>
-                <li><a href="">不合理用药记录</a></li>
-                <li><a href="">药品用量统计</a></li>
-                <li><a href="">联合用药统计</a></li>
+                <li class="sidebar-item"><a href="">科室药费比</a></li>
+                <li class="sidebar-item"><a href="">科室门诊次均药费</a></li>
+                <li class="sidebar-item"><a href="">病区住院次均药费</a></li>
+                <li class="sidebar-item"><a href="">病区抗菌药物使用强度</a></li>
+                <li class="sidebar-item"><a href="">病区住院抗菌药物使用率</a></li>
+                <li class="sidebar-item"><a href="">科室门诊抗菌药物处方比例</a></li>
+                <li class="sidebar-item"><a href="">急诊抗菌药物处方比例</a></li>
+                <li class="sidebar-item"><a href="">I类切口预防使用抗菌药物比例</a></li>
+                <li class="sidebar-item"><a href="">不合理用药记录</a></li>
+                <li class="sidebar-item"><a href="">药品用量统计</a></li>
+                <li class="sidebar-item"><a href="">联合用药统计</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li class="active"><a>特殊管理药品监控</a></li>
-                <li><a href="">在院用量统计</a></li>
-                <li><a href="">临床应用统计</a></li>
-                <li><a href="">单病人用药统计</a></li>
+                <li class="sidebar-item"><a href="">在院用量统计</a></li>
+                <li class="sidebar-item"><a href="">临床应用统计</a></li>
+                <li class="sidebar-item"><a href="">单病人用药统计</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li class="active"><a>用户权限管理</a></li>
@@ -107,8 +112,8 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <div class="row">
                 <ol class="breadcrumb x-breadcrumb">
-                    <li><a class="main_title">检测数据</a></li>
-                    <li><a class="sub_title">体重历史数据</a></li>
+                    <li><a class="main_title">首页</a></li>
+                    <li><a class="sub_title"></a></li>
                 </ol>
             </div>
             <tiles:insertAttribute name="main"/>

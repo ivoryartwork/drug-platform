@@ -78,6 +78,14 @@ body {
     background-color: #428bca;
 }
 
+.sidebar-item.select {
+    background-color: #f7f7f7;
+}
+
+.sidebar-item.select a:hover {
+    background-color: #f7f7f7 !important;
+}
+
 /*
  * Main content
  */

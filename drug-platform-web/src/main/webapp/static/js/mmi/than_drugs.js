@@ -3,15 +3,20 @@
  */
 var panel_index = 0;
 var beginDate, endDate, type, deptCode, wardCode, costType;
-var dataFormatStr = 'yyyy-MM-dd';
+var dateFormatStr = 'yyyy-MM-dd';
 
 $(function () {
     path('用药指标监控', '药费比');
-    beginDate = '2015-12-12';
-    endDate = '2015-12-12';
+    initDate();
     allThanDrugs();
     initBtn();
 })
+
+function initDate() {
+    var now = new Date();
+    beginDate = now.Format(dateFormatStr);
+    endDate = now.AddDate(-30).Format(dateFormatStr);
+}
 
 /**
  * 全院统计药费比
@@ -23,12 +28,12 @@ function allThanDrugs() {
         endDate: endDate,
     }
     S.thanDrugs.global(params, bindGlabalData);
-    setTitle("全院2015年9月药费比", "全院总药费比趋势图", "全院2015年9月各科室药费比");
+    setTitle("全院" + beginDate + "至" + endDate + "药费比", "全院总药费比趋势图", "全院" + beginDate + "至" + endDate + "各科室药费比");
 }
 
 function setTitle(title1, title2, title3) {
     $("#panel-" + panel_index + " .des").each(function (i) {
-        if (i = 0) {
+        if (i == 0) {
             $(this).html(title1);
         } else if (i == 1) {
             $(this).html(title2);
@@ -78,7 +83,7 @@ function bindGlabalData(data) {
 
     var deptRatesList = '';
     for (var i = 0; i < deptRates.length; i++) {
-        deptRatesList += ' <tr> <td><a onclick=switchToDepartment("' + deptRates[i].deptName + '")>' + deptRates[i].deptName + '</a></td> <td>' + deptRates[i].drugCost + '</td>' +
+        deptRatesList += ' <tr> <td><a onclick=switchToDepartment("' + deptRates[i].deptCode + '","' + deptRates[i].deptName + '")>' + deptRates[i].deptName + '</a></td> <td>' + deptRates[i].drugCost + '</td>' +
             ' <td>' + deptRates[i].treatCost + '</td> <td>' + deptRates[i].totalCost + '</td> <td>' + deptRates[i].rate + '</td> <td>' + deptRates[i].targetRate + '</td> <td>' + deptRates[i].rank + '</td> </tr>';
     }
     $("#panel-0 table tbody").html(deptRatesList);
@@ -153,7 +158,7 @@ function bindDeptData(data) {
 
     var wardRatesList = '';
     for (var i = 0; i < wardRates.length; i++) {
-        wardRatesList += ' <tr> <td><a onclick=switchToWard("' + wardRates[i].wardName + '")>' + wardRates[i].wardName + '</a></td> <td>' + wardRates[i].drugCost + '</td>' +
+        wardRatesList += ' <tr> <td><a onclick=switchToWard("' + wardRates[i].wardCode + '","' + wardRates[i].wardName + '")>' + wardRates[i].wardName + '</a></td> <td>' + wardRates[i].drugCost + '</td>' +
             ' <td>' + wardRates[i].treatCost + '</td> <td>' + wardRates[i].totalCost + '</td> <td>' + wardRates[i].rate + '</td> <td>' + wardRates[i].targetRate + '</td> <td>' + wardRates[i].rank + '</td> </tr>';
     }
     $("#panel-1 table tbody").html(wardRatesList);
@@ -201,30 +206,30 @@ function bindWardData(data) {
 /**
  * 科室统计
  */
-function departmentThanDrugs() {
+function departmentThanDrugs(deptCode, deptName) {
     var params = {
         type: 1,
         beginDate: beginDate,
         endDate: endDate,
-        deptCode: '123455'
+        deptCode: deptCode
     }
     S.thanDrugs.dept(params, bindDeptData);
-    setTitle("肾病科2015年9月药费比", "肾病科总药费比趋势图", "肾病科2015年9月各病区药费比");
+    setTitle(deptName + beginDate + "至" + endDate + "药费比", deptName + "总药费比趋势图", deptName + beginDate + "至" + endDate + "各病区药费比");
 }
 
 /**
  * 病区统计
  */
-function wardThanDrugs() {
+function wardThanDrugs(wardCode, wardName) {
     var params = {
         type: 1,
         beginDate: beginDate,
         endDate: endDate,
         deptCode: '123455',
-        wardCode: '21'
+        wardCode: wardCode
     }
     S.thanDrugs.ward(params, bindWardData);
-    setTitle("肾病科一区2015年9月药费比", "肾病科一区总药费比趋势图", "肾病科一区2015年9月各病区药费比");
+    setTitle(wardName + beginDate + "至" + endDate + "药费比", wardName + "总药费比趋势图", null);
 }
 
 function initBtn() {
@@ -260,35 +265,37 @@ function initBtn() {
         beginDate = begin;
         endDate = end;
         type = $(this).parent().find('.type').find('option:selected').val();
-        deptCode = $(this).parent().find('.dept').find('option:selected').val();
-        wardCode = $(this).parent().find('.dept-ward').find('option:selected').val();
+        var $dept = $(this).parent().find('.dept').find('option:selected');
+        var $ward = $(this).parent().find('.dept-ward').find('option:selected');
+        deptCode = $dept.val();
+        wardCode = $ward.val();
         costType = $(this).parent().find('.costType').find('option:selected').val();
         if (deptCode == 'none') {
             //全局
             allThanDrugs();
         } else if (deptCode != 'none' && wardCode == 'none') {
             //科室
-            switchToDepartment('');
+            switchToDepartment(deptCode, $dept.html());
         } else if (deptCode != 'none' && wardCode != 'none') {
             //病区
-            switchToWard('');
+            switchToWard(wardCode, $ward.html());
         }
     });
 }
 
 //跳转到科室统计
-function switchToDepartment(name) {
+function switchToDepartment(deptCode, deptName) {
     panel_index = 1;
     $("#panel-0").addClass("hide");
     $("#panel-1").removeClass("hide");
     $("#panel-1 .title-name").html(name);
-    departmentThanDrugs();
+    departmentThanDrugs(deptCode, deptName);
 }
 
-function switchToWard(name) {
+function switchToWard(wardCode, wardName) {
     panel_index = 2;
     $("#panel-1").addClass("hide");
     $("#panel-2").removeClass("hide");
     $("#panel-2 .title-name").html(name);
-    wardThanDrugs();
+    wardThanDrugs(wardCode, wardName);
 }

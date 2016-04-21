@@ -5,7 +5,7 @@ package com.drug.platform.controller;
  */
 public class Pages {
 
-    public static final String LOGIN = "login_new";
+    public static final String LOGIN = "login";
 
     public static final String REDIRECT_LOGIN = "redirect:/login.html";
 

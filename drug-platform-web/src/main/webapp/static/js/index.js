@@ -5,15 +5,36 @@ var Main = function () {
 
     //初始化侧边栏
     var initSidebar = function () {
+        $(".nav-sidebar").each(function (i) {
+            var activeItemIndex = localStorage.getItem(userInfo.userName + "itemIndex");
+            var active = localStorage.getItem(userInfo.userName + "itemIndexHead" + i);
+            if (active == 1) {
+                $(this).children(".active").siblings("li").show();
+                $(this).children(".active").addClass("fold");
+            }
+            $(this).children(".active").attr("index", i);
+            $(this).children(".sidebar-item").each(function (k) {
+                if (activeItemIndex == i + "-" + k) {
+                    $(this).addClass("select")
+                }
+                $(this).attr("index", i + "-" + k);
+            })
+        })
         $(".nav-sidebar .active").click(function () {
+            var index = $(this).attr("index");
             if ($(this).hasClass("fold")) {
                 $(this).siblings("li").hide(300);
                 $(this).removeClass("fold");
+                localStorage.setItem(userInfo.userName + "itemIndexHead" + index, 0);
             } else {
                 $(this).siblings("li").show(300);
                 $(this).addClass("fold");
+                localStorage.setItem(userInfo.userName + "itemIndexHead" + index, 1);
             }
         });
+        $(".nav-sidebar .sidebar-item").click(function () {
+            localStorage.setItem(userInfo.userName + "itemIndex", $(this).attr("index"));
+        })
     }
 
     var initDatepicker = function () {
@@ -101,4 +122,11 @@ Date.prototype.Format = function (fmt) { //author: meizz
     for (var k in o)
         if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
+}
+
+Date.prototype.AddDate = function (days) {
+    var newDate = this;
+    newDate.setDate(newDate.getDate() + days);
+    //alert(newDate.Format(dateFormatStr));
+    return newDate;
 }
