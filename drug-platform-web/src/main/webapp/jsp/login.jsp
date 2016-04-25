@@ -16,7 +16,7 @@
 <html>
 <head>
     <base href="<%=basePath%>">
-    <title>水木元生健康管理系统</title>
+    <title>解放军总医院药品监管平台</title>
     <link rel="stylesheet" href="<c:url value="/static/css/login_page.css"/>">
 </head>
 <body>

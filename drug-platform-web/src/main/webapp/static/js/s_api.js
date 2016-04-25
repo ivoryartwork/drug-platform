@@ -2,8 +2,9 @@
  * Created by Yaochao on 2016/4/20.
  */
 $(function (s) {
-    s.thanDrugs = {};
 
+    //药费比
+    s.thanDrugs = {};
     s.thanDrugs.global = function (params, callback) {
         $.ajax({
             url: 'mmi/thanDrugs/global',
@@ -37,6 +38,7 @@ $(function (s) {
         });
     }
 
+    //用药记录
     s.drugTakeRecords = {};
     s.drugTakeRecords.byTime = function (params, callback) {
         $.ajax({
@@ -59,4 +61,28 @@ $(function (s) {
             }
         });
     }
+
+    s.drugsOutPatient = {}
+    s.drugsOutPatient.global = function (params, callback) {
+        $.ajax({
+            url: 'mmi/drugsOutPatient/global',
+            data: params,
+            type: 'get',
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
+
+    s.drugsOutPatient.dept = function (params, callback) {
+        $.ajax({
+            url: 'mmi/drugsOutPatient/dept',
+            data: params,
+            type: 'get',
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
+
 }(window.S = {}))

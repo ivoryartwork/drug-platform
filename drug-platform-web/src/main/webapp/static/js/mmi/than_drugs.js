@@ -14,14 +14,17 @@ $(function () {
 
 function initDate() {
     var now = new Date();
-    beginDate = now.Format(dateFormatStr);
-    endDate = now.AddDate(-30).Format(dateFormatStr);
+    endDate = now.Format(dateFormatStr);
+    beginDate = now.AddDate(-30).Format(dateFormatStr);
 }
 
 /**
  * 全院统计药费比
  */
 function allThanDrugs() {
+    $("#panel-1").addClass("hide");
+    $("#panel-2").addClass("hide");
+    $("#panel-0").removeClass("hide");
     var params = {
         type: 1,
         beginDate: beginDate,
@@ -287,6 +290,7 @@ function initBtn() {
 function switchToDepartment(deptCode, deptName) {
     panel_index = 1;
     $("#panel-0").addClass("hide");
+    $("#panel-2").addClass("hide");
     $("#panel-1").removeClass("hide");
     $("#panel-1 .title-name").html(name);
     departmentThanDrugs(deptCode, deptName);
@@ -294,6 +298,7 @@ function switchToDepartment(deptCode, deptName) {
 
 function switchToWard(wardCode, wardName) {
     panel_index = 2;
+    $("#panel-0").addClass("hide");
     $("#panel-1").addClass("hide");
     $("#panel-2").removeClass("hide");
     $("#panel-2 .title-name").html(name);
