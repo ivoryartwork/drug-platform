@@ -85,4 +85,38 @@ $(function (s) {
         });
     }
 
+    s.ahe = {}
+    s.ahe.global = function (params, callback) {
+        $.ajax({
+            url: 'mmi/ahe/global',
+            data: params,
+            type: 'get',
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
+
+    s.ahe.dept = function (params, callback) {
+        $.ajax({
+            url: 'mmi/ahe/dept',
+            data: params,
+            type: 'get',
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
+
+    s.ahe.ward = function (params, callback) {
+        $.ajax({
+            url: 'mmi/ahe/ward',
+            data: params,
+            type: 'get',
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
+
 }(window.S = {}))

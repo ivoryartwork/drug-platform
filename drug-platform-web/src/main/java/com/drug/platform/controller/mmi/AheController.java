@@ -13,22 +13,21 @@ import javax.servlet.http.HttpServletRequest;
  * Created by Yaochao on 2016/4/25.
  */
 @RestController
-@RequestMapping("/mmi/drugsOutPatient")
-public class DrugsOutPatientController {
+@RequestMapping("/mmi/ahe")
+public class AheController {
 
     /**
-     * 门诊次均药费比
+     * 住院次均药费
      *
      * @param beginDate
      * @param endDate
-     * @param costType 费用类别
+     * @param costType
      * @param request
      * @return
      */
     @RequestMapping(value = "/global", method = RequestMethod.GET)
     public String global(@RequestParam String beginDate, @RequestParam String endDate, @RequestParam(required = false) String costType,
                          HttpServletRequest request) {
-
         JSONObject result = new JSONObject();
         result.put("timesDrugCost", 5000);   //次均药费
         result.put("targetTimesDrugCost", 4000);
@@ -47,22 +46,35 @@ public class DrugsOutPatientController {
         return result.toJSONString();
     }
 
-    /**
-     * 科室门诊次均药费比
-     *
-     * @param beginDate
-     * @param endDate
-     * @param deptCode
-     * @param costType
-     * @param request
-     * @return
-     */
     @RequestMapping(value = "/dept", method = RequestMethod.GET)
     public String dept(@RequestParam String beginDate, @RequestParam String endDate,
                        @RequestParam String deptCode, @RequestParam(required = false) String costType,
                        HttpServletRequest request) {
         JSONObject result = new JSONObject();
+        result.put("timesDrugCost", 5200);   //次均药费
+        result.put("targetTimesDrugCost", 6000);
+        result.put("trend", "1,2,3,4,5,6");
+        JSONArray timesDrugCostList = new JSONArray();
+        JSONObject deptTimesDrugCost = new JSONObject();
+        deptTimesDrugCost.put("wardName", "肾病科一区");
+        deptTimesDrugCost.put("wardCode", "123445");
+        deptTimesDrugCost.put("times", 12321);
+        deptTimesDrugCost.put("totalDrugCost", 123552);
+        deptTimesDrugCost.put("timesDrugCost", 1232);
+        deptTimesDrugCost.put("targetTimesDrugCost", 75.3);
+        deptTimesDrugCost.put("rank", 75);
+        timesDrugCostList.add(deptTimesDrugCost);
+        result.put("timesDrugCostList", timesDrugCostList);
+        return result.toJSONString();
+    }
+
+    @RequestMapping(value = "/ward", method = RequestMethod.GET)
+    public String ward(@RequestParam String beginDate, @RequestParam String endDate,
+                       @RequestParam String deptCode, @RequestParam String wardCode, @RequestParam(required = false) String costType,
+                       HttpServletRequest request) {
+        JSONObject result = new JSONObject();
         result.put("trend", "1,2,3,4,5,6");
         return result.toJSONString();
     }
+
 }

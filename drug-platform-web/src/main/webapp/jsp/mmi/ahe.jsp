@@ -13,17 +13,17 @@
 </head>
 <body>
 <div class="row">
-    <div class="panel">
+    <div class="panel search-panel">
         <form class="form-inline search-from">
             <div class="form-group">
                 <label>开始时间：</label>
-                <input type="text" class="form-control x-datepicker-month">
+                <input type="text" name="begin" class="form-control x-datepicker-day">
             </div>
             <div class="form-group">
                 <label>截止时间：</label>
-                <input type="text" class="form-control x-datepicker-month">
+                <input type="text" name="end" class="form-control x-datepicker-day">
             </div>
-            <div class="form-group">
+            <div class="form-group dept">
                 <label>科室名称：</label>
                 <select class="form-control">
                     <option>不分科室</option>
@@ -33,7 +33,7 @@
                     <option>内科</option>
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group dept-ward hide">
                 <label>病区名称：</label>
                 <select class="form-control">
                     <option>不分病区</option>
@@ -44,7 +44,7 @@
                     <option>病区五</option>
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group costType">
                 <label>类别：</label>
                 <select class="form-control">
                     <option>不分类别</option>
@@ -54,8 +54,7 @@
                 </select>
             </div>
         </form>
-        <button type="button" class="btn btn-primary x-btn">查询</button>
-        <button type="button" class="btn btn-warning x-btn">导出</button>
+        <button type="button" class="btn btn-primary x-btn search-btn">查询</button>
         <button id="back" type="button" class="btn btn-info x-btn">返回</button>
     </div>
 </div>
@@ -63,21 +62,22 @@
     <div id="panel-0" class="panel">
         <div class="row">
             <div class="col-md-6">
-                <p class="explanation">全院2015年9月住院次均药费</p>
+                <p class="explanation"><span class="des"></span></p>
 
-                <h3 class="text-center">全院2015年9月住院次均药费<span class="x-prom">1122530元</span></h3>
+                <h3 class="text-center" id="globalTimesDrugCost"></h3>
 
-                <p class="text-right">目标值：412100元</p>
+                <p class="text-right">目标值：<span id="globalTarget"></span></p>
             </div>
             <div class="col-md-6">
-                <p class="explanation">全院住院次均药费趋势图</p>
+                <p class="explanation"><span class="des"></span></p>
 
                 <div id="aheColumn" class="x-column"></div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <p class="explanation">全院2015年9月各科室住院次均药费</p>
+                <p class="explanation"><span class="des"></span><a class="right x-export-btn"
+                                                                   href="export/thanDrugsData">导出</a></p>
                 <table class="table table-bordered">
                     <thead>
                     <tr>
@@ -85,142 +85,37 @@
                         <th>住院人次</th>
                         <th>住院总费用</th>
                         <th>次均药费</th>
-                        <th>目标值（%）</th>
-                        <th>涨幅</th>
+                        <th>目标值</th>
                         <th>排名</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><a onclick="switchToDepartment('肾病科')">肾病科</a></td>
-                        <td>282956</td>
-                        <td>363535</td>
-                        <td>4455411</td>
-                        <td>76.3</td>
-                        <td>53</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>Integer</td>
-                        <td>nec</td>
-                        <td>odio</td>
-                        <td>Praesent</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
                     </tbody>
                 </table>
-                <ul class="pagination-sm right thandrugs-pagination"></ul>
             </div>
         </div>
     </div>
     <div id="panel-1" class="panel hide">
         <div class="row">
             <div class="col-md-6">
-                <p class="explanation">肾病科2015年9月住院次均药费</p>
+                <p class="explanation"><span class="des"></span></p>
 
-                <h3 class="text-center">肾病科2015年9月住院次均药费<span class="x-prom">1122530元</span></h3>
+                <span id="deptName"></span>
 
-                <p class="text-right">目标值：412100元</p>
+                <h3 class="text-center" id="deptTimesDrugCost"></h3>
+
+                <p class="text-right">目标值：<span id="deptTarget"></span>元</p>
             </div>
             <div class="col-md-6">
-                <p class="explanation">肾病科住院次均药费趋势图</p>
+                <p class="explanation"><span class="des"></span></p>
 
                 <div id="departmentAheColumn" class="x-column"></div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <p class="explanation"><span class="title-name"></span>2015年9月各科室药费比</p>
+                <p class="explanation"><span class="des"></span><a class="right x-export-btn"
+                                                                   href="export/thanDrugsData">导出</a></p>
                 <table class="table table-bordered">
                     <thead>
                     <tr>
@@ -228,118 +123,11 @@
                         <th>住院人次</th>
                         <th>住院总费用</th>
                         <th>次均药费</th>
-                        <th>目标值（%）</th>
-                        <th>涨幅</th>
+                        <th>目标值</th>
                         <th>排名</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><a onclick="switchToWard('肾病一区')">肾病科一区</a></td>
-                        <td>282956</td>
-                        <td>363535</td>
-                        <td>4455411</td>
-                        <td>76.3</td>
-                        <td>53</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>Integer</td>
-                        <td>nec</td>
-                        <td>odio</td>
-                        <td>Praesent</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
                     </tbody>
                 </table>
                 <ul class="pagination-sm right thandrugs-pagination"></ul>
@@ -349,7 +137,7 @@
     <div id="panel-2" class="panel hide">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h3 class="text-center">肾病一病区住院次均药费趋势图</h3>
+                <h3 class="text-center"><span class="des"></span>住院次均药费趋势图</h3>
 
                 <div id="wardAheColumn" class="x-column"></div>
             </div>

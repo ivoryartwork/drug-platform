@@ -130,3 +130,22 @@ Date.prototype.AddDate = function (days) {
     //alert(newDate.Format(dateFormatStr));
     return newDate;
 }
+
+function setTitle(title1, title2, title3) {
+    $("#panel-" + panel_index + " .des").each(function (i) {
+        if (i == 0) {
+            $(this).html(title1);
+        } else if (i == 1) {
+            $(this).html(title2);
+        } else {
+            $(this).html(title3);
+        }
+    })
+}
+
+function initDate() {
+    var now = new Date();
+    endDate = now.Format(dateFormatStr);
+    beginDate = now.AddDate(-30).Format(dateFormatStr);
+}
+var dateFormatStr = 'yyyy-MM-dd';

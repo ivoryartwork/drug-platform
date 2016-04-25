@@ -2,8 +2,7 @@
  * Created by Yaochao on 2016/4/18.
  */
 var panel_index = 0;
-var beginDate, endDate, type, deptCode, wardCode, costType;
-var dateFormatStr = 'yyyy-MM-dd';
+var beginDate, endDate, type = 1, deptCode, wardCode, costType;
 
 $(function () {
     path('用药指标监控', '药费比');
@@ -11,12 +10,6 @@ $(function () {
     allThanDrugs();
     initBtn();
 })
-
-function initDate() {
-    var now = new Date();
-    endDate = now.Format(dateFormatStr);
-    beginDate = now.AddDate(-30).Format(dateFormatStr);
-}
 
 /**
  * 全院统计药费比
@@ -26,24 +19,13 @@ function allThanDrugs() {
     $("#panel-2").addClass("hide");
     $("#panel-0").removeClass("hide");
     var params = {
-        type: 1,
+        type: type,
+        costType: costType,
         beginDate: beginDate,
         endDate: endDate,
     }
     S.thanDrugs.global(params, bindGlabalData);
     setTitle("全院" + beginDate + "至" + endDate + "药费比", "全院总药费比趋势图", "全院" + beginDate + "至" + endDate + "各科室药费比");
-}
-
-function setTitle(title1, title2, title3) {
-    $("#panel-" + panel_index + " .des").each(function (i) {
-        if (i == 0) {
-            $(this).html(title1);
-        } else if (i == 1) {
-            $(this).html(title2);
-        } else {
-            $(this).html(title3);
-        }
-    })
 }
 
 //绑定全局数据
@@ -273,6 +255,9 @@ function initBtn() {
         deptCode = $dept.val();
         wardCode = $ward.val();
         costType = $(this).parent().find('.costType').find('option:selected').val();
+        if (costType == 'none') {
+            costType = null;
+        }
         if (deptCode == 'none') {
             //全局
             allThanDrugs();

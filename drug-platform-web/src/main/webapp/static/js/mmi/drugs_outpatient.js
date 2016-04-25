@@ -3,13 +3,6 @@
  */
 var panel_index = 0;
 var beginDate, endDate, deptCode, costType;
-var dateFormatStr = 'yyyy-MM-dd';
-
-function initDate() {
-    var now = new Date();
-    endDate = now.Format(dateFormatStr);
-    beginDate = now.AddDate(-30).Format(dateFormatStr);
-}
 
 $(function () {
     path('用药指标监控', '门诊次均药费');
@@ -31,7 +24,7 @@ function allDrugsOutpatient() {
     }
 
     S.drugsOutPatient.global(params, bindGlobalData)
-    setTitle("全院" + beginDate + "至" + endDate + "门诊次均药费", "全院门诊次均药费趋势图", "全院" + beginDate + "至" + endDate + "各科室次均药费");
+    setTitle("全院" + beginDate + "至" + endDate + "门诊次均药费", "全院门诊次均药费趋势图", "全院" + beginDate + "至" + endDate + "各科室门诊次均药费");
 }
 
 function bindGlobalData(data) {
@@ -156,16 +149,4 @@ function bindDeptData(data) {
         }
     }]
     chartHelper.column('departmentDrugsOutPatientColumn', categories, series, "%");
-}
-
-function setTitle(title1, title2, title3) {
-    $("#panel-" + panel_index + " .des").each(function (i) {
-        if (i == 0) {
-            $(this).html(title1);
-        } else if (i == 1) {
-            $(this).html(title2);
-        } else {
-            $(this).html(title3);
-        }
-    })
 }
