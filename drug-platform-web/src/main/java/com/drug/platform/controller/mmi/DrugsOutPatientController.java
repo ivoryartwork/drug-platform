@@ -11,13 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Yaochao on 2016/4/25.
+ * 门诊次均药费比接口
  */
 @RestController
 @RequestMapping("/mmi/drugsOutPatient")
 public class DrugsOutPatientController {
 
     /**
-     * 门诊次均药费比
+     * 全院门诊次均药费比
      *
      * @param beginDate
      * @param endDate

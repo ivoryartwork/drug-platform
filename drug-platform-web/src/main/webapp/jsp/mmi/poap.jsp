@@ -13,19 +13,19 @@
 </head>
 <body>
 <div class="row">
-    <div class="panel">
+    <div class="panel search-panel">
         <form class="form-inline search-from">
             <div class="form-group">
                 <label>开始时间：</label>
-                <input type="text" class="form-control x-datepicker-month">
+                <input type="text" name="begin" class="form-control x-datepicker-day">
             </div>
             <div class="form-group">
                 <label>截止时间：</label>
-                <input type="text" class="form-control x-datepicker-month">
+                <input type="text" name="end" class="form-control x-datepicker-day">
             </div>
         </form>
         <form class="form-inline search-from">
-            <div class="form-group">
+            <div class="form-group dept">
                 <label>科室名称：</label>
                 <select class="form-control">
                     <option>不分科室</option>
@@ -35,7 +35,7 @@
                     <option>内科</option>
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group costType">
                 <label>类别：</label>
                 <select class="form-control">
                     <option>不分类别</option>
@@ -45,8 +45,7 @@
                 </select>
             </div>
         </form>
-        <button type="button" class="btn btn-primary x-btn">查询</button>
-        <button type="button" class="btn btn-warning x-btn">导出</button>
+        <button type="button" class="btn btn-primary x-btn search-btn">查询</button>
         <button id="back" type="button" class="btn btn-info x-btn">返回</button>
     </div>
 </div>
@@ -54,36 +53,36 @@
     <div id="panel-0" class="panel">
         <div class="row">
             <div class="col-md-6">
-                <p class="explanation">全院2015年9月门诊抗菌药物处方比例</p>
+                <p class="explanation"><span class="des"></span></p>
                 <table class="table table-bordered">
                     <tr>
                         <td>门诊处方总患者数</td>
-                        <td>256231</td>
+                        <td id="nopp-0"></td>
                     </tr>
                     <tr>
                         <td>门诊抗菌药物处方患者数</td>
-                        <td>102563</td>
+                        <td id="nopa-0"></td>
                     </tr>
                     <tr>
                         <td>门诊抗菌药物处方比例</td>
-                        <td>37%</td>
+                        <td><span id="poap-0"></span>%</td>
                     </tr>
                     <tr>
                         <td>目标值</td>
-                        <td>36%</td>
+                        <td><span id="targetPoap-0"></span>%</td>
                     </tr>
                 </table>
             </div>
             <div class="col-md-6">
-                <p class="explanation">全院门诊抗菌药物处方比例趋势图</p>
+                <p class="explanation"><span class="des"></span></p>
 
                 <div id="poapColumn" class="x-column"></div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <p class="explanation">2015年9月各科室门诊抗菌药物处方比例</p>
-                <table class="table table-bordered">
+                <p class="explanation"><span class="des"></span></p>
+                <table id="deptPoapList" class="table table-bordered">
                     <thead>
                     <tr>
                         <th>科室名称</th>
@@ -96,143 +95,36 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><a onclick="switchToDepartment('肾病科')">肾病科</a></td>
-                        <td>282956</td>
-                        <td>363535</td>
-                        <td>4455411</td>
-                        <td>76.3</td>
-                        <td>53</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>Integer</td>
-                        <td>nec</td>
-                        <td>odio</td>
-                        <td>Praesent</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
                     </tbody>
                 </table>
-                <ul class="pagination-sm right thandrugs-pagination"></ul>
             </div>
         </div>
     </div>
     <div id="panel-1" class="panel hide">
         <div class="row">
             <div class="col-md-6">
-                <p class="explanation">肾病科门诊抗菌药物处方比例</p>
+                <p class="explanation"><span class="des"></span></p>
                 <table class="table table-bordered">
                     <tr>
-                        <td>住院患者数</td>
-                        <td>256231</td>
+                        <td>门诊处方总患者数</td>
+                        <td id="nopp-1"></td>
                     </tr>
                     <tr>
-                        <td>使用抗菌药物人数</td>
-                        <td>180033</td>
+                        <td>门诊抗菌药物处方患者数</td>
+                        <td id="nopa-1"></td>
                     </tr>
                     <tr>
-                        <td>住院抗菌药物使用率</td>
-                        <td>63%</td>
+                        <td>门诊抗菌药物处方比例</td>
+                        <td><span id="poap-1"></span>%</td>
                     </tr>
                     <tr>
                         <td>目标值</td>
-                        <td>58%</td>
+                        <td><span id="targetPoap-1"></span>%</td>
                     </tr>
                 </table>
             </div>
             <div class="col-md-6">
-                <p class="explanation">肾病科门诊抗菌药物处方比例趋势图</p>
+                <p class="explanation"><span class="des"></span></p>
 
                 <div id="departmentPoapColumn" class="x-column"></div>
             </div>

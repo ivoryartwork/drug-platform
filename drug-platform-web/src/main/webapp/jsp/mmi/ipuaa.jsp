@@ -13,19 +13,19 @@
 </head>
 <body>
 <div class="row">
-    <div class="panel">
+    <div class="panel search-panel">
         <form class="form-inline search-from">
             <div class="form-group">
                 <label>开始时间：</label>
-                <input type="text" class="form-control x-datepicker-month">
+                <input type="text" name="begin" class="form-control x-datepicker-day">
             </div>
             <div class="form-group">
                 <label>截止时间：</label>
-                <input type="text" class="form-control x-datepicker-month">
+                <input type="text" name="end" class="form-control x-datepicker-day">
             </div>
         </form>
         <form class="form-inline search-from">
-            <div class="form-group">
+            <div class="form-group dept">
                 <label>科室名称：</label>
                 <select class="form-control">
                     <option>不分科室</option>
@@ -35,7 +35,7 @@
                     <option>内科</option>
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group dept-ward hide">
                 <label>病区名称：</label>
                 <select class="form-control">
                     <option>不分病区</option>
@@ -46,7 +46,7 @@
                     <option>病区五</option>
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group costType">
                 <label>类别：</label>
                 <select class="form-control">
                     <option>不分类别</option>
@@ -56,8 +56,8 @@
                 </select>
             </div>
         </form>
-        <button type="button" class="btn btn-primary x-btn">查询</button>
-        <button type="button" class="btn btn-warning x-btn">导出</button>
+        <button type="button" class="btn btn-primary x-btn search-btn">查询</button>
+        <%--<button type="button" class="btn btn-warning x-btn">导出</button>--%>
         <button id="back" type="button" class="btn btn-info x-btn">返回</button>
     </div>
 </div>
@@ -65,36 +65,36 @@
     <div id="panel-0" class="panel">
         <div class="row">
             <div class="col-md-6">
-                <p class="explanation">全院2015年9月I类切口预防使用抗菌药物比例</p>
+                <p class="explanation"><span class="des"></span></p>
                 <table class="table table-bordered">
                     <tr>
                         <td>I类切口手术总患者数</td>
-                        <td>8598</td>
+                        <td id="inp-0"></td>
                     </tr>
                     <tr>
                         <td>I类切口预防使用抗菌药物患者数</td>
-                        <td>5486</td>
+                        <td id="ianp-0"></td>
                     </tr>
                     <tr>
                         <td>I类切口预防使用抗菌药物比例</td>
-                        <td>63%</td>
+                        <td><span id="ipuaa-0"></span>%</td>
                     </tr>
                     <tr>
                         <td>目标值</td>
-                        <td>58%</td>
+                        <td><span id="targetIpuaa-0"></span>%</td>
                     </tr>
                 </table>
             </div>
             <div class="col-md-6">
-                <p class="explanation">全院I类切口预防使用抗菌药物比例趋势图</p>
+                <p class="explanation"><span class="des"></span></p>
 
                 <div id="ipuaaColumn" class="x-column"></div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <p class="explanation">2015年9月各科室I类切口预防使用抗菌药物比例</p>
-                <table class="table table-bordered">
+                <p class="explanation"><span class="des"></span></p>
+                <table id="deptIpuaaList" class="table table-bordered">
                     <thead>
                     <tr>
                         <th>科室名称</th>
@@ -107,112 +107,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><a onclick="switchToDepartment('肾病科')">肾病科</a></td>
-                        <td>282956</td>
-                        <td>363535</td>
-                        <td>4455411</td>
-                        <td>76.3</td>
-                        <td>53</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>Integer</td>
-                        <td>nec</td>
-                        <td>odio</td>
-                        <td>Praesent</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
                     </tbody>
                 </table>
                 <ul class="pagination-sm right thandrugs-pagination"></ul>
@@ -222,36 +116,36 @@
     <div id="panel-1" class="panel hide">
         <div class="row">
             <div class="col-md-6">
-                <p class="explanation">肾病科2015年9月I类切口预防使用抗菌药物比例</p>
+                <p class="explanation"><span class="des"></span></p>
                 <table class="table table-bordered">
                     <tr>
                         <td>I类切口手术总患者数</td>
-                        <td>8598</td>
+                        <td id="inp-1"></td>
                     </tr>
                     <tr>
                         <td>I类切口预防使用抗菌药物患者数</td>
-                        <td>5486</td>
+                        <td id="ianp-1"></td>
                     </tr>
                     <tr>
                         <td>I类切口预防使用抗菌药物比例</td>
-                        <td>30%</td>
+                        <td><span id="ipuaa-1"></span>%</td>
                     </tr>
                     <tr>
                         <td>目标值</td>
-                        <td>35%</td>
+                        <td><span id="targetIpuaa-1"></span>%</td>
                     </tr>
                 </table>
             </div>
             <div class="col-md-6">
-                <p class="explanation">肾病科I类切口预防使用抗菌药物比例趋势图</p>
+                <p class="explanation"><span class="des"></span>肾病科I类切口预防使用抗菌药物比例趋势图</p>
 
                 <div id="departmentIpuaaColumn" class="x-column"></div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <p class="explanation">肾病科2015年9月各病区I类切口预防使用抗菌药物比例</p>
-                <table class="table table-bordered">
+                <p class="explanation"><span class="des"></span>肾病科2015年9月各病区I类切口预防使用抗菌药物比例</p>
+                <table id="wardIpuaaList" class="table table-bordered">
                     <thead>
                     <tr>
                         <th>病区名称</th>
@@ -264,112 +158,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><a onclick="switchToWard('肾病科一病区')">肾病科一病区</a></td>
-                        <td>282956</td>
-                        <td>363535</td>
-                        <td>4455411</td>
-                        <td>76.3</td>
-                        <td>53</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>Integer</td>
-                        <td>nec</td>
-                        <td>odio</td>
-                        <td>Praesent</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
                     </tbody>
                 </table>
                 <ul class="pagination-sm right thandrugs-pagination"></ul>
@@ -379,28 +167,28 @@
     <div id="panel-2" class="panel hide">
         <div class="row">
             <div class="col-md-6">
-                <p class="explanation">肾病科一病区I类切口预防使用抗菌药物比例</p>
+                <p class="explanation"><span class="des"></span></p>
                 <table class="table table-bordered">
                     <tr>
                         <td>I类切口手术总患者数</td>
-                        <td>256231</td>
+                        <td id="inp-2"></td>
                     </tr>
                     <tr>
                         <td>I类切口预防使用抗菌药物患者数</td>
-                        <td>180033</td>
+                        <td id="ianp-2"></td>
                     </tr>
                     <tr>
                         <td>I类切口预防使用抗菌药物比例</td>
-                        <td>63%</td>
+                        <td><span id="ipuaa-2"></span>%</td>
                     </tr>
                     <tr>
                         <td>目标值</td>
-                        <td>58%</td>
+                        <td><span id="targetIpuaa-2"></span>%</td>
                     </tr>
                 </table>
             </div>
             <div class="col-md-6">
-                <p class="explanation">肾病科一病区I类切口预防使用抗菌药物比例趋势图</p>
+                <p class="explanation"><span class="des"></span></p>
 
                 <div id="wardIpuaaColumn" class="x-column"></div>
             </div>

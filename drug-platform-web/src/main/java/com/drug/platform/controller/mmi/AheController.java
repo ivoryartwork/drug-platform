@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Yaochao on 2016/4/25.
+ * 住院次均药费接口
  */
 @RestController
 @RequestMapping("/mmi/ahe")
@@ -46,6 +47,16 @@ public class AheController {
         return result.toJSONString();
     }
 
+    /**
+     * 某科室住院次均药费
+     *
+     * @param beginDate
+     * @param endDate
+     * @param deptCode
+     * @param costType
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/dept", method = RequestMethod.GET)
     public String dept(@RequestParam String beginDate, @RequestParam String endDate,
                        @RequestParam String deptCode, @RequestParam(required = false) String costType,
@@ -68,6 +79,17 @@ public class AheController {
         return result.toJSONString();
     }
 
+    /**
+     * 某病区住院次均药费
+     *
+     * @param beginDate
+     * @param endDate
+     * @param deptCode
+     * @param wardCode
+     * @param costType
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/ward", method = RequestMethod.GET)
     public String ward(@RequestParam String beginDate, @RequestParam String endDate,
                        @RequestParam String deptCode, @RequestParam String wardCode, @RequestParam(required = false) String costType,
