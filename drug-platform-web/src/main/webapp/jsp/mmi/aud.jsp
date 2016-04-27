@@ -29,7 +29,11 @@
                     </div>
                     <div class="form-group">
                         <label>规格厂家：</label>
-                        <input type="text" class="form-control">
+                        <select class="form-control">
+                            <option>0.25g哈药总厂</option>
+                            <option>0.5g华北制药</option>
+                            <option>1g晋博康</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>开始时间：</label>
@@ -89,87 +93,11 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td><a onclick="switchToSingleDepartment('肾病科')">甲硝唑注射液</a></td>
+                                <td><a onclick="singleSwitchToAll()">甲硝唑注射液</a></td>
                                 <td>6g</td>
                                 <td>0.5-4g</td>
                                 <td>68</td>
                                 <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                            </tr>
-                            <tr>
-                                <td>1,003</td>
-                                <td>Integer</td>
-                                <td>nec</td>
-                                <td>odio</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
                             </tr>
                             </tbody>
                         </table>
@@ -182,12 +110,12 @@
                     <div class="col-md-12">
                         <p class="explanation">甲硝唑注射液全院使用强度趋势</p>
 
-                        <div id="departmentSingleAudColumn" class="x-column"></div>
+                        <div id="singleAudColumn" class="x-column"></div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <p class="explanation"><span class="title-name"></span>2015年9月各科室药费比</p>
+                        <p class="explanation"><span class="title-name"></span>2015年9月各科室甲硝唑注射液使用强度</p>
                         <table class="table table-bordered">
                             <thead>
                             <tr>
@@ -199,80 +127,56 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td><a>肾病科</a></td>
+                                <td><a onclick="singleSwitchToDepartment()">肾病科</a></td>
                                 <td>282956</td>
                                 <td>363535</td>
                                 <td>4455411</td>
                             </tr>
+                            </tbody>
+                        </table>
+                        <ul class="pagination-sm right thandrugs-pagination"></ul>
+                    </div>
+                </div>
+            </div>
+            <div id="panel-2" class="panel hide">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="explanation">甲硝唑注射液肾病科使用强度趋势</p>
+
+                        <div id="departmentSingleAudColumn" class="x-column"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="explanation"><span class="title-name"></span>甲硝唑注射液2015年9月肾病科各病区使用强度</p>
+                        <table class="table table-bordered">
+                            <thead>
                             <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
+                                <th>病区名称</th>
+                                <th>使用强度</th>
+                                <th>目标值</th>
+                                <th>排名</th>
                             </tr>
+                            </thead>
+                            <tbody>
                             <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,003</td>
-                                <td>Integer</td>
-                                <td>nec</td>
-                                <td>odio</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
+                                <td><a onclick="singleSwitchToWard()">肾病科一区</a></td>
+                                <td>282956</td>
+                                <td>363535</td>
+                                <td>4455411</td>
                             </tr>
                             </tbody>
                         </table>
                         <ul class="pagination-sm right thandrugs-pagination"></ul>
+                    </div>
+                </div>
+            </div>
+            <div id="panel-3" class="panel hide">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="explanation">甲硝唑注射液肾病科一区使用强度趋势</p>
+
+                        <div id="wardSingleAudColumn" class="x-column"></div>
                     </div>
                 </div>
             </div>
@@ -327,68 +231,10 @@
             </div>
             <div id="panel-6" class="panel">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <p class="explanation">全院2015年9月总抗菌药物使用强度</p>
 
                         <div id="audColumn" class="x-column"></div>
-                    </div>
-                    <div class="col-md-6">
-                        <p class="explanation">全院2015年9月各药品抗菌药物使用强度列表</p>
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <th>药品名称</th>
-                                <th>DDD</th>
-                                <th>日剂量</th>
-                                <th>DDDs</th>
-                                <th>排名</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>甲硝唑注射液</td>
-                                <td>6g</td>
-                                <td>0.5-4g</td>
-                                <td>68</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                            </tr>
-                            <tr>
-                                <td>1,003</td>
-                                <td>Integer</td>
-                                <td>nec</td>
-                                <td>odio</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <ul class="pagination-sm right thandrugs-pagination"></ul>
                     </div>
                 </div>
                 <div class="row">
@@ -410,72 +256,6 @@
                                 <td>363535</td>
                                 <td>4455411</td>
                             </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,003</td>
-                                <td>Integer</td>
-                                <td>nec</td>
-                                <td>odio</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
                             </tbody>
                         </table>
                         <ul class="pagination-sm right thandrugs-pagination"></ul>
@@ -484,68 +264,10 @@
             </div>
             <div id="panel-7" class="panel hide">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <p class="explanation">肾病科2015年9月总抗菌药物使用强度</p>
 
                         <div id="departmentAudColumn" class="x-column"></div>
-                    </div>
-                    <div class="col-md-6">
-                        <p class="explanation">肾病科2015年9月各药品抗菌药物使用强度列表</p>
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <th>药品名称</th>
-                                <th>DDD</th>
-                                <th>日剂量</th>
-                                <th>DDDs</th>
-                                <th>排名</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>甲硝唑注射液</td>
-                                <td>6g</td>
-                                <td>0.5-4g</td>
-                                <td>68</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                            </tr>
-                            <tr>
-                                <td>1,003</td>
-                                <td>Integer</td>
-                                <td>nec</td>
-                                <td>odio</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <ul class="pagination-sm right thandrugs-pagination"></ul>
                     </div>
                 </div>
                 <div class="row">
@@ -562,80 +284,23 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td><a>肾病一区</a></td>
+                                <td><a onclick="switchToWard()">肾病一区</a></td>
                                 <td>282956</td>
                                 <td>363535</td>
                                 <td>4455411</td>
                             </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,003</td>
-                                <td>Integer</td>
-                                <td>nec</td>
-                                <td>odio</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                            </tr>
                             </tbody>
                         </table>
                         <ul class="pagination-sm right thandrugs-pagination"></ul>
+                    </div>
+                </div>
+            </div>
+            <div id="panel-8" class="panel hide">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="explanation">肾病科一区2015年9月总抗菌药物使用强度</p>
+
+                        <div id="wardAudColumn" class="x-column"></div>
                     </div>
                 </div>
             </div>

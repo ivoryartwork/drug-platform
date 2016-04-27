@@ -204,4 +204,16 @@ public class IndexPageController {
     public String singleVarietyPrescription(HttpServletRequest request) {
         return Pages.TMPI.SINGLE_VARIETY_PRESCRIPTION;
     }
+
+    @UserAuthenticate({UserType.ADMIN})
+    @RequestMapping("/spdr")
+    public String spdr(HttpServletRequest request) {
+        return Pages.MR.SPDR;
+    }
+
+    @UserAuthenticate({UserType.ADMIN})
+    @RequestMapping("/par")
+    public String par(HttpServletRequest request) {
+        return Pages.MR.PAR;
+    }
 }

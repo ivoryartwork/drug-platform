@@ -23,12 +23,76 @@ $(function () {
  *
  * @param name
  */
-function switchToSingleDepartment(name) {
+function singleSwitchToAll() {
     panel_index = 1;
     $("#panel-0").addClass("hide");
     $("#panel-1").removeClass("hide");
-    $("#panel-1 .title-name").html(name);
-    departmentSingleAud();
+    $("#panel-2").addClass("hide");
+    $("#panel-3").addClass("hide");
+    var categories = [
+        '4月',
+        '5月',
+        '6月',
+        '7月',
+        '8月',
+        '9月'
+    ]
+    var series = [{
+        name: '使用强度',
+        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0],
+        dataLabels: {
+            enabled: true,
+        }
+    }]
+    chartHelper.column('singleAudColumn', categories, series, "DDD");
+}
+
+function singleSwitchToDepartment() {
+    panel_index = 2;
+    $("#panel-0").addClass("hide");
+    $("#panel-2").removeClass("hide");
+    $("#panel-1").addClass("hide");
+    $("#panel-3").addClass("hide");
+    var categories = [
+        '4月',
+        '5月',
+        '6月',
+        '7月',
+        '8月',
+        '9月'
+    ]
+    var series = [{
+        name: '使用强度',
+        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0],
+        dataLabels: {
+            enabled: true,
+        }
+    }]
+    chartHelper.column('departmentSingleAudColumn', categories, series, "DDD");
+}
+
+function singleSwitchToWard() {
+    panel_index = 3;
+    $("#panel-0").addClass("hide");
+    $("#panel-3").removeClass("hide");
+    $("#panel-1").addClass("hide");
+    $("#panel-2").addClass("hide");
+    var categories = [
+        '4月',
+        '5月',
+        '6月',
+        '7月',
+        '8月',
+        '9月'
+    ]
+    var series = [{
+        name: '使用强度',
+        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0],
+        dataLabels: {
+            enabled: true,
+        }
+    }]
+    chartHelper.column('wardSingleAudColumn', categories, series, "DDD");
 }
 
 /**
@@ -38,9 +102,32 @@ function switchToSingleDepartment(name) {
 function switchToDepartment(name) {
     panel_index_1 = 7;
     $("#panel-6").addClass("hide");
+    $("#panel-8").addClass("hide");
     $("#panel-7").removeClass("hide");
-    $("#panel-7 .title-name").html(name);
     departmentAud();
+}
+
+function switchToWard() {
+    panel_index_1 = 8;
+    $("#panel-6").addClass("hide");
+    $("#panel-7").addClass("hide");
+    $("#panel-8").removeClass("hide");
+    var categories = [
+        '4月',
+        '5月',
+        '6月',
+        '7月',
+        '8月',
+        '9月'
+    ]
+    var series = [{
+        name: '使用强度',
+        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0],
+        dataLabels: {
+            enabled: true,
+        }
+    }]
+    chartHelper.column('wardAudColumn', categories, series, "DDD");
 }
 
 function initBtn() {
@@ -79,25 +166,4 @@ function departmentAud() {
         }
     }]
     chartHelper.column('departmentAudColumn', categories, series, "DDD");
-}
-/**
- *
- */
-function departmentSingleAud() {
-    var categories = [
-        '4月',
-        '5月',
-        '6月',
-        '7月',
-        '8月',
-        '9月'
-    ]
-    var series = [{
-        name: '使用强度',
-        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0],
-        dataLabels: {
-            enabled: true,
-        }
-    }]
-    chartHelper.column('departmentSingleAudColumn', categories, series, "DDD");
 }

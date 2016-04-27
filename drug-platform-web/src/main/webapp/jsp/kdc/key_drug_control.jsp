@@ -26,6 +26,7 @@
             </button>
 
             <button class="btn btn-warning x-btn">导出</button>
+            <button id="back" type="button" class="btn btn-info x-btn">返回</button>
             <div class="form-group right">
                 <input type="text" class="form-control" placeholder="药品名称">
                 <button class="btn btn-primary">搜索</button>
@@ -234,7 +235,176 @@
         </table>
         <%--<ul class="pagination-sm right thandrugs-pagination"></ul>--%>
     </div>
-    <div id="panel-1"></div>
+    <div id="panel-1" class="panel hide">
+        <div class="row" style="height: 800px">
+            <div class="col-md-4">
+                <div>
+                    <p class="explanation">基本信息</p>
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <td>药品代码</td>
+                            <td>0107003CI2</td>
+                        </tr>
+                        <tr>
+                            <td>药品名称</td>
+                            <td>注射用替考拉宁</td>
+                        </tr>
+                        <tr>
+                            <td>规格厂家</td>
+                            <td>0.2g浙新昌</td>
+                        </tr>
+                        <tr>
+                            <td>单次用量</td>
+                            <td><20ml</td>
+                        </tr>
+                        <tr>
+                            <td>频次</td>
+                            <td><3/日</td>
+                        </tr>
+                        <tr>
+                            <td>用量</td>
+                            <td><50ml</td>
+                        </tr>
+                        <tr>
+                            <td>用药途径</td>
+                            <td>注射</td>
+                        </tr>
+                        <tr>
+                            <td>同类药品</td>
+                            <td>头孢氨苄胶囊 哌拉西林钠 注射用胸腺五肽</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <p class="explanation">本月药品用量情况</p>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>用药区域</th>
+                            <th>数量（盒）</th>
+                            <th>金额（元）</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>全院</td>
+                            <td>21654</td>
+                            <td>5895352</td>
+                        </tr>
+                        <tr>
+                            <td>住院</td>
+                            <td>17546</td>
+                            <td>569230</td>
+                        </tr>
+                        <tr>
+                            <td>门诊</td>
+                            <td>2356</td>
+                            <td>26531</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <p class="explanation">本月不合理用药统计</p>
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <td>关于此药不合理医嘱数</td>
+                            <td>5895</td>
+                        </tr>
+                        <tr>
+                            <td>关于此药医嘱总数</td>
+                            <td>365215</td>
+                        </tr>
+                        <tr>
+                            <td>关于此药不合理用药患者数</td>
+                            <td>1546</td>
+                        </tr>
+                        <tr>
+                            <td>关于此药用药患者数</td>
+                            <td>152656</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div style="height: 50%">
+                    <div class="container-fluid explanation">
+                        <div class="row col-md-6">
+                            <span id="des">阿莫西林胶囊2015年9月各科室用量排名</span>
+                        </div>
+                        <div class="col-md-6">
+                            <a class="x-export-btn right"
+                               style="display: inline-block;margin-left: 10px">导出</a>
+                            <select id="selectType" class="right" style="width: auto;color: black">
+                                <option value="0">科室排名</option>
+                                <option value="1">病区排名</option>
+                                <option value="1">医生排名</option>
+                                <option value="1">门诊科室排名</option>
+                                <option value="1">门诊医生排名</option>
+                            </select>
+                        </div>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>病人编号</th>
+                            <th>病人姓名</th>
+                            <th>医嘱名称</th>
+                            <th>科室</th>
+                            <th>医生</th>
+                            <th>联合用药情况</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>1000812</td>
+                            <td>刘武</td>
+                            <td>狄奥宁（13902）</td>
+                            <td>神经内科</td>
+                            <td>于生</td>
+                            <td>注射用胸腺五肽 、头孢唑林钠</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="height: 50%;">
+                    <p class="explanation">本月不合理用药医嘱<a class="x-export-btn right">导出</a></p>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>医嘱名称</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
+                            <th>病人编号</th>
+                            <th>病人姓名</th>
+                            <th>科室</th>
+                            <th>医生</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>狄奥宁（13902）</td>
+                            <td>2015-09-03 12:12:12</td>
+                            <td>2015-09-03 12:12:12</td>
+                            <td>1000812</td>
+                            <td>刘武</td>
+                            <td>神经内科</td>
+                            <td>于生</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="<c:url value="/static/js/kdc/key_drug_control.js"/>"></script>
 </body>

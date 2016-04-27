@@ -71,6 +71,14 @@ public class Pages {
 
     }
 
+    public class MR {
+        //单品种药品用量排名
+        public static final String SPDR = "mr.spdr.page";
+
+        //处方金额排名
+        public static final String PAR = "mr.par.page";
+    }
+
     public class ERROR {
 
         public static final String _404 = "404";

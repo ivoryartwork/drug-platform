@@ -82,8 +82,8 @@
             </ul>
             <ul class="nav nav-sidebar">
                 <li class="active"><a>用药排名</a></li>
-                <li class="sidebar-item"><a href="">单品种药品用量排名</a></li>
-                <li class="sidebar-item"><a href="">处方金额排名</a></li>
+                <li class="sidebar-item"><a href="spdr.html">单品种药品用量排名</a></li>
+                <li class="sidebar-item"><a href="par.html">处方金额排名</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li class="active"><a>月报表</a></li>

@@ -233,4 +233,16 @@ $(function (s) {
             }
         });
     }
+
+    s.oir = {}
+    s.oir.getRecords = function (params, callback) {
+        $.ajax({
+            url: 'tmpi/oir',
+            data: params,
+            type: 'get',
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
 }(window.S = {}))
