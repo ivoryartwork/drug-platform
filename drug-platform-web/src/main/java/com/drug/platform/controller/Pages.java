@@ -79,6 +79,21 @@ public class Pages {
         public static final String PAR = "mr.par.page";
     }
 
+    public class SDM {
+        //临床应用统计
+        public static final String CAS = "sdm.cas.page";
+
+        //在院用量统计
+        public static final String IHUS = "sdm.ihus.page";
+
+        //单病人用量统计
+        public static final String SPTA = "sdm.spta.page";
+    }
+
+    public class URM{
+        public static final String URM="urm.urm.page";
+    }
+
     public class ERROR {
 
         public static final String _404 = "404";

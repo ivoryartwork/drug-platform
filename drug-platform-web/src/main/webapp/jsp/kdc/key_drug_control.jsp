@@ -160,9 +160,7 @@
                             <label class="col-sm-2 control-label">同类药品：</label>
 
                             <div class="col-sm-10">
-                                <input id="similarDrugs" class="form-control">
-
-                                <div id="addSimilarDrugs" class="similar-drugs-panel hide">
+                                <div id="addSimilarDrugs" class="similar-drugs-panel">
                                     <label>已添加：</label>
 
                                     <div class="added-drugs">
