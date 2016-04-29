@@ -216,4 +216,52 @@ public class IndexPageController {
     public String par(HttpServletRequest request) {
         return Pages.MR.PAR;
     }
+
+    /**
+     * 临床应用统计
+     *
+     * @param request
+     * @return
+     */
+    @UserAuthenticate({UserType.ADMIN})
+    @RequestMapping("/cas")
+    public String cas(HttpServletRequest request) {
+        return Pages.SDM.CAS;
+    }
+
+    /**
+     * 在院用量统计
+     *
+     * @param request
+     * @return
+     */
+    @UserAuthenticate({UserType.ADMIN})
+    @RequestMapping("/ihus")
+    public String ihus(HttpServletRequest request) {
+        return Pages.SDM.IHUS;
+    }
+
+    /**
+     * 单病人用量统计
+     *
+     * @param request
+     * @return
+     */
+    @UserAuthenticate({UserType.ADMIN})
+    @RequestMapping("/spta")
+    public String spta(HttpServletRequest request) {
+        return Pages.SDM.SPTA;
+    }
+
+    /**
+     * 用户权限管理
+     *
+     * @param request
+     * @return
+     */
+    @UserAuthenticate({UserType.ADMIN})
+    @RequestMapping("/urm")
+    public String urm(HttpServletRequest request) {
+        return Pages.URM.URM;
+    }
 }

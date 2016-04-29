@@ -101,12 +101,12 @@
             </ul>
             <ul class="nav nav-sidebar">
                 <li class="active"><a>特殊管理药品监控</a></li>
-                <li class="sidebar-item"><a href="">在院用量统计</a></li>
-                <li class="sidebar-item"><a href="">临床应用统计</a></li>
-                <li class="sidebar-item"><a href="">单病人用药统计</a></li>
+                <li class="sidebar-item"><a href="ihus.html">在院用量统计</a></li>
+                <li class="sidebar-item"><a href="cas.html">临床应用统计</a></li>
+                <li class="sidebar-item"><a href="spta.html">单病人用药统计</a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li class="active"><a>用户权限管理</a></li>
+                <li class="active"><a href="urm.html">用户权限管理</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

@@ -3,7 +3,7 @@
  */
 var panel_index = 0;
 $(function () {
-    path('用药指标监控', '重点药品监控');
+    path('重点药品监控', '');
     initBtn();
     bindDrugMonitorData('');
 })
@@ -27,10 +27,6 @@ function initBtn() {
             $("#drugList thead").html(hospitalizedThead)
             bindDrugMonitorData('');
         }
-    })
-
-    $("#similarDrugs").on('focus', function () {
-        $('#addSimilarDrugs').removeClass("hide");
     })
 
     $(".similar-drug").click(function () {
