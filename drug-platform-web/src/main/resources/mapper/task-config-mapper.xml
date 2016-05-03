@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drug.platform.dao.TaskConfigDAO">
+    <sql id="task_config_base_column_list">
+        taskId,itemName,itemValue,description
+    </sql>
+    <sql id="task_config_table_name">
+        t_task_config
+    </sql>
+
+    <select id="getItem" resultType="string">
+        SELECT itemValue FROM
+        <include refid="task_config_table_name"/>
+        WHERE taskId=#{0} AND itemName=#{1}
+    </select>
+
+    <update id="updateItem">
+        UPDATE
+        <include refid="task_config_table_name"/>
+        SET itemValue=#{2} WHERE taskId=#{0} AND itemName=#{1}
+    </update>
+</mapper>
