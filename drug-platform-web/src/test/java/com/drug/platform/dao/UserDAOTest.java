@@ -10,13 +10,9 @@ import static org.junit.Assert.*;
 /**
  * Created by ivoryartwork on 2016/4/28.
  */
-public class UserDAOTest extends BaseTestBean{
+public class UserDAOTest extends BaseTestBean {
 
     @Resource
     private UserDAO userDAO;
 
-    @Test
-    public void testGetUser() throws Exception {
-        User user = userDAO.getUser("");
-    }
 }

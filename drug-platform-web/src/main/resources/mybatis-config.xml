@@ -3,8 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
     <!-- 命名空间 -->
     <typeAliases>
         <typeAlias alias="User" type="com.drug.platform.model.User"/>
+        <typeAlias alias="DrugsThan" type="com.drug.platform.model.DrugsThan"/>
     </typeAliases>
 </configuration>

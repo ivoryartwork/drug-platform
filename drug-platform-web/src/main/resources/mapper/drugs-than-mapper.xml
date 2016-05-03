@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drug.platform.dao.DrugsThanDAO">
+    <sql id="drugs_than_base_column_list">
+        deptCode,xTotal,yTotal,fate,time
+    </sql>
+    <sql id="drugs_than_table_name">
+        t_drugs_than
+    </sql>
+    <insert id="save" parameterType="java.util.List">
+        INSERT INTO
+        <include refid="drugs_than_table_name"/>(<include refid="drugs_than_base_column_list"/>)
+        <foreach collection="list" item="item" index="index" separator="union all">
+            (SELECT #{item.deptCode},#{item.xTotal},#{item.yTotal},#{item.fate},#{item.time} FROM dual)
+        </foreach>
+    </insert>
+</mapper>

@@ -7,5 +7,5 @@ import com.drug.platform.model.User;
  */
 public interface UserDAO {
 
-    public User getUser(String userName);
+    public User getByUserName(String userName);
 }
