@@ -17,6 +17,12 @@ public class DrugsThan {
     //总金额
     private float yTotal;
 
+    //保险类型
+    private String chargeType="";
+
+    //住院或门诊 outp or inp
+    private String type;
+
     //药占比
     private int fate;
 
@@ -61,5 +67,21 @@ public class DrugsThan {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public String getChargeType() {
+        return chargeType;
+    }
+
+    public void setChargeType(String chargeType) {
+        this.chargeType = chargeType;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

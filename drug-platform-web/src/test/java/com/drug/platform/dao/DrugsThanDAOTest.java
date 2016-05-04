@@ -21,22 +21,26 @@ public class DrugsThanDAOTest extends BaseTestBean {
 
     @Test
     public void testSave() throws Exception {
-//        List<DrugsThan> drugsThans = new ArrayList<>();
-//        DrugsThan drugsThan = new DrugsThan();
-//        drugsThan.setDeptCode("123");
-//        drugsThan.setxTotal(120);
-//        drugsThan.setyTotal(500);
-//        drugsThan.setFate(40);
-//        drugsThan.setTime(new Date());
-//        drugsThans.add(drugsThan);
-//
-//        DrugsThan drugsThan1 = new DrugsThan();
-//        drugsThan1.setDeptCode("1234");
-//        drugsThan1.setxTotal(1200);
-//        drugsThan1.setyTotal(5000);
-//        drugsThan1.setFate(40);
-//        drugsThan1.setTime(new Date());
-//        drugsThans.add(drugsThan1);
-//        drugsThanDAO.save(drugsThans);
+        List<DrugsThan> drugsThans = new ArrayList<>();
+        DrugsThan drugsThan = new DrugsThan();
+        drugsThan.setDeptCode("123");
+        drugsThan.setxTotal(120);
+        drugsThan.setyTotal(500);
+        drugsThan.setFate(40);
+        drugsThan.setTime(new Date());
+        drugsThan.setChargeType("全费");
+        drugsThan.setType("outp");
+        drugsThans.add(drugsThan);
+
+        DrugsThan drugsThan1 = new DrugsThan();
+        drugsThan1.setDeptCode("1234");
+        drugsThan1.setxTotal(1200);
+        drugsThan1.setyTotal(5000);
+        drugsThan1.setFate(40);
+//        drugsThan1.setChargeType("全费");
+        drugsThan1.setType("outp");
+        drugsThan1.setTime(new Date());
+        drugsThans.add(drugsThan1);
+        drugsThanDAO.save(drugsThans);
     }
 }

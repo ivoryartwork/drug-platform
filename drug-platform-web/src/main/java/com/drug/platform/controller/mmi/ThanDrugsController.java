@@ -36,7 +36,7 @@ public class ThanDrugsController {
         } else if (type == 2) {
             //门诊药费比
         } else {
-            //急诊药费比
+            //住院药费比
         }
         JSONObject result = new JSONObject();
         JSONObject rate = new JSONObject();
