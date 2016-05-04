@@ -10,5 +10,6 @@
     <typeAliases>
         <typeAlias alias="User" type="com.drug.platform.model.User"/>
         <typeAlias alias="DrugsThan" type="com.drug.platform.model.DrugsThan"/>
+        <typeAlias alias="QueryParams" type="com.drug.platform.model.QueryParams"/>
     </typeAliases>
 </configuration>

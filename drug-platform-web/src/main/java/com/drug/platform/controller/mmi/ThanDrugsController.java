@@ -2,11 +2,15 @@ package com.drug.platform.controller.mmi;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.drug.platform.model.QueryParams;
+import com.drug.platform.service.DrugsThanService;
+import com.drug.platform.utils.DateFormatUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -16,6 +20,9 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/mmi/thanDrugs")
 public class ThanDrugsController {
+
+    @Resource
+    private DrugsThanService drugsThanService;
 
     /**
      * 全院/门诊/急诊 药费比
@@ -30,39 +37,18 @@ public class ThanDrugsController {
     @RequestMapping(value = "/global", method = RequestMethod.GET)
     public String global(@RequestParam int type, @RequestParam String beginDate,
                          @RequestParam String endDate, @RequestParam(required = false) String costType,
-                         HttpServletRequest request) {
-        if (type == 1) {
-            //全院药费比
-        } else if (type == 2) {
+                         HttpServletRequest request) throws Exception {
+        QueryParams queryParams = new QueryParams();
+        if (type == 2) {
             //门诊药费比
-        } else {
+            queryParams.setType("outp");
+        } else if (type == 3) {
             //住院药费比
+            queryParams.setType("inp");
         }
-        JSONObject result = new JSONObject();
-        JSONObject rate = new JSONObject();
-        rate.put("totalDrugCost", 2829567); //总药费
-        rate.put("totalTreatCost", 2829567); //总药费
-        rate.put("totalCost", 2829567);  //总费用
-        rate.put("rate", 36);  //药费比
-        result.put("rate", rate);
-
-        //各科室列表
-        JSONArray deptRates = new JSONArray();
-        JSONObject deptRate = new JSONObject();
-        deptRate.put("deptName", "肾病科");
-        deptRate.put("deptCode", "123445");
-        deptRate.put("drugCost", "256");
-        deptRate.put("treatCost", "123");
-        deptRate.put("totalCost", "379");
-        deptRate.put("rate", "76");
-        deptRate.put("targetRate", "75");
-        deptRate.put("rank", "75");
-        deptRates.add(deptRate);
-        result.put("deptRates", deptRates);
-
-        //趋势
-        result.put("trend", "1,2,3,4,5,6");
-        return result.toJSONString();
+        queryParams.setBeginDate(DateFormatUtils.parse(beginDate, DateFormatUtils.FORMAT_DATE));
+        queryParams.setEndDate(DateFormatUtils.parse(endDate, DateFormatUtils.FORMAT_DATE));
+        return drugsThanService.staGlobalDrugsThan(queryParams);
     }
 
     /**

@@ -9,11 +9,75 @@
     <sql id="drugs_than_table_name">
         t_drugs_than
     </sql>
+
+    <select id="staDrugsThan" parameterType="QueryParams" resultType="java.util.HashMap">
+        SELECT x.totalDrugCost,x.totalCost, x.totalCost-x.totalDrugCost totalTreatCost,x.totalDrugCost / x.totalCost *
+        100 fate FROM
+        (SELECT SUM(XTOTAL) totalDrugCost,SUM(YTOTAL) totalCost FROM
+        <include refid="drugs_than_table_name"/>
+        <where>
+            <if test="type!=null">
+                TYPE=#{type}
+            </if>
+            <if test="chargeType!=null">
+                AND CHARGETYPE=#{chargeType}
+            </if>
+            <if test="beginDate!=null and endDate!=null">
+                <![CDATA[AND TIME>=#{beginDate} AND TIME<=#{endDate}]]>
+            </if>
+            <if test="deptCode!=null">
+                AND DEPTCODE=#{deptCode}
+            </if>
+        </where>
+        ) x
+    </select>
+
+    <!--<select id="staDeptDrugsThan" parameterType="QueryParams" resultType="java.util.HashMap">-->
+    <!--SELECT x.DEPTCODE,y.DEPT_NAME,x.TOTALDRUGCOST,x.TOTALCOST,x.TOTALDRUGCOST / x.TOTALCOST * 100 fate FROM(SELECT DEPTCODE,SUM (XTOTAL) totalDrugCost,SUM (YTOTAL) totalCost FROM T_DRUGS_THAN WHERE TYPE = 'inp' AND CHARGETYPE = '全费' GROUP BY DEPTCODE) x,DEPT_DICT y WHERE x.DEPTCODE=y.DEPT_CODE ORDER BY fate DESC;-->
+    <!--</select>-->
+    <select id="staDeptDrugsThan" parameterType="QueryParams" resultType="java.util.HashMap">
+        SELECT
+        x.DEPTCODE,
+        y.DEPT_NAME,
+        x.TOTALDRUGCOST,
+        x.TOTALCOST,
+        x.TOTALCOST-x.TOTALDRUGCOST TOTALTREATCOST,
+        x.TOTALDRUGCOST / x.TOTALCOST * 100 fate
+        FROM
+        (
+        SELECT
+        DEPTCODE,
+        SUM (XTOTAL) totalDrugCost,
+        SUM (YTOTAL) totalCost
+        FROM
+        T_DRUGS_THAN
+        <where>
+            <if test="type!=null">
+                TYPE=#{type}
+            </if>
+            <if test="chargeType!=null">
+                AND CHARGETYPE=#{chargeType}
+            </if>
+            <if test="beginDate!=null and endDate!=null">
+                <![CDATA[AND TIME>=#{beginDate} AND TIME<=#{endDate}]]>
+            </if>
+        </where>
+        GROUP BY
+        DEPTCODE
+        ) x,DEPT_DICT y
+        WHERE
+        x.DEPTCODE = y.DEPT_CODE
+        ORDER BY
+        fate DESC
+    </select>
+
     <insert id="save" parameterType="java.util.List">
         INSERT INTO
         <include refid="drugs_than_table_name"/>(<include refid="drugs_than_base_column_list"/>)
         <foreach collection="list" item="item" index="index" separator="union all">
-            (SELECT #{item.deptCode},#{item.xTotal},#{item.yTotal},#{item.chargeType},#{item.type},#{item.fate},#{item.time} FROM
+            (SELECT
+            #{item.deptCode},#{item.xTotal},#{item.yTotal},#{item.chargeType},#{item.type},#{item.fate},#{item.time}
+            FROM
             dual)
         </foreach>
     </insert>

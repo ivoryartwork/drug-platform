@@ -1,6 +1,7 @@
 package com.drug.platform.service;
 
 import com.drug.platform.model.DrugsThan;
+import com.drug.platform.model.QueryParams;
 
 import java.util.List;
 
@@ -15,4 +16,12 @@ public interface DrugsThanService {
      * @param drugsThans
      */
     public void addDrugsThanBatch(List<DrugsThan> drugsThans);
+
+    /**
+     * 全局统计药费比
+     *
+     * @param queryParams
+     * @return json格式
+     */
+    public String staGlobalDrugsThan(QueryParams queryParams);
 }

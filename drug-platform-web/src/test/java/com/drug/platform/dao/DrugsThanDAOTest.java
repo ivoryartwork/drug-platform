@@ -1,6 +1,8 @@
 package com.drug.platform.dao;
 
 import com.drug.platform.model.DrugsThan;
+import com.drug.platform.model.QueryParams;
+import com.drug.platform.utils.DateFormatUtils;
 import org.junit.Test;
 
 import javax.annotation.Resource;
@@ -8,6 +10,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -42,5 +45,28 @@ public class DrugsThanDAOTest extends BaseTestBean {
         drugsThan1.setTime(new Date());
         drugsThans.add(drugsThan1);
         drugsThanDAO.save(drugsThans);
+    }
+
+    @Test
+    public void testStaDrugsThan() throws Exception {
+//        QueryParams queryParams = new QueryParams();
+//        queryParams.setType("inp");
+//        queryParams.setChargeType("全费");
+//        queryParams.setBeginDate(DateFormatUtils.parse("2015-01-01", DateFormatUtils.FORMAT_DATE));
+//        queryParams.setEndDate(DateFormatUtils.parse("2016-01-01", DateFormatUtils.FORMAT_DATE));
+//        queryParams.setDeptCode("210804");
+//        Map<String, Object> objectMap = drugsThanDAO.staDrugsThan(queryParams);
+//        System.out.println(objectMap.toString());
+    }
+
+    @Test
+    public void testStaDeptDrugsThan() throws Exception {
+        QueryParams queryParams = new QueryParams();
+        queryParams.setType("inp");
+        queryParams.setChargeType("全费");
+        queryParams.setBeginDate(DateFormatUtils.parse("2015-01-01", DateFormatUtils.FORMAT_DATE));
+        queryParams.setEndDate(DateFormatUtils.parse("2016-01-01", DateFormatUtils.FORMAT_DATE));
+        List<Map<String, Object>> maps = drugsThanDAO.staDeptDrugsThan(queryParams);
+        System.out.println(maps);
     }
 }

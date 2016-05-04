@@ -25,7 +25,13 @@ function allThanDrugs() {
         endDate: endDate,
     }
     S.thanDrugs.global(params, bindGlabalData);
-    setTitle("全院" + beginDate + "至" + endDate + "药费比", "全院总药费比趋势图", "全院" + beginDate + "至" + endDate + "各科室药费比");
+    if (type == '1') {
+        setTitle("全院" + beginDate + "至" + endDate + "药费比", "全院总药费比趋势图", "全院" + beginDate + "至" + endDate + "各科室药费比");
+    } else if (type == '2') {
+        setTitle("门诊" + beginDate + "至" + endDate + "药费比", "门诊总药费比趋势图", "门诊" + beginDate + "至" + endDate + "各科室药费比");
+    } else {
+        setTitle("住院" + beginDate + "至" + endDate + "药费比", "住院总药费比趋势图", "住院" + beginDate + "至" + endDate + "各科室药费比");
+    }
 }
 
 //绑定全局数据
@@ -34,6 +40,7 @@ function bindGlabalData(data) {
     var rate = data.rate;
     var deptRates = data.deptRates;
     var trend = data.trend;
+    trend = trend.split("#");
     $("#rate-0").html(rate.rate);
     $("#totalDrugCost-0").html(rate.totalDrugCost);
     $("#totalTreatCost-0").html(rate.totalTreatCost);
@@ -44,19 +51,12 @@ function bindGlabalData(data) {
         ['其他', 100 - Number(rate.rate)],
     ];
     chartHelper.pie('thanDrugsPie', data);
-    var trendArray = trend.split(",");
+    var trendArray = trend[1].split(",");
     var trendData = [];
     for (var i = 0; i < trendArray.length; i++) {
         trendData[i] = Number(trendArray[i]);
     }
-    var categories = [
-        '4月',
-        '5月',
-        '6月',
-        '7月',
-        '8月',
-        '9月'
-    ]
+    var trendDate = trend[0].split(",");
     var series = [{
         name: '药费比',
         data: trendData,
@@ -64,7 +64,7 @@ function bindGlabalData(data) {
             enabled: true,
         }
     }]
-    chartHelper.column('thanDrugsColumn', categories, series, "%");
+    chartHelper.column('thanDrugsColumn', trendDate, series, "%");
 
     var deptRatesList = '';
     for (var i = 0; i < deptRates.length; i++) {
