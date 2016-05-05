@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drug.platform.dao.DrugAmountDAO">
+    <sql id="drug_amount_global_base_column_list">
+        drugCode,drugName,drugSpec,units,total,amount,time,type
+    </sql>
+    <sql id="drug_amount_global_table_name">
+        t_drug_amount_global
+    </sql>
+    <sql id="drug_amount_dept_base_column_list">
+    drugCode,drugName,drugSpec,units,total,amount,time,deptCode
+</sql>
+    <sql id="drug_amount_dept_table_name">
+        t_drug_amount_dept
+    </sql>
+    <sql id="drug_amount_doctor_base_column_list">
+        drugCode,drugName,drugSpec,units,total,amount,time,deptCode,doctor
+    </sql>
+    <sql id="drug_amount_doctor_table_name">
+        t_drug_amount_doctor
+    </sql>
+
+    <insert id="saveGlobal" parameterType="java.util.List">
+        INSERT INTO
+        <include refid="drug_amount_global_table_name"/>(<include refid="drug_amount_global_base_column_list"/>)
+        <foreach collection="list" item="item" index="index" separator="union all">
+            (SELECT
+            #{item.drugCode},#{item.drugName},#{item.drugSpec},#{item.units},#{item.total},#{item.amount},#{item.time},#{item.type}
+            FROM
+            dual)
+        </foreach>
+    </insert>
+
+    <insert id="saveDept" parameterType="java.util.List">
+        INSERT INTO
+        <include refid="drug_amount_dept_table_name"/>(<include refid="drug_amount_dept_base_column_list"/>)
+        <foreach collection="list" item="item" index="index" separator="union all">
+            (SELECT
+            #{item.drugCode},#{item.drugName},#{item.drugSpec},#{item.units},#{item.total},#{item.amount},#{item.time},#{item.deptCode}
+            FROM
+            dual)
+        </foreach>
+    </insert>
+
+    <insert id="saveDoctor" parameterType="java.util.List">
+        INSERT INTO
+        <include refid="drug_amount_doctor_table_name"/>(<include refid="drug_amount_doctor_base_column_list"/>)
+        <foreach collection="list" item="item" index="index" separator="union all">
+            (SELECT
+            #{item.drugCode},#{item.drugName},#{item.drugSpec},#{item.units},#{item.total},#{item.amount},#{item.time},#{item.deptCode},#{item.doctor}
+            FROM
+            dual)
+        </foreach>
+    </insert>
+</mapper>
