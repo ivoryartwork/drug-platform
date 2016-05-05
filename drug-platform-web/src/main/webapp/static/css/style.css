@@ -73,6 +73,31 @@ body {
 .x-export-btn:hover {
   text-decoration: none; }
 
+#drugName {
+  position: relative; }
+
+#drugName ul {
+  display: none;
+  position: absolute;
+  background-color: white;
+  left: 0;
+  width: 100%;
+  border: 1px solid #d3d3d3;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  max-height: 200px;
+  z-index: 100; }
+
+#drugName ul li {
+  width: 100%;
+  text-align: center; }
+
+#drugName ul li:hover {
+  background-color: #efefef;
+  cursor: pointer; }
+
 .similar-drugs-panel {
   width: 99%;
   border-radius: 2px;

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drug.platform.dao.DrugNameDictDAO">
+    <sql id="drug_name_dict_table_name">
+        drug_name_dict
+    </sql>
+    <resultMap id="DrugNameDictMap" type="DrugNameDict">
+        <result property="drugCode" column="DRUG_CODE"></result>
+        <result property="drugName" column="DRUG_NAME"></result>
+        <result property="inputCode" column="INPUT_CODE"></result>
+    </resultMap>
+    <select id="searchByInputCode" parameterType="string" resultMap="DrugNameDictMap">
+        SELECT DRUG_CODE,DRUG_NAME FROM
+        <include refid="drug_name_dict_table_name"/>
+        WHERE INPUT_CODE like #{0} AND <![CDATA[ROWNUM<20]]>
+    </select>
+</mapper>

@@ -25,7 +25,14 @@
                 <form class="form-inline search-from">
                     <div class="form-group">
                         <label>药品名称：</label>
-                        <input type="text" class="form-control">
+                        <span id="drugName">
+                            <input type="text" class="form-control">
+                            <ul>
+                                <li onclick=selectDrug('test','test')>test</li>
+                                <li>test</li>
+                                <li>test</li>
+                            </ul>
+                        </span>
                     </div>
                     <div class="form-group">
                         <label>规格厂家：</label>

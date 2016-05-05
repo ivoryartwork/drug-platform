@@ -81,6 +81,40 @@ var Main = function () {
                 })
             }
         })
+
+        $("#drugName input").keyup(function () {
+            searchDrugByInput(this);
+        })
+
+        $("#drugName input").focus(function () {
+            searchDrugByInput(this);
+        })
+    }
+
+    function searchDrugByInput(input) {
+        var inputCode = $(input).val();
+        var $drugName = $(input).parent();
+        var reg = /^[a-zA-Z]{1,}$/
+        if (inputCode == '' || !reg.test(inputCode)) {
+            $drugName.children("ul").hide();
+            return;
+        }
+        $.ajax({
+            url: 'drug/searchByInputCode',
+            type: 'get',
+            data: {
+                inputCode: inputCode
+            },
+            success: function (data) {
+                data = JSON.parse(data);
+                var list = "";
+                for (var i = 0; i < data.length; i++) {
+                    list += "<li onclick=selectDrug('" + data[i].drugCode + "','" + data[i].drugName + "',this)>" + data[i].drugName + "</li>";
+                }
+                $drugName.children("ul").html(list);
+                $drugName.children("ul").show();
+            }
+        })
     }
 
     return {
@@ -91,6 +125,13 @@ var Main = function () {
         }
     }
 }();
+
+function selectDrug(drugCode, drugName, target) {
+    var $input = $(target).parent().parent().children("input");
+    $(target).parent().hide();
+    $input.val(drugName);
+    $input.attr("name", drugCode);
+}
 
 //显示当前页面路径
 function path(main_tilte, sub_title) {
