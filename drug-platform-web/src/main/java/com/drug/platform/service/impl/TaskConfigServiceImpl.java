@@ -34,4 +34,24 @@ public class TaskConfigServiceImpl implements TaskConfigService {
     public void updateDrugsThanTaskExecTime(String execTime) {
         taskConfigDAO.updateItem("drugsThan", "execTime", execTime);
     }
+
+    /**
+     * 获取药品用量任务执行时间
+     *
+     * @return
+     */
+    @Override
+    public String getDrugAmountTaskExecTime() {
+        return taskConfigDAO.getItem("drugAmount", "execTime");
+    }
+
+    /**
+     * 更新药品用量任务执行时间
+     *
+     * @param execTime
+     */
+    @Override
+    public void updateDrugAmountTaskExecTime(String execTime) {
+        taskConfigDAO.updateItem("drugAmount", "execTime", execTime);
+    }
 }

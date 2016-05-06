@@ -1,8 +1,9 @@
-package com.drug.platform.dal;
+package com.drug.platform.job.calculate;
 
-import com.alibaba.fastjson.JSONObject;
+import com.drug.platform.dal.JDBCCallBack;
 import com.drug.platform.model.DrugsThan;
 import com.drug.platform.utils.DateFormatUtils;
+import com.drug.platform.utils.StaUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,12 +17,10 @@ import java.util.List;
  */
 public class CalculateDrugsThan {
 
-    private static String dateFormatStr = "yyyy-mm-dd hh24:mi:ss";
-
     /**
      * 计算药费比
      */
-    public static List<DrugsThan> calculate(final String time) throws Exception {
+    public static List<DrugsThan> calculate(String time) throws Exception {
         String beginDate = time + " 00:00:00";
         String endDate = time + " 23:59:59";
         List<DrugsThan> outps = outp(beginDate, endDate);
@@ -60,8 +59,8 @@ public class CalculateDrugsThan {
                         "\t\t\t\t\tD .visit_date = E .visit_date\n" +
                         "\t\t\t\tAND D .visit_no = E .visit_no\n" +
                         "\t\t\t\tAND E .PATIENT_ID = F.PATIENT_ID\n" +
-                        "\t\t\t\tAND D .visit_date >= TO_DATE ('" + beginDate + "', '" + dateFormatStr + "')\n" +
-                        "\t\t\t\tAND D .visit_date <= TO_DATE ('" + endDate + "', '" + dateFormatStr + "')\n" +
+                        "\t\t\t\tAND D .visit_date >= TO_DATE ('" + beginDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
+                        "\t\t\t\tAND D .visit_date <= TO_DATE ('" + endDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
                         "\t\t\t\tAND item_class = 'A'\n" +
                         "\t\t\t\tGROUP BY\n" +
                         "\t\t\t\t\tordered_by_dept,\n" +
@@ -93,8 +92,8 @@ public class CalculateDrugsThan {
                         "\t\t\t\t\tD .visit_date = E .visit_date\n" +
                         "\t\t\t\tAND D .visit_no = E .visit_no\n" +
                         "\t\t\t\tAND E .PATIENT_ID = F.PATIENT_ID\n" +
-                        "\t\t\t\tAND D .visit_date >= TO_DATE ('" + beginDate + "', '" + dateFormatStr + "')\n" +
-                        "\t\t\t\tAND D .visit_date <= TO_DATE ('" + endDate + "', '" + dateFormatStr + "')\n" +
+                        "\t\t\t\tAND D .visit_date >= TO_DATE ('" + beginDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
+                        "\t\t\t\tAND D .visit_date <= TO_DATE ('" + endDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
                         "\t\t\t\tGROUP BY\n" +
                         "\t\t\t\t\tordered_by_dept,\n" +
                         "\t\t\t\t\tF.CHARGE_TYPE\n" +
@@ -159,8 +158,8 @@ public class CalculateDrugsThan {
                         "\t\t\t\tWHERE\n" +
                         "\t\t\t\t\tD .item_class = 'A'\n" +
                         "\t\t\t\tAND D .PATIENT_ID = E .PATIENT_ID\n" +
-                        "\t\t\t\tAND D .billing_date_time >= TO_DATE ('" + beginDate + "', '" + dateFormatStr + "')\n" +
-                        "\t\t\t\tAND D .billing_date_time <= TO_DATE ('" + endDate + "', '" + dateFormatStr + "')\n" +
+                        "\t\t\t\tAND D .billing_date_time >= TO_DATE ('" + beginDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
+                        "\t\t\t\tAND D .billing_date_time <= TO_DATE ('" + endDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
                         "\t\t\t\tGROUP BY\n" +
                         "\t\t\t\t\tD .ordered_by,\n" +
                         "\t\t\t\t\tE .CHARGE_TYPE\n" +
@@ -186,8 +185,8 @@ public class CalculateDrugsThan {
                         "\t\t\t\t\tinp_bill_detail D,\n" +
                         "          pat_master_index E\n" +
                         "\t\t\t\tWHERE\n" +
-                        "\t\t\t\t\tD.billing_date_time >= TO_DATE ('" + beginDate + "', '" + dateFormatStr + "')\n" +
-                        "\t\t\t\tAND D.billing_date_time <= TO_DATE ('" + endDate + "', '" + dateFormatStr + "')\n" +
+                        "\t\t\t\t\tD.billing_date_time >= TO_DATE ('" + beginDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
+                        "\t\t\t\tAND D.billing_date_time <= TO_DATE ('" + endDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
                         "        AND D .PATIENT_ID = E .PATIENT_ID\n" +
                         "\t\t\t\tGROUP BY\n" +
                         "\t\t\t\t\tD.ordered_by,E.CHARGE_TYPE\n" +

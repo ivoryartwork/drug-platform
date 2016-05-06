@@ -18,4 +18,18 @@ public interface TaskConfigService {
      * @param execTime
      */
     public void updateDrugsThanTaskExecTime(String execTime);
+
+    /**
+     * 获取药品用量任务执行时间
+     *
+     * @return
+     */
+    public String getDrugAmountTaskExecTime();
+
+    /**
+     * 更新药品用量任务执行时间
+     *
+     * @param execTime
+     */
+    public void updateDrugAmountTaskExecTime(String execTime);
 }

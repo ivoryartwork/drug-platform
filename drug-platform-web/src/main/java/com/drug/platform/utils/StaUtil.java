@@ -8,6 +8,8 @@ import java.util.Date;
  */
 public class StaUtil {
 
+    public static String oracleDateFormatStr = "yyyy-mm-dd hh24:mi:ss";
+
     public static Date[][] getTrendTime() {
         Date[][] dates = new Date[6][2];
         Date date = new Date();

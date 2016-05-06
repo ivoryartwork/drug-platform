@@ -1,7 +1,12 @@
 package com.drug.platform.job;
 
+import com.drug.platform.job.calculate.CalculateDrugAmount;
 import com.drug.platform.job.calculate.CalculateDrugsThan;
+import com.drug.platform.model.DrugAmountDept;
+import com.drug.platform.model.DrugAmountDoctor;
+import com.drug.platform.model.DrugAmountGlobal;
 import com.drug.platform.model.DrugsThan;
+import com.drug.platform.service.DrugAmountService;
 import com.drug.platform.service.DrugsThanService;
 import com.drug.platform.service.TaskConfigService;
 import com.drug.platform.utils.DateFormatUtils;
@@ -16,14 +21,14 @@ import java.util.List;
  * Created by Yaochao on 2016/5/3.
  * 统计药费比任务
  */
-public class DrugsThanTask implements Task {
+public class DrugAmountTask implements Task {
 
-    private Logger logger = Logger.getLogger(DrugsThanTask.class);
+    private Logger logger = Logger.getLogger(DrugAmountTask.class);
 
     private boolean isRunning = false;
 
     @Resource
-    private DrugsThanService drugsThanService;
+    private DrugAmountService drugAmountService;
 
     @Resource
     private TaskConfigService taskConfigService;
@@ -49,26 +54,34 @@ public class DrugsThanTask implements Task {
         isRunning = true;
         try {
             while (true) {
-                String execTime = taskConfigService.getDrugsThanTaskExecTime();
+                String execTime = taskConfigService.getDrugAmountTaskExecTime();
                 String now = DateFormatUtils.format(new Date(), DateFormatUtils.FORMAT_DATE);
                 Date execDate = DateFormatUtils.parse(execTime, DateFormatUtils.FORMAT_DATE);
                 Date nowDate = DateFormatUtils.parse(now, DateFormatUtils.FORMAT_DATE);
                 if (execDate.compareTo(nowDate) < 0) {
-                    List<DrugsThan> drugsThans = CalculateDrugsThan.calculate(execTime);
-                    if (drugsThans.size() > 0) {
-                        drugsThanService.addDrugsThanBatch(drugsThans);
+                    List<DrugAmountGlobal> drugAmountGlobals = CalculateDrugAmount.calculateGlobal(execTime);
+                    if (drugAmountGlobals.size() > 0) {
+                        drugAmountService.addDrugAmountGlobalBatch(drugAmountGlobals);
+                    }
+                    List<DrugAmountDept> drugAmountDepts = CalculateDrugAmount.calculateDept(execTime);
+                    if (drugAmountDepts.size() > 0) {
+                        drugAmountService.addDrugAmountDeptBatch(drugAmountDepts);
+                    }
+                    List<DrugAmountDoctor> drugAmountDoctors = CalculateDrugAmount.calculateDoctor(execTime);
+                    if (drugAmountDoctors.size() > 0) {
+                        drugAmountService.addDrugAmountDoctorBatch(drugAmountDoctors);
                     }
                     Calendar calendar = Calendar.getInstance();
                     calendar.setTime(execDate);
                     calendar.add(Calendar.DAY_OF_MONTH, 1);
-                    taskConfigService.updateDrugsThanTaskExecTime(DateFormatUtils.format(calendar.getTime(), DateFormatUtils.FORMAT_DATE));
-                    logger.info(execTime + "：完成药费比统计");
+                    taskConfigService.updateDrugAmountTaskExecTime(DateFormatUtils.format(calendar.getTime(), DateFormatUtils.FORMAT_DATE));
+                    logger.info(execTime + "：完成药品用量统计");
                 } else {
                     break;
                 }
             }
         } catch (Exception e) {
-            logger.error("药费比统计出错:" + e.getMessage());
+            logger.error("药品用量统计出错:"+e.getMessage());
             e.printStackTrace();
         } finally {
             isRunning = false;

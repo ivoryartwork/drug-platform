@@ -1,5 +1,7 @@
 package com.drug.platform.dao;
 
+import com.drug.platform.model.DrugAmountDept;
+import com.drug.platform.model.DrugAmountDoctor;
 import com.drug.platform.model.DrugAmountGlobal;
 import org.junit.Test;
 
@@ -45,5 +47,63 @@ public class DrugAmountDAOTest extends BaseTestBean {
 //        drugAmountGlobals.add(drugAmountGlobal1);
 //
 //        drugAmountDAO.saveGlobal(drugAmountGlobals);
+    }
+
+    @Test
+    public void testSaveDept() throws Exception {
+//        List<DrugAmountDept> drugAmountDepts = new ArrayList<>();
+//        DrugAmountDept drugAmountDept = new DrugAmountDept();
+//        drugAmountDept.setDeptCode("12321321");
+//        drugAmountDept.setTime(new Date());
+//        drugAmountDept.setAmount(12);
+//        drugAmountDept.setDrugCode("test");
+//        drugAmountDept.setDrugName("test");
+//        drugAmountDept.setDrugSpec("test");
+//        drugAmountDept.setTotal(1232f);
+//        drugAmountDept.setUnits("盒");
+//        drugAmountDepts.add(drugAmountDept);
+//
+//        DrugAmountDept drugAmountDept1 = new DrugAmountDept();
+//        drugAmountDept1.setDeptCode("123123433");
+//        drugAmountDept1.setTime(new Date());
+//        drugAmountDept1.setAmount(12);
+//        drugAmountDept1.setDrugCode("test");
+//        drugAmountDept1.setDrugName("test");
+//        drugAmountDept1.setDrugSpec("test");
+//        drugAmountDept1.setTotal(1232f);
+//        drugAmountDept1.setUnits("盒");
+//        drugAmountDepts.add(drugAmountDept1);
+//
+//        drugAmountDAO.saveDept(drugAmountDepts);
+    }
+
+    @Test
+    public void testSaveDoctor() throws Exception {
+//        List<DrugAmountDoctor> drugAmountDoctors = new ArrayList<>();
+//        DrugAmountDoctor drugAmountDoctor = new DrugAmountDoctor();
+//        drugAmountDoctor.setDeptCode("12321321");
+//        drugAmountDoctor.setDoctor("张三");
+//        drugAmountDoctor.setTime(new Date());
+//        drugAmountDoctor.setAmount(12);
+//        drugAmountDoctor.setDrugCode("test");
+//        drugAmountDoctor.setDrugName("test");
+//        drugAmountDoctor.setDrugSpec("test");
+//        drugAmountDoctor.setTotal(1232f);
+//        drugAmountDoctor.setUnits("盒");
+//        drugAmountDoctors.add(drugAmountDoctor);
+//
+//        DrugAmountDoctor drugAmountDoctor1 = new DrugAmountDoctor();
+//        drugAmountDoctor1.setDeptCode("123123433");
+//        drugAmountDoctor1.setDoctor("张三");
+//        drugAmountDoctor1.setTime(new Date());
+//        drugAmountDoctor1.setAmount(12);
+//        drugAmountDoctor1.setDrugCode("test");
+//        drugAmountDoctor1.setDrugName("test");
+//        drugAmountDoctor1.setDrugSpec("test");
+//        drugAmountDoctor1.setTotal(1232f);
+//        drugAmountDoctor1.setUnits("盒");
+//        drugAmountDoctors.add(drugAmountDoctor1);
+//
+//        drugAmountDAO.saveDoctor(drugAmountDoctors);
     }
 }
