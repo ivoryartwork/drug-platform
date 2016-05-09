@@ -13,31 +13,39 @@
 </head>
 <body>
 <div class="row">
-    <div class="panel">
+    <div class="panel search-panel">
         <form class="form-inline search-from">
             <div class="form-group">
                 <label>药品名称：</label>
-                <input type="text" class="form-control">
+                        <span id="drugName">
+                            <input type="text" class="form-control">
+                            <ul>
+                            </ul>
+                        </span>
             </div>
             <div class="form-group">
                 <label>规格厂家：</label>
-                <input type="text" class="form-control">
+                <select class="form-control" id="drugSpec">
+                    <option value="0.25g哈药总厂">0.25g哈药总厂</option>
+                    <option value="0.5g华北制药">0.5g华北制药</option>
+                    <option value="1g晋博康">1g晋博康</option>
+                </select>
             </div>
             <div class="form-group">
                 <label>开始时间：</label>
-                <input type="text" class="form-control x-datepicker-month">
+                <input type="text" name="begin" class="form-control x-datepicker-day">
             </div>
             <div class="form-group">
                 <label>结束时间：</label>
-                <input type="text" class="form-control x-datepicker-month">
+                <input type="text" name="end" class="form-control x-datepicker-day">
             </div>
         </form>
-        <button type="button" class="btn btn-primary x-btn">查询</button>
+        <button type="button" class="btn btn-primary x-btn search-btn">查询</button>
     </div>
-    <div class="panel">
+    <div class="panel hide" id="rankList">
         <div class="container-fluid explanation" style="font-size: 18px;line-height: 35px">
             <div class="row col-md-6">
-                <span id="des">阿莫西林胶囊2015年9月各科室用量排名</span>
+                <span class="des">阿莫西林胶囊2015年9月各科室用量排名</span>
             </div>
             <div class="col-md-6">
                 <a class="x-export-btn right"
@@ -45,9 +53,9 @@
                 <select id="selectType" class="form-control right" style="width: auto;">
                     <option value="0">科室排名</option>
                     <option value="1">病区排名</option>
-                    <option value="1">医生排名</option>
-                    <option value="1">门诊科室排名</option>
-                    <option value="1">门诊医生排名</option>
+                    <option value="2">医生排名</option>
+                    <option value="3">门诊科室排名</option>
+                    <option value="4">门诊医生排名</option>
                 </select>
             </div>
         </div>
