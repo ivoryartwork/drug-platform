@@ -245,4 +245,32 @@ $(function (s) {
             }
         });
     }
+
+    s.sdm = {}
+    s.sdm.ihus = function (params, callback, init) {
+        $.ajax({
+            url: 'sdm/ihus',
+            data: params,
+            type: 'get',
+            success: function (data) {
+                if (init) {
+                    callback(data);
+                } else {
+                    data = JSON.parse(data);
+                    callback(data.pageData);
+                }
+            }
+        });
+    }
+
+    s.sdm.ihusDetail = function (params, callback) {
+        $.ajax({
+            url: 'sdm/ihusDetail',
+            data: params,
+            type: 'post',
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
 }(window.S = {}))

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drug.platform.dao.SDMDAO">
+
+    <select id="drugStockInHospital" resultType="java.util.HashMap">
+        SELECT
+	     A .drug_code,
+	     b.drug_name,
+	     A .drug_spec,
+	     A .units,
+	     firm_id,
+	SUM (quantity) total_quantity
+   FROM
+	drug_stock A,
+	drug_name_dict b
+WHERE
+	A .drug_code LIKE '23%'
+AND A .drug_code = b.drug_code
+AND b.std_indicator = 1
+GROUP BY
+	A .drug_code,
+	drug_name,
+	A .drug_spec,
+	A .units,
+	firm_id
+    </select>
+
+    <select id="drugStockInHospitalDetail" resultType="java.util.HashMap">
+		SELECT
+	c.storage_name,
+	A .drug_code,
+	drug_name,
+	A .drug_spec,
+	A .units,
+	firm_id,
+	batch_no,
+	supply_indicator,
+	SUM (quantity) total_quantity
+FROM
+	drug_stock A,
+	drug_name_dict b,
+	drug_storage_dept c
+WHERE
+	A .drug_code LIKE '23%'
+AND b.std_indicator = 1
+AND A . STORAGE = c.storage_code
+AND A .drug_code = #{0}
+AND A .drug_spec = #{2}
+AND A .firm_id = #{3}
+AND b.DRUG_NAME=#{1}
+GROUP BY
+	c.storage_name,
+	A .drug_code,
+	drug_name,
+	A .drug_spec,
+	A .units,
+	firm_id,
+	batch_no,
+	supply_indicator
+ORDER BY
+	c.storage_name,
+	A .drug_code,
+	drug_name,
+	A .drug_spec,
+	A .units,
+	firm_id,
+	batch_no
+	</select>
+</mapper>

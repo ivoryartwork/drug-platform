@@ -28,9 +28,6 @@
                         <span id="drugName">
                             <input type="text" class="form-control">
                             <ul>
-                                <li onclick=selectDrug('test','test')>test</li>
-                                <li>test</li>
-                                <li>test</li>
                             </ul>
                         </span>
                     </div>

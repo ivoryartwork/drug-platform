@@ -1,8 +1,6 @@
 package com.drug.platform.dao;
 
-import com.drug.platform.model.DrugAmountDept;
-import com.drug.platform.model.DrugAmountDoctor;
-import com.drug.platform.model.DrugAmountGlobal;
+import com.drug.platform.model.*;
 
 import java.util.List;
 
@@ -31,4 +29,12 @@ public interface DrugAmountDAO {
      * @param drugAmountDoctors
      */
     public void saveDoctor(List<DrugAmountDoctor> drugAmountDoctors);
+
+    /**
+     * 获取全院（住院/门诊）一段时间的药品用量
+     *
+     * @param queryParams
+     * @return
+     */
+    public List<DrugAmount> getGlobalDrugAmountList(QueryParams queryParams);
 }

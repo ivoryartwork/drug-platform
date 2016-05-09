@@ -13,6 +13,13 @@ function initBtn() {
     })
 }
 
+/**
+ * 所有药品用量
+ */
+function singleAllDrugsAmountList() {
+
+}
+
 function singleSwitchToAll(drugCode, drugName) {
     panel_index = 1;
     $("#panel-0").addClass("hide");
