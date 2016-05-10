@@ -81,7 +81,7 @@ public class DrugAmountTask implements Task {
                 }
             }
         } catch (Exception e) {
-            logger.error("药品用量统计出错:"+e.getMessage());
+            logger.error("药品用量统计出错:" + e.getMessage());
             e.printStackTrace();
         } finally {
             isRunning = false;

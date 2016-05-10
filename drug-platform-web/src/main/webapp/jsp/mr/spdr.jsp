@@ -61,12 +61,7 @@
         </div>
         <table class="table table-bordered">
             <thead>
-            <tr>
-                <th>序号</th>
-                <th>科室</th>
-                <th>用量（盒）</th>
-                <th>金额（元）</th>
-            </tr>
+
             </thead>
             <tbody>
             <tr>

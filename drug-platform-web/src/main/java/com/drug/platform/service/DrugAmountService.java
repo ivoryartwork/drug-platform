@@ -3,6 +3,7 @@ package com.drug.platform.service;
 import com.drug.platform.model.DrugAmountDept;
 import com.drug.platform.model.DrugAmountDoctor;
 import com.drug.platform.model.DrugAmountGlobal;
+import com.drug.platform.model.QueryParams;
 
 import java.util.List;
 
@@ -32,4 +33,12 @@ public interface DrugAmountService {
      * @param drugAmountDoctors
      */
     public void addDrugAmountDoctorBatch(List<DrugAmountDoctor> drugAmountDoctors);
+
+    /**
+     * 获取单个药品各科室用量排名
+     *
+     * @param queryParams
+     * @return
+     */
+    public String getDrugAmountRankByDept(QueryParams queryParams);
 }

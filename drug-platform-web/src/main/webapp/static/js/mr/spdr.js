@@ -62,6 +62,26 @@ function initBtn() {
  */
 function deptRank() {
     title(drugName + beginDate + "至" + endDate + "各科室用量排名");
+    var params = {
+        drugCode: drugCode,
+        drugSpec: drugSpec,
+        beginDate: beginDate,
+        endDate: endDate,
+        rankBy: 'dept'
+    }
+    S.drugAmount.rank(params, bindDeptRankData);
+    function bindDeptRankData(data) {
+        data = JSON.parse(data);
+        var listStr = '';
+        if (data.length > 0) {
+            var headStr = '<tr> <th>序号</th> <th>科室</th> <th>用量（' + data[0].UNITS + '）</th> <th>金额（元）</th> </tr>'
+            for (var i = 0; i < data.length; i++) {
+                listStr += ' <tr> <td>' + data[i].NUM + '</td> <td>' + data[i].DEPT_NAME + '</td> <td>' + data[i].AMOUNT + '</td> <td>' + data[i].TOTAL + '</td> </tr>';
+            }
+            $("#rankList table thead").html(headStr);
+            $("#rankList table tbody").html(listStr);
+        }
+    }
 }
 
 /**

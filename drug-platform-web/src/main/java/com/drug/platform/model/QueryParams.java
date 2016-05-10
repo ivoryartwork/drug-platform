@@ -17,6 +17,12 @@ public class QueryParams {
 
     private String deptCode;
 
+    private String drugCode;
+
+    private String drugSpec;
+
+    private String drugName;
+
     public String getType() {
         return type;
     }
@@ -55,5 +61,29 @@ public class QueryParams {
 
     public void setDeptCode(String deptCode) {
         this.deptCode = deptCode;
+    }
+
+    public String getDrugCode() {
+        return drugCode;
+    }
+
+    public void setDrugCode(String drugCode) {
+        this.drugCode = drugCode;
+    }
+
+    public String getDrugSpec() {
+        return drugSpec;
+    }
+
+    public void setDrugSpec(String drugSpec) {
+        this.drugSpec = drugSpec;
+    }
+
+    public String getDrugName() {
+        return drugName;
+    }
+
+    public void setDrugName(String drugName) {
+        this.drugName = drugName;
     }
 }

@@ -252,6 +252,7 @@ $(function (s) {
             url: 'sdm/ihus',
             data: params,
             type: 'get',
+            timeout: 10000,
             success: function (data) {
                 if (init) {
                     callback(data);
@@ -266,6 +267,19 @@ $(function (s) {
     s.sdm.ihusDetail = function (params, callback) {
         $.ajax({
             url: 'sdm/ihusDetail',
+            data: params,
+            type: 'post',
+            timeout: 10000,
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
+
+    s.drugAmount = {}
+    s.drugAmount.rank = function (params, callback) {
+        $.ajax({
+            url: 'mmi/drugAmount/rank',
             data: params,
             type: 'post',
             success: function (data) {

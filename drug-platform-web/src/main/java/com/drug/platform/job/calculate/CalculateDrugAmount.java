@@ -43,6 +43,7 @@ public class CalculateDrugAmount {
                         "\t\t\tdrug_code,\n" +
                         "\t\t\tdrug_spec,\n" +
                         "\t\t\tunits,\n" +
+                        "\t\t\tTYPE,\n" +
                         "\t\t\tSUM (total) total,\n" +
                         "\t\t\tSUM (quantity) amount\n" +
                         "\t\tFROM\n" +
@@ -53,6 +54,7 @@ public class CalculateDrugAmount {
                         "\t\t\t\t\tT .drug_spec,\n" +
                         "\t\t\t\t\tT .drug_units units,\n" +
                         "\t\t\t\t\tT .ordered_by dept_code,\n" +
+                        "\t\t\t\t\t'inp' AS TYPE,\n" +
                         "\t\t\t\t\tSUM (T .costs) total,\n" +
                         "\t\t\t\t\tSUM (T .dispense_amount) quantity\n" +
                         "\t\t\t\tFROM\n" +
@@ -76,6 +78,7 @@ public class CalculateDrugAmount {
                         "\t\t\t\t\t\tb.drug_spec,\n" +
                         "\t\t\t\t\t\tb.package_units units,\n" +
                         "\t\t\t\t\t\tA .ordered_by dept_code,\n" +
+                        "\t\t\t\t\t\t'outp' AS TYPE,\n" +
                         "\t\t\t\t\t\tSUM (b.costs) total,\n" +
                         "\t\t\t\t\t\tSUM (b.quantity) quantity\n" +
                         "\t\t\t\t\tFROM\n" +
@@ -94,12 +97,17 @@ public class CalculateDrugAmount {
                         "\t\t\t\t\t\tb.package_units\n" +
                         "\t\t\t)\n" +
                         "\t\tGROUP BY\n" +
+                        "\t\t\tTYPE,\n" +
                         "\t\t\tdept_code,\n" +
                         "\t\t\tdrug_name,\n" +
                         "\t\t\tdrug_code,\n" +
                         "\t\t\tdrug_spec,\n" +
                         "\t\t\tunits\n" +
-                        "\t)x WHERE x.AMOUNT>0 AND x.TOTAL>0 AND x.DEPT_CODE is not NULL";
+                        "\t) x\n" +
+                        "WHERE\n" +
+                        "\tx.AMOUNT > 0\n" +
+                        "AND x.TOTAL > 0\n" +
+                        "AND x.DEPT_CODE IS NOT NULL";
                 statement = con.prepareStatement(sql);
                 ResultSet resultSet = statement.executeQuery();
                 List<DrugAmountDept> drugAmountDepts = new ArrayList<>();
@@ -109,8 +117,9 @@ public class CalculateDrugAmount {
                     drugAmountDept.setDrugName(resultSet.getString(2));
                     drugAmountDept.setDrugSpec(resultSet.getString(4));
                     drugAmountDept.setUnits(resultSet.getString(5));
-                    drugAmountDept.setTotal(resultSet.getFloat(6));
-                    drugAmountDept.setAmount(resultSet.getInt(7));
+                    drugAmountDept.setType(resultSet.getString(6));
+                    drugAmountDept.setTotal(resultSet.getFloat(7));
+                    drugAmountDept.setAmount(resultSet.getInt(8));
                     drugAmountDept.setDeptCode(resultSet.getString(1));
                     drugAmountDept.setTime(DateFormatUtils.parse(beginDate, DateFormatUtils.FORMAT_DATE));
                     drugAmountDepts.add(drugAmountDept);
@@ -135,6 +144,7 @@ public class CalculateDrugAmount {
                         "\tdrug_code,\n" +
                         "\tdrug_spec,\n" +
                         "\tunits,\n" +
+                        "  type,\n" +
                         "\tSUM (total) total,\n" +
                         "\tSUM (quantity) amount\n" +
                         "FROM\n" +
@@ -146,6 +156,7 @@ public class CalculateDrugAmount {
                         "\t\t\tb.drug_code,\n" +
                         "\t\t\tb.drug_spec,\n" +
                         "\t\t\tb.package_units units,\n" +
+                        "      'outp' AS TYPE,\n" +
                         "\t\t\tSUM (b.costs) total,\n" +
                         "\t\t\tSUM (b.quantity) quantity\n" +
                         "\t\tFROM\n" +
@@ -171,6 +182,7 @@ public class CalculateDrugAmount {
                         "\t\t\t\tD .ITEM_CODE drug_code,\n" +
                         "\t\t\t\tD .ITEM_SPEC drug_spec,\n" +
                         "\t\t\t\tD .UNITS units,\n" +
+                        "        'inp' AS TYPE,\n" +
                         "\t\t\t\tSUM (D .costs) total,\n" +
                         "\t\t\t\tSUM (D .total_amount) quantity\n" +
                         "\t\t\tFROM\n" +
@@ -193,6 +205,7 @@ public class CalculateDrugAmount {
                         "\t\t\t\tD .UNITS\n" +
                         "\t)\n" +
                         "GROUP BY\n" +
+                        "  type,\n" +
                         "\tdept_code,\n" +
                         "\tdoctor,\n" +
                         "\tdrug_name,\n" +
@@ -208,8 +221,9 @@ public class CalculateDrugAmount {
                     drugAmountDoctor.setDrugName(resultSet.getString(3));
                     drugAmountDoctor.setDrugSpec(resultSet.getString(5));
                     drugAmountDoctor.setUnits(resultSet.getString(6));
-                    drugAmountDoctor.setTotal(resultSet.getFloat(7));
-                    drugAmountDoctor.setAmount(resultSet.getInt(8));
+                    drugAmountDoctor.setType(resultSet.getString(7));
+                    drugAmountDoctor.setTotal(resultSet.getFloat(8));
+                    drugAmountDoctor.setAmount(resultSet.getInt(9));
                     drugAmountDoctor.setDeptCode(resultSet.getString(1));
                     drugAmountDoctor.setDoctor(resultSet.getString(2));
                     drugAmountDoctor.setTime(DateFormatUtils.parse(beginDate, DateFormatUtils.FORMAT_DATE));

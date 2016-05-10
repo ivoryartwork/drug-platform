@@ -3,6 +3,7 @@ package com.drug.platform.dao;
 import com.drug.platform.model.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Yaochao on 2016/5/5.
@@ -37,4 +38,12 @@ public interface DrugAmountDAO {
      * @return
      */
     public List<DrugAmount> getGlobalDrugAmountList(QueryParams queryParams);
+
+    /**
+     * 获取单个药品科室用量排名
+     *
+     * @param queryParams
+     * @return
+     */
+    public List<Map<String, Object>> getDrugAmountRankByDept(QueryParams queryParams);
 }

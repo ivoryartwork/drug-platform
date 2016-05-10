@@ -10,13 +10,13 @@
         t_drug_amount_global
     </sql>
     <sql id="drug_amount_dept_base_column_list">
-    drugCode,drugName,drugSpec,units,total,amount,time,deptCode
-</sql>
+        drugCode,drugName,drugSpec,units,total,amount,time,type,deptCode
+    </sql>
     <sql id="drug_amount_dept_table_name">
         t_drug_amount_dept
     </sql>
     <sql id="drug_amount_doctor_base_column_list">
-        drugCode,drugName,drugSpec,units,total,amount,time,deptCode,doctor
+        drugCode,drugName,drugSpec,units,total,amount,time,type,deptCode,doctor
     </sql>
     <sql id="drug_amount_doctor_table_name">
         t_drug_amount_doctor
@@ -38,7 +38,7 @@
         <include refid="drug_amount_dept_table_name"/>(<include refid="drug_amount_dept_base_column_list"/>)
         <foreach collection="list" item="item" index="index" separator="union all">
             (SELECT
-            #{item.drugCode},#{item.drugName},#{item.drugSpec},#{item.units},#{item.total},#{item.amount},#{item.time},#{item.deptCode}
+            #{item.drugCode},#{item.drugName},#{item.drugSpec},#{item.units},#{item.total},#{item.amount},#{item.time},#{item.type},#{item.deptCode}
             FROM
             dual)
         </foreach>
@@ -49,9 +49,33 @@
         <include refid="drug_amount_doctor_table_name"/>(<include refid="drug_amount_doctor_base_column_list"/>)
         <foreach collection="list" item="item" index="index" separator="union all">
             (SELECT
-            #{item.drugCode},#{item.drugName},#{item.drugSpec},#{item.units},#{item.total},#{item.amount},#{item.time},#{item.deptCode},#{item.doctor}
+            #{item.drugCode},#{item.drugName},#{item.drugSpec},#{item.units},#{item.total},#{item.amount},#{item.time},#{item.type},#{item.deptCode},#{item.doctor}
             FROM
             dual)
         </foreach>
     </insert>
+
+    <select id="getDrugAmountRankByDept" parameterType="QueryParams" resultType="java.util.HashMap">
+        SELECT
+        A.DEPTCODE,
+        B.DEPT_NAME,
+        A.UNITS,
+        SUM (A.AMOUNT) AMOUNT,
+        SUM (A.TOTAL) TOTAL
+        FROM
+        T_DRUG_AMOUNT_DEPT A,
+        DEPT_DICT B
+        WHERE
+        A.DRUGCODE = #{drugCode}
+        AND A.DRUGSPEC = #{drugSpec}
+         <![CDATA[AND A.TIME>= #{beginDate}
+        AND A.TIME<= #{endDate}]]>
+        AND B.DEPT_CODE = A.DEPTCODE
+        GROUP BY
+        A.DEPTCODE,
+        B.DEPT_NAME,
+        A.UNITS
+        ORDER BY
+        TOTAL DESC
+    </select>
 </mapper>

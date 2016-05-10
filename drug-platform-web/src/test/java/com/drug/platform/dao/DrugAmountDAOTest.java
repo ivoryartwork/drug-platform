@@ -3,6 +3,8 @@ package com.drug.platform.dao;
 import com.drug.platform.model.DrugAmountDept;
 import com.drug.platform.model.DrugAmountDoctor;
 import com.drug.platform.model.DrugAmountGlobal;
+import com.drug.platform.model.QueryParams;
+import com.drug.platform.utils.DateFormatUtils;
 import org.junit.Test;
 
 import javax.annotation.Resource;
@@ -10,6 +12,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -61,6 +64,7 @@ public class DrugAmountDAOTest extends BaseTestBean {
 //        drugAmountDept.setDrugSpec("test");
 //        drugAmountDept.setTotal(1232f);
 //        drugAmountDept.setUnits("盒");
+//        drugAmountDept.setType("inp");
 //        drugAmountDepts.add(drugAmountDept);
 //
 //        DrugAmountDept drugAmountDept1 = new DrugAmountDept();
@@ -72,6 +76,7 @@ public class DrugAmountDAOTest extends BaseTestBean {
 //        drugAmountDept1.setDrugSpec("test");
 //        drugAmountDept1.setTotal(1232f);
 //        drugAmountDept1.setUnits("盒");
+//        drugAmountDept1.setType("outp");
 //        drugAmountDepts.add(drugAmountDept1);
 //
 //        drugAmountDAO.saveDept(drugAmountDepts);
@@ -90,6 +95,7 @@ public class DrugAmountDAOTest extends BaseTestBean {
 //        drugAmountDoctor.setDrugSpec("test");
 //        drugAmountDoctor.setTotal(1232f);
 //        drugAmountDoctor.setUnits("盒");
+//        drugAmountDoctor.setType("inp");
 //        drugAmountDoctors.add(drugAmountDoctor);
 //
 //        DrugAmountDoctor drugAmountDoctor1 = new DrugAmountDoctor();
@@ -102,8 +108,20 @@ public class DrugAmountDAOTest extends BaseTestBean {
 //        drugAmountDoctor1.setDrugSpec("test");
 //        drugAmountDoctor1.setTotal(1232f);
 //        drugAmountDoctor1.setUnits("盒");
+//        drugAmountDoctor1.setType("outp");
 //        drugAmountDoctors.add(drugAmountDoctor1);
 //
 //        drugAmountDAO.saveDoctor(drugAmountDoctors);
+    }
+
+    @Test
+    public void testGetDrugAmountRankByDept() throws Exception {
+        QueryParams queryParams = new QueryParams();
+        queryParams.setDrugCode("3012583WE0");
+        queryParams.setDrugSpec("6.5cm*10cm");
+        queryParams.setBeginDate(DateFormatUtils.parse("2010-10-10", "yyyy-MM-dd"));
+        queryParams.setEndDate(DateFormatUtils.parse("2016-10-10", "yyyy-MM-dd"));
+        List<Map<String, Object>> mapList = drugAmountDAO.getDrugAmountRankByDept(queryParams);
+        System.out.println(mapList.get(0));
     }
 }

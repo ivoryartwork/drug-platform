@@ -1,13 +1,18 @@
-package com.drug.platform.service;
+package com.drug.platform.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.drug.platform.dao.DrugAmountDAO;
 import com.drug.platform.model.DrugAmountDept;
 import com.drug.platform.model.DrugAmountDoctor;
 import com.drug.platform.model.DrugAmountGlobal;
+import com.drug.platform.model.QueryParams;
+import com.drug.platform.service.DrugAmountService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Yaochao on 2016/5/5.
@@ -46,5 +51,28 @@ public class DrugAmountServiceImpl implements DrugAmountService {
     @Override
     public void addDrugAmountDoctorBatch(List<DrugAmountDoctor> drugAmountDoctors) {
         drugAmountDAO.saveDoctor(drugAmountDoctors);
+    }
+
+    /**
+     * 获取单个药品各科室用量排名
+     *
+     * @param queryParams
+     * @return
+     */
+    @Override
+    public String getDrugAmountRankByDept(QueryParams queryParams) {
+        List<Map<String, Object>> mapList = drugAmountDAO.getDrugAmountRankByDept(queryParams);
+        JSONArray result = new JSONArray();
+        for (int i = 0; i < mapList.size(); i++) {
+            Map<String, Object> map = mapList.get(i);
+            JSONObject object = new JSONObject();
+            object.put("NUM", i + 1);
+            object.put("DEPT_NAME", map.get("DEPT_NAME"));
+            object.put("AMOUNT", map.get("AMOUNT"));
+            object.put("TOTAL", map.get("TOTAL"));
+            object.put("UNITS", map.get("UNITS"));
+            result.add(object);
+        }
+        return result.toJSONString();
     }
 }
