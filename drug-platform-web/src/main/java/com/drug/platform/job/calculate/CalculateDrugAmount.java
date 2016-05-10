@@ -146,7 +146,8 @@ public class CalculateDrugAmount {
                         "\tunits,\n" +
                         "  type,\n" +
                         "\tSUM (total) total,\n" +
-                        "\tSUM (quantity) amount\n" +
+                        "\tSUM (quantity) amount,\n" +
+                        "  sum(patient_amount) patient_amount\n" +
                         "FROM\n" +
                         "\t(\n" +
                         "\t\tSELECT\n" +
@@ -158,7 +159,8 @@ public class CalculateDrugAmount {
                         "\t\t\tb.package_units units,\n" +
                         "      'outp' AS TYPE,\n" +
                         "\t\t\tSUM (b.costs) total,\n" +
-                        "\t\t\tSUM (b.quantity) quantity\n" +
+                        "\t\t\tSUM (b.quantity) quantity,\n" +
+                        "      COUNT(PATIENT_ID) patient_amount\n" +
                         "\t\tFROM\n" +
                         "\t\t\tdrug_presc_master A,\n" +
                         "\t\t\tdrug_presc_detail b\n" +
@@ -184,7 +186,8 @@ public class CalculateDrugAmount {
                         "\t\t\t\tD .UNITS units,\n" +
                         "        'inp' AS TYPE,\n" +
                         "\t\t\t\tSUM (D .costs) total,\n" +
-                        "\t\t\t\tSUM (D .total_amount) quantity\n" +
+                        "\t\t\t\tSUM (D .total_amount) quantity,\n" +
+                        "        COUNT(D.PATIENT_ID) patient_amount\n" +
                         "\t\t\tFROM\n" +
                         "\t\t\t\torders c,\n" +
                         "\t\t\t\torders_costs D\n" +
@@ -224,6 +227,7 @@ public class CalculateDrugAmount {
                     drugAmountDoctor.setType(resultSet.getString(7));
                     drugAmountDoctor.setTotal(resultSet.getFloat(8));
                     drugAmountDoctor.setAmount(resultSet.getInt(9));
+                    drugAmountDoctor.setPatientAmount(resultSet.getInt(10));
                     drugAmountDoctor.setDeptCode(resultSet.getString(1));
                     drugAmountDoctor.setDoctor(resultSet.getString(2));
                     drugAmountDoctor.setTime(DateFormatUtils.parse(beginDate, DateFormatUtils.FORMAT_DATE));

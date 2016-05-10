@@ -96,6 +96,7 @@ public class DrugAmountDAOTest extends BaseTestBean {
 //        drugAmountDoctor.setTotal(1232f);
 //        drugAmountDoctor.setUnits("盒");
 //        drugAmountDoctor.setType("inp");
+//        drugAmountDoctor.setPatientAmount(1);
 //        drugAmountDoctors.add(drugAmountDoctor);
 //
 //        DrugAmountDoctor drugAmountDoctor1 = new DrugAmountDoctor();
@@ -109,6 +110,7 @@ public class DrugAmountDAOTest extends BaseTestBean {
 //        drugAmountDoctor1.setTotal(1232f);
 //        drugAmountDoctor1.setUnits("盒");
 //        drugAmountDoctor1.setType("outp");
+//        drugAmountDoctor1.setPatientAmount(2);
 //        drugAmountDoctors.add(drugAmountDoctor1);
 //
 //        drugAmountDAO.saveDoctor(drugAmountDoctors);
@@ -116,12 +118,25 @@ public class DrugAmountDAOTest extends BaseTestBean {
 
     @Test
     public void testGetDrugAmountRankByDept() throws Exception {
-        QueryParams queryParams = new QueryParams();
-        queryParams.setDrugCode("3012583WE0");
-        queryParams.setDrugSpec("6.5cm*10cm");
-        queryParams.setBeginDate(DateFormatUtils.parse("2010-10-10", "yyyy-MM-dd"));
-        queryParams.setEndDate(DateFormatUtils.parse("2016-10-10", "yyyy-MM-dd"));
-        List<Map<String, Object>> mapList = drugAmountDAO.getDrugAmountRankByDept(queryParams);
-        System.out.println(mapList.get(0));
+//        QueryParams queryParams = new QueryParams();
+//        queryParams.setDrugCode("3012583WE0");
+//        queryParams.setDrugSpec("6.5cm*10cm");
+//        queryParams.setType("outp");
+//        queryParams.setBeginDate(DateFormatUtils.parse("2010-10-10", "yyyy-MM-dd"));
+//        queryParams.setEndDate(DateFormatUtils.parse("2016-10-10", "yyyy-MM-dd"));
+//        List<Map<String, Object>> mapList = drugAmountDAO.getDrugAmountRankByDept(queryParams);
+//        System.out.println(mapList.size());
+    }
+
+    @Test
+    public void testGetDrugAmountRankByDoctor() throws Exception {
+//        QueryParams queryParams = new QueryParams();
+//        queryParams.setDrugCode("3012583WE0");
+//        queryParams.setDrugSpec("6.5cm*10cm");
+////        queryParams.setType("outp");
+//        queryParams.setBeginDate(DateFormatUtils.parse("2010-10-10", "yyyy-MM-dd"));
+//        queryParams.setEndDate(DateFormatUtils.parse("2016-10-10", "yyyy-MM-dd"));
+//        List<Map<String, Object>> mapList = drugAmountDAO.getDrugAmountRankByDoctor(queryParams);
+//        System.out.println(mapList.get(0));
     }
 }

@@ -75,4 +75,29 @@ public class DrugAmountServiceImpl implements DrugAmountService {
         }
         return result.toJSONString();
     }
+
+    /**
+     * 获取单个药品各医师用量排名
+     *
+     * @param queryParams
+     * @return
+     */
+    @Override
+    public String getDrugAmountRankByDoctor(QueryParams queryParams) {
+        List<Map<String, Object>> mapList = drugAmountDAO.getDrugAmountRankByDoctor(queryParams);
+        JSONArray result = new JSONArray();
+        for (int i = 0; i < mapList.size(); i++) {
+            Map<String, Object> map = mapList.get(i);
+            JSONObject object = new JSONObject();
+            object.put("NUM", i + 1);
+            object.put("DEPT_NAME", map.get("DEPT_NAME"));
+            object.put("AMOUNT", map.get("AMOUNT"));
+            object.put("TOTAL", map.get("TOTAL"));
+            object.put("UNITS", map.get("UNITS"));
+            object.put("DOCTOR", map.get("DOCTOR"));
+            object.put("PATIENTAMOUNT", map.get("PATIENTAMOUNT"));
+            result.add(object);
+        }
+        return result.toJSONString();
+    }
 }

@@ -96,6 +96,26 @@ function wardRank() {
  */
 function doctorRank() {
     title(drugName + beginDate + "至" + endDate + "各医生用量排名");
+    var params = {
+        drugCode: drugCode,
+        drugSpec: drugSpec,
+        beginDate: beginDate,
+        endDate: endDate,
+        rankBy: 'doctor'
+    }
+    S.drugAmount.rank(params, bindDeptRankData);
+    function bindDeptRankData(data) {
+        data = JSON.parse(data);
+        var listStr = '';
+        if (data.length > 0) {
+            var headStr = '<tr> <th>序号</th> <th>科室</th> <th>医生</th><th>用量（' + data[0].UNITS + '）</th> <th>金额（元）</th> <th>用药人数</th></tr>'
+            for (var i = 0; i < data.length; i++) {
+                listStr += ' <tr> <td>' + data[i].NUM + '</td> <td>' + data[i].DEPT_NAME + '</td><td>' + data[i].DOCTOR + '</td> <td>' + data[i].AMOUNT + '</td> <td>' + data[i].TOTAL + '</td> <td>' + data[i].PATIENTAMOUNT + '</td></tr>';
+            }
+            $("#rankList table thead").html(headStr);
+            $("#rankList table tbody").html(listStr);
+        }
+    }
 }
 
 /**
@@ -103,6 +123,26 @@ function doctorRank() {
  */
 function outpDept() {
     title(drugName + beginDate + "至" + endDate + "各门诊科室用量排名");
+    var params = {
+        drugCode: drugCode,
+        drugSpec: drugSpec,
+        beginDate: beginDate,
+        endDate: endDate,
+        rankBy: 'outpDept'
+    }
+    S.drugAmount.rank(params, bindDeptRankData);
+    function bindDeptRankData(data) {
+        data = JSON.parse(data);
+        var listStr = '';
+        if (data.length > 0) {
+            var headStr = '<tr> <th>序号</th> <th>门诊科室</th> <th>用量（' + data[0].UNITS + '）</th> <th>金额（元）</th> </tr>'
+            for (var i = 0; i < data.length; i++) {
+                listStr += ' <tr> <td>' + data[i].NUM + '</td> <td>' + data[i].DEPT_NAME + '</td> <td>' + data[i].AMOUNT + '</td> <td>' + data[i].TOTAL + '</td> </tr>';
+            }
+            $("#rankList table thead").html(headStr);
+            $("#rankList table tbody").html(listStr);
+        }
+    }
 }
 
 /**
@@ -110,6 +150,26 @@ function outpDept() {
  */
 function outpDoctor() {
     title(drugName + beginDate + "至" + endDate + "各门诊医生用量排名");
+    var params = {
+        drugCode: drugCode,
+        drugSpec: drugSpec,
+        beginDate: beginDate,
+        endDate: endDate,
+        rankBy: 'outpDoctor'
+    }
+    S.drugAmount.rank(params, bindDeptRankData);
+    function bindDeptRankData(data) {
+        data = JSON.parse(data);
+        var listStr = '';
+        if (data.length > 0) {
+            var headStr = '<tr> <th>序号</th> <th>门诊科室</th> <th>医生</th><th>用量（' + data[0].UNITS + '）</th> <th>金额（元）</th> <th>用药人数</th></tr>'
+            for (var i = 0; i < data.length; i++) {
+                listStr += ' <tr> <td>' + data[i].NUM + '</td> <td>' + data[i].DEPT_NAME + '</td><td>' + data[i].DOCTOR + '</td> <td>' + data[i].AMOUNT + '</td> <td>' + data[i].TOTAL + '</td> <td>' + data[i].PATIENTAMOUNT + '</td></tr>';
+            }
+            $("#rankList table thead").html(headStr);
+            $("#rankList table tbody").html(listStr);
+        }
+    }
 }
 
 function title(con) {

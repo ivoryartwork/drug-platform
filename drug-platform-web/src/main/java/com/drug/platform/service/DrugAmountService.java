@@ -41,4 +41,12 @@ public interface DrugAmountService {
      * @return
      */
     public String getDrugAmountRankByDept(QueryParams queryParams);
+
+    /**
+     * 获取单个药品各医师用量排名
+     *
+     * @param queryParams
+     * @return
+     */
+    public String getDrugAmountRankByDoctor(QueryParams queryParams);
 }

@@ -35,6 +35,14 @@ public class DrugAmountController {
         queryParams.setEndDate(DateFormatUtils.parse("2016-10-10", "yyyy-MM-dd"));
         if (rankBy.equals("dept")) {
             return drugAmountService.getDrugAmountRankByDept(queryParams);
+        } else if (rankBy.equals("outpDept")) {
+            queryParams.setType("outp");
+            return drugAmountService.getDrugAmountRankByDept(queryParams);
+        }else if(rankBy.equals("doctor")){
+            return drugAmountService.getDrugAmountRankByDoctor(queryParams);
+        }else if(rankBy.equals("outpDoctor")){
+            queryParams.setType("outp");
+            return drugAmountService.getDrugAmountRankByDoctor(queryParams);
         }
         return "";
     }
