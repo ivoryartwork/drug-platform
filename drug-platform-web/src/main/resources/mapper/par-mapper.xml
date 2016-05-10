@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drug.platform.dao.ParDAO">
+    <sql id="par_base_column_list">
+        patientId,visitDate,visitNo,rcptNo,deptName,doctor,patientName,total
+    </sql>
+    <sql id="par_table_name">
+        t_par
+    </sql>
+
+    <insert id="save" parameterType="java.util.List">
+        INSERT INTO
+        <include refid="par_table_name"/>(<include refid="par_base_column_list"/>)
+        <foreach collection="list" item="item" index="index" separator="union all">
+            (SELECT
+            #{item.patientId},#{item.visitDate},#{item.visitNo},#{item.rcptNo},#{item.deptName},#{item.doctor},#{item.patientName},#{item.total}
+            FROM
+            dual)
+        </foreach>
+    </insert>
+</mapper>
