@@ -139,4 +139,30 @@ public class DrugAmountDAOTest extends BaseTestBean {
 //        List<Map<String, Object>> mapList = drugAmountDAO.getDrugAmountRankByDoctor(queryParams);
 //        System.out.println(mapList.get(0));
     }
+
+    @Test
+    public void testStaDrugAmountGlobal() throws Exception {
+//        QueryParams queryParams = new QueryParams();
+//        queryParams.setDrugCode("1802009SL1");
+//        queryParams.setDrugName("枸橼酸钾溶液");
+//        queryParams.setDrugSpec("20%/10ml301制剂室");
+////        queryParams.setType("inp");
+////        queryParams.setChargeType("全费");
+//        queryParams.setBeginDate(DateFormatUtils.parse("2010-01-01", DateFormatUtils.FORMAT_DATE));
+//        queryParams.setEndDate(DateFormatUtils.parse("2016-01-01", DateFormatUtils.FORMAT_DATE));
+//        System.out.println(drugAmountDAO.staSingleDrugAmountGlobal(queryParams));
+    }
+
+    @Test
+    public void testStaDrugAmountDeptList() throws Exception {
+//        QueryParams queryParams = new QueryParams();
+//        queryParams.setDrugCode("1802009SL1");
+//        queryParams.setDrugName("枸橼酸钾溶液");
+//        queryParams.setDrugSpec("20%/10ml301制剂室");
+////        queryParams.setType("inp");
+////        queryParams.setChargeType("全费");
+//        queryParams.setBeginDate(DateFormatUtils.parse("2010-01-01", DateFormatUtils.FORMAT_DATE));
+//        queryParams.setEndDate(DateFormatUtils.parse("2016-01-01", DateFormatUtils.FORMAT_DATE));
+//        System.out.println(drugAmountDAO.staSingleDrugAmountDeptList(queryParams));
+    }
 }

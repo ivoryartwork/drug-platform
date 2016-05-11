@@ -287,4 +287,59 @@ $(function (s) {
             }
         });
     }
+
+    s.drugAmount.singleGlobal = function (params, callback) {
+        $.ajax({
+            url: 'mmi/drugAmount/singleGlobal',
+            data: params,
+            type: 'post',
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
+
+    s.par = {}
+    s.par.list = function (params, callback, init) {
+        $.ajax({
+            url: 'par/list',
+            data: params,
+            type: 'post',
+            success: function (data) {
+                if (init) {
+                    callback(data);
+                } else {
+                    data = JSON.parse(data);
+                    callback(data.pageData);
+                }
+            }
+        });
+    }
+
+    s.par.listDetail = function (params, callback) {
+        $.ajax({
+            url: 'par/list/detail',
+            data: params,
+            type: 'post',
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
+
+    s.par.listByDoctor = function (params, callback, init) {
+        $.ajax({
+            url: 'par/listByDoctor',
+            data: params,
+            type: 'post',
+            success: function (data) {
+                if (init) {
+                    callback(data);
+                } else {
+                    data = JSON.parse(data);
+                    callback(data.pageData);
+                }
+            }
+        });
+    }
 }(window.S = {}))

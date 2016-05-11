@@ -13,23 +13,24 @@
 </head>
 <body>
 <div class="row">
-    <div class="panel">
+    <div class="panel search-panel">
         <form class="form-inline search-from">
             <div class="form-group">
                 <label>开始时间：</label>
-                <input type="text" class="form-control x-datepicker-month">
+                <input type="text" name="begin" class="form-control x-datepicker-day">
             </div>
             <div class="form-group">
                 <label>结束时间：</label>
-                <input type="text" class="form-control x-datepicker-month">
+                <input type="text" name="end" class="form-control x-datepicker-day">
             </div>
         </form>
-        <button type="button" class="btn btn-primary x-btn">查询</button>
+        <button type="button" class="btn btn-primary x-btn search-btn">查询</button>
+        <button id="back" type="button" class="btn btn-info x-btn">返回</button>
     </div>
-    <div class="panel">
+    <div class="panel" id="panel-0">
         <div class="container-fluid explanation" style="font-size: 18px;line-height: 35px">
             <div class="row col-md-6">
-                <span id="des">2015年9月1日至2015年9月3日单张处方排名</span>
+                <span class="des">2015年9月1日至2015年9月3日单张处方排名</span>
             </div>
             <div class="col-md-6">
                 <a class="x-export-btn right"
@@ -42,26 +43,42 @@
         </div>
         <table class="table table-bordered">
             <thead>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <ul id="paginationParList" class="pagination-sm"></ul>
+    </div>
+    <div class="panel hide" id="panel-1">
+        <p class="explanation"><span class="des">处方号1232明细</span></p>
+
+        <div class="container-fluid">
+            <br>
+
+            <div class="row">
+                <div class="col-md-3">开处方科室：<span id="deptName"></span></div>
+                <div class="col-md-3">医生：<span id="doctor"></span></div>
+                <div class="col-md-3">门诊ID：<span id="visitNo"></span></div>
+                <div class="col-md-3">患者姓名：<span id="patientName"></span></div>
+            </div>
+            <br>
+        </div>
+        <table class="table table-bordered">
+            <thead>
             <tr>
                 <th>序号</th>
                 <th>处方号</th>
-                <th>开处方诊室</th>
-                <th>医生姓名</th>
-                <th>门诊ID</th>
-                <th>患者姓名</th>
-                <th>处方金额</th>
+                <th>时间</th>
+                <th>就诊号</th>
+                <th>药品代码</th>
+                <th>药品名称</th>
+                <th>规格</th>
+                <th>单位</th>
+                <th>数量</th>
+                <th>金额</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>Z2189998</td>
-                <td>风湿科门诊</td>
-                <td>刘虎</td>
-                <td>100265623</td>
-                <td>张继</td>
-                <td>787878</td>
-            </tr>
             </tbody>
         </table>
     </div>

@@ -27,6 +27,9 @@ public class DrugAmount {
 
     private Date time;
 
+    //保险类型
+    private String chargeType = "";
+
     public String getDrugCode() {
         return drugCode;
     }
@@ -81,5 +84,13 @@ public class DrugAmount {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public String getChargeType() {
+        return chargeType;
+    }
+
+    public void setChargeType(String chargeType) {
+        this.chargeType = chargeType;
     }
 }

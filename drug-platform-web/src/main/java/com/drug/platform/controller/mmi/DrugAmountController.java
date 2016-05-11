@@ -38,12 +38,48 @@ public class DrugAmountController {
         } else if (rankBy.equals("outpDept")) {
             queryParams.setType("outp");
             return drugAmountService.getDrugAmountRankByDept(queryParams);
-        }else if(rankBy.equals("doctor")){
+        } else if (rankBy.equals("doctor")) {
             return drugAmountService.getDrugAmountRankByDoctor(queryParams);
-        }else if(rankBy.equals("outpDoctor")){
+        } else if (rankBy.equals("outpDoctor")) {
             queryParams.setType("outp");
             return drugAmountService.getDrugAmountRankByDoctor(queryParams);
         }
         return "";
+    }
+
+    /**
+     * 获取单品种全院药品用量
+     *
+     * @param drugCode
+     * @param drugName
+     * @param drugSpec
+     * @param type
+     * @param beginDate
+     * @param endDate
+     * @param costType
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/singleGlobal", method = RequestMethod.POST)
+    public String singleGlobal(@RequestParam String drugCode, @RequestParam String drugName, @RequestParam String drugSpec, @RequestParam int type, @RequestParam String beginDate,
+                               @RequestParam String endDate, @RequestParam(required = false) String costType, HttpServletRequest request) throws Exception {
+        QueryParams queryParams = new QueryParams();
+        if (type == 2) {
+            //门诊药费比
+            queryParams.setType("outp");
+        } else if (type == 3) {
+            //住院药费比
+            queryParams.setType("inp");
+        }
+        queryParams.setBeginDate(DateFormatUtils.parse(beginDate, DateFormatUtils.FORMAT_DATE));
+        queryParams.setEndDate(DateFormatUtils.parse(endDate, DateFormatUtils.FORMAT_DATE));
+//        queryParams.setDrugCode(drugCode);
+//        queryParams.setDrugName(drugName);
+//        queryParams.setDrugSpec(drugSpec);
+        queryParams.setDrugCode("1802009SL1");
+        queryParams.setDrugName("枸橼酸钾溶液");
+        queryParams.setDrugSpec("20%/10ml301制剂室");
+        return drugAmountService.staSingleDrugAmountGlobal(queryParams);
     }
 }

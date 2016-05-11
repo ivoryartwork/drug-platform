@@ -49,4 +49,12 @@ public interface DrugAmountService {
      * @return
      */
     public String getDrugAmountRankByDoctor(QueryParams queryParams);
+
+    /**
+     * 统计 全院(门诊/住院) 单品种药品总量
+     *
+     * @param queryParams
+     * @return
+     */
+    public String staSingleDrugAmountGlobal(QueryParams queryParams);
 }

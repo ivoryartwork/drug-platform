@@ -18,7 +18,6 @@ function initBtn() {
  * 获取药品库存列表
  */
 function drugStockList() {
-
     var params = {
         page: 1
     }
@@ -54,6 +53,9 @@ function drugStockList() {
             drugStockListStr += '<tr><td>' + data[i].num + '</td><td>' + data[i].drugCode + '</td><td><a onclick=switchDetail("' + data[i].drugCode + '","' + data[i].drugName + '","' + data[i].drugSpec + '","' + data[i].firmId + '")>' + data[i].drugName + '</a></td><td>' + data[i].drugSpec + '</td><td>' + data[i].firmId + '</td><td>' + data[i].totalQuantity + '</td></tr>';
         }
         $("#panel-0 table tbody").html(drugStockListStr);
+        $("#panel-1").addClass("hide");
+        $("#panel-0").removeClass("hide");
+        panel_index=0;
     }
 }
 

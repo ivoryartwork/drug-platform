@@ -54,4 +54,20 @@ public interface DrugAmountDAO {
      * @return
      */
     public List<Map<String, Object>> getDrugAmountRankByDoctor(QueryParams queryParams);
+
+    /**
+     * 统计全局单品种药品总用量
+     *
+     * @param queryParams
+     * @return
+     */
+    public Map<String, Object> staSingleDrugAmountGlobal(QueryParams queryParams);
+
+    /**
+     * 统计各科室单品种药品总用量
+     *
+     * @param queryParams
+     * @return
+     */
+    public List<Map<String, Object>> staSingleDrugAmountDeptList(QueryParams queryParams);
 }

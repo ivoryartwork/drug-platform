@@ -8,9 +8,13 @@ import com.drug.platform.model.DrugAmountDoctor;
 import com.drug.platform.model.DrugAmountGlobal;
 import com.drug.platform.model.QueryParams;
 import com.drug.platform.service.DrugAmountService;
+import com.drug.platform.utils.Assert;
+import com.drug.platform.utils.DateFormatUtils;
+import com.drug.platform.utils.StaUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -99,5 +103,55 @@ public class DrugAmountServiceImpl implements DrugAmountService {
             result.add(object);
         }
         return result.toJSONString();
+    }
+
+    /**
+     * 统计 全院(门诊/住院) 单品种药品总量
+     *
+     * @param queryParams
+     * @return
+     */
+    @Override
+    public String staSingleDrugAmountGlobal(QueryParams queryParams) {
+        Map<String, Object> rateMap = drugAmountDAO.staSingleDrugAmountGlobal(queryParams);
+        if (Assert.notNull(rateMap)) {
+            JSONObject result = new JSONObject();
+            JSONObject rate = new JSONObject();
+            rate.put("TOTAL", rateMap.get("TOTAL"));
+            rate.put("AMOUNT", rateMap.get("AMOUNT"));
+            rate.put("UNITS", rateMap.get("UNITS"));
+            result.put("rate", rate);
+            List<Map<String, Object>> deptDrugAmountList = drugAmountDAO.staSingleDrugAmountDeptList(queryParams);
+            JSONArray deptRates = new JSONArray();
+            for (int i = 0; i < deptDrugAmountList.size(); i++) {
+                Map<String, Object> deptDrugAmount = deptDrugAmountList.get(i);
+                JSONObject deptRate = new JSONObject();
+                deptRate.put("UNITS", deptDrugAmount.get("UNITS"));
+                deptRate.put("DEPTCODE", deptDrugAmount.get("DEPTCODE"));
+                deptRate.put("TOTAL", deptDrugAmount.get("TOTAL"));
+                deptRate.put("DEPT_NAME", deptDrugAmount.get("DEPT_NAME"));
+                deptRate.put("AMOUNT", deptDrugAmount.get("AMOUNT"));
+                deptRates.add(deptRate);
+            }
+            result.put("deptRates", deptRates);
+
+            Date[][] dates = StaUtil.getTrendTime();
+            String rateTrend = "";
+            String rateTrendDate = "";
+            for (int i = 0; i < dates.length; i++) {
+                queryParams.setBeginDate(dates[i][0]);
+                queryParams.setEndDate(dates[i][1]);
+                Map<String, Object> rateMap1 = drugAmountDAO.staSingleDrugAmountGlobal(queryParams);
+                rateTrendDate += "," + DateFormatUtils.format(dates[i][0], "yyyy-MM");
+                if (Assert.isNull(rateMap1)) {
+                    rateTrend += ",0";
+                } else {
+                    rateTrend += "," + rateMap1.get("TOTAL");
+                }
+            }
+            result.put("trend", rateTrendDate.substring(1) + "#" + rateTrend.substring(1));
+            return result.toJSONString();
+        }
+        return "";
     }
 }

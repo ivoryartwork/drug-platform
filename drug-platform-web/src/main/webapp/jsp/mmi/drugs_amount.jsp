@@ -21,7 +21,7 @@
     </ul>
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="tab1">
-            <div class="panel">
+            <div class="panel search-panel">
                 <form class="form-inline search-from">
                     <div class="form-group">
                         <label>药品名称：</label>
@@ -31,7 +31,7 @@
                             </ul>
                         </span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group drugSpec">
                         <label>规格厂家：</label>
                         <select class="form-control">
                             <option>0.25g哈药总厂</option>
@@ -41,51 +41,51 @@
                     </div>
                     <div class="form-group">
                         <label>开始时间：</label>
-                        <input type="text" class="form-control x-datepicker-month">
+                        <input type="text" name="begin" class="form-control x-datepicker-day">
                     </div>
                     <div class="form-group">
                         <label>结束时间：</label>
-                        <input type="text" class="form-control x-datepicker-month">
+                        <input type="text" name="end" class="form-control x-datepicker-day">
                     </div>
                 </form>
                 <form class="form-inline search-from">
-                    <div class="form-group">
+                    <div class="form-group type">
                         <label>用药区域：</label>
                         <select class="form-control">
-                            <option>全院</option>
-                            <option>门诊</option>
-                            <option>住院</option>
+                            <option value="1">全院</option>
+                            <option value="2">门诊</option>
+                            <option value="3">住院</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group dept">
                         <label>科室名称：</label>
                         <select class="form-control">
-                            <option>不分科室</option>
-                            <option>骨科</option>
-                            <option>妇产科</option>
-                            <option>外科</option>
-                            <option>内科</option>
+                            <option value="none">不分科室</option>
+                            <option value="112">骨科</option>
+                            <option value="12">妇产科</option>
+                            <option value="23213">外科</option>
+                            <option value="23432">内科</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group doctor">
                         <label>医生姓名：</label>
                         <select class="form-control">
-                            <option>不分医生</option>
-                            <option>张三</option>
-                            <option>李四</option>
+                            <option value="none">不分医生</option>
+                            <option value="1">张三</option>
+                            <option value="2">李四</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group costType">
                         <label>类别：</label>
                         <select class="form-control">
-                            <option>不分类别</option>
-                            <option>军人</option>
-                            <option>地方医保</option>
-                            <option>全费</option>
+                            <option value="none">不分类别</option>
+                            <option value="1">军人</option>
+                            <option value="2">地方医保</option>
+                            <option value="3">全费</option>
                         </select>
                     </div>
                 </form>
-                <button type="button" class="btn btn-primary x-btn">查询</button>
+                <button type="button" class="btn btn-primary x-btn" id="searchBySingle">查询</button>
                 <button id="back-0" type="button" class="btn btn-info x-btn">返回</button>
             </div>
             <div id="panel-0" class="panel">
@@ -206,14 +206,14 @@
                             <thead>
                             <tr>
                                 <th>序号</th>
-                                <th>科室</th>
+                                <th>医生</th>
                                 <th>用量</th>
                                 <th>金额（元）</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td><a onclick="singleSwitchToWard('肾病科一区')">肾病科一区</a></td>
+                                <td><a onclick="singleSwitchToDoctor('张山')">张山</a></td>
                                 <td>282956</td>
                                 <td>363535</td>
                                 <td>4455411</td>
@@ -227,7 +227,7 @@
             <div id="panel-3" class="panel hide">
                 <div class="row">
                     <div class="col-md-6">
-                        <p class="explanation">肾病科一区2015年9月用量</p>
+                        <p class="explanation">张山医生2015年9月用量</p>
                         <br>
                         <br>
 
@@ -246,9 +246,9 @@
                     </div>
                     <div class="col-md-6" style="position: relative">
 
-                        <p class="explanation">肾病科一区2015年9月用量趋势图</p>
+                        <p class="explanation">张山医生2015年9月用量趋势图</p>
 
-                        <div id="singleWardDrugAmountColumn" class="x-column"></div>
+                        <div id="singleDoctorDrugAmountColumn" class="x-column"></div>
                     </div>
                 </div>
             </div>

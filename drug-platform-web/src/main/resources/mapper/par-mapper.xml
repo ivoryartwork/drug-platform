@@ -10,6 +10,13 @@
         t_par
     </sql>
 
+    <sql id="parByDoctor_base_column_list">
+        deptName,doctor,total,time
+    </sql>
+    <sql id="parByDoctor_table_name">
+        t_par_by_doctor
+    </sql>
+
     <insert id="save" parameterType="java.util.List">
         INSERT INTO
         <include refid="par_table_name"/>(<include refid="par_base_column_list"/>)
@@ -20,4 +27,27 @@
             dual)
         </foreach>
     </insert>
+
+    <insert id="saveParByDoctor" parameterType="java.util.List">
+        INSERT INTO
+        <include refid="parByDoctor_table_name"/>(<include refid="parByDoctor_base_column_list"/>)
+        <foreach collection="list" item="item" index="index" separator="union all">
+            (SELECT
+            #{item.deptName},#{item.doctor},#{item.total},#{item.time}
+            FROM
+            dual)
+        </foreach>
+    </insert>
+
+    <select id="getParListByTimeRange" resultType="Par">
+        SELECT * FROM
+        <include refid="par_table_name"/>
+        WHERE  <![CDATA[visitDate>=#{0} AND visitDate<=#{1}]]> ORDER BY total DESC
+    </select>
+
+    <select id="getParByDoctorListByTimeRange" resultType="ParByDoctor">
+        SELECT * FROM
+        <include refid="parByDoctor_table_name"/>
+        WHERE  <![CDATA[time>=#{0} AND time<=#{1}]]> ORDER BY total DESC
+    </select>
 </mapper>

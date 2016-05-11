@@ -45,7 +45,8 @@ public class CalculateDrugAmount {
                         "\t\t\tunits,\n" +
                         "\t\t\tTYPE,\n" +
                         "\t\t\tSUM (total) total,\n" +
-                        "\t\t\tSUM (quantity) amount\n" +
+                        "\t\t\tSUM (quantity) amount,\n" +
+                        "      chargeType\n" +
                         "\t\tFROM\n" +
                         "\t\t\t(\n" +
                         "\t\t\t\tSELECT\n" +
@@ -56,13 +57,16 @@ public class CalculateDrugAmount {
                         "\t\t\t\t\tT .ordered_by dept_code,\n" +
                         "\t\t\t\t\t'inp' AS TYPE,\n" +
                         "\t\t\t\t\tSUM (T .costs) total,\n" +
-                        "\t\t\t\t\tSUM (T .dispense_amount) quantity\n" +
+                        "\t\t\t\t\tSUM (T .dispense_amount) quantity,\n" +
+                        "          E.CHARGE_TYPE chargeType\n" +
                         "\t\t\t\tFROM\n" +
                         "\t\t\t\t\tdrug_dispense_rec T,\n" +
-                        "\t\t\t\t\tdrug_name_dict s\n" +
+                        "\t\t\t\t\tdrug_name_dict s,\n" +
+                        "          pat_master_index E\n" +
                         "\t\t\t\tWHERE\n" +
                         "\t\t\t\t\ts.drug_code = T .drug_code\n" +
                         "\t\t\t\tAND s.std_indicator = 1\n" +
+                        "        AND T.PATIENT_ID = E.PATIENT_ID\n" +
                         "\t\t\t\tAND T .dispensing_date_time >= TO_DATE ('" + beginDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
                         "\t\t\t\tAND T .dispensing_date_time <= TO_DATE ('" + endDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
                         "\t\t\t\tGROUP BY\n" +
@@ -70,7 +74,8 @@ public class CalculateDrugAmount {
                         "\t\t\t\t\ts.drug_name,\n" +
                         "\t\t\t\t\tT .drug_code,\n" +
                         "\t\t\t\t\tT .drug_spec,\n" +
-                        "\t\t\t\t\tT .drug_units\n" +
+                        "\t\t\t\t\tT .drug_units,\n" +
+                        "          E.CHARGE_TYPE\n" +
                         "\t\t\t\tUNION\n" +
                         "\t\t\t\t\tSELECT\n" +
                         "\t\t\t\t\t\tb.drug_name,\n" +
@@ -80,12 +85,15 @@ public class CalculateDrugAmount {
                         "\t\t\t\t\t\tA .ordered_by dept_code,\n" +
                         "\t\t\t\t\t\t'outp' AS TYPE,\n" +
                         "\t\t\t\t\t\tSUM (b.costs) total,\n" +
-                        "\t\t\t\t\t\tSUM (b.quantity) quantity\n" +
+                        "\t\t\t\t\t\tSUM (b.quantity) quantity,\n" +
+                        "            C.CHARGE_TYPE chargeType\n" +
                         "\t\t\t\t\tFROM\n" +
                         "\t\t\t\t\t\tdrug_presc_master A,\n" +
-                        "\t\t\t\t\t\tdrug_presc_detail b\n" +
+                        "\t\t\t\t\t\tdrug_presc_detail b,\n" +
+                        "            pat_master_index C\n" +
                         "\t\t\t\t\tWHERE\n" +
                         "\t\t\t\t\t\tA .presc_date = b.presc_date\n" +
+                        "          AND A.PATIENT_ID = C.PATIENT_ID\n" +
                         "\t\t\t\t\tAND A .presc_no = b.presc_no\n" +
                         "\t\t\t\t\tAND A .presc_date >= TO_DATE ('" + beginDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
                         "\t\t\t\t\tAND A .presc_date <= TO_DATE ('" + endDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
@@ -94,7 +102,8 @@ public class CalculateDrugAmount {
                         "\t\t\t\t\t\tb.drug_name,\n" +
                         "\t\t\t\t\t\tb.drug_code,\n" +
                         "\t\t\t\t\t\tb.drug_spec,\n" +
-                        "\t\t\t\t\t\tb.package_units\n" +
+                        "\t\t\t\t\t\tb.package_units,\n" +
+                        "            C.CHARGE_TYPE\n" +
                         "\t\t\t)\n" +
                         "\t\tGROUP BY\n" +
                         "\t\t\tTYPE,\n" +
@@ -102,7 +111,8 @@ public class CalculateDrugAmount {
                         "\t\t\tdrug_name,\n" +
                         "\t\t\tdrug_code,\n" +
                         "\t\t\tdrug_spec,\n" +
-                        "\t\t\tunits\n" +
+                        "\t\t\tunits,\n" +
+                        "      chargeType\n" +
                         "\t) x\n" +
                         "WHERE\n" +
                         "\tx.AMOUNT > 0\n" +
@@ -120,6 +130,7 @@ public class CalculateDrugAmount {
                     drugAmountDept.setType(resultSet.getString(6));
                     drugAmountDept.setTotal(resultSet.getFloat(7));
                     drugAmountDept.setAmount(resultSet.getInt(8));
+                    drugAmountDept.setChargeType(resultSet.getString(9));
                     drugAmountDept.setDeptCode(resultSet.getString(1));
                     drugAmountDept.setTime(DateFormatUtils.parse(beginDate, DateFormatUtils.FORMAT_DATE));
                     drugAmountDepts.add(drugAmountDept);
@@ -136,85 +147,104 @@ public class CalculateDrugAmount {
         JDBCCallBack<List<DrugAmountDoctor>> jdbcCallBack = new JDBCCallBack<List<DrugAmountDoctor>>() {
             @Override
             public List<DrugAmountDoctor> doInJDBCCallBack() throws SQLException, ParseException {
-                String sql = "SELECT * FROM\n" +
-                        "(SELECT\n" +
-                        "\tdept_code,\n" +
-                        "\tdoctor,\n" +
-                        "\tdrug_name,\n" +
-                        "\tdrug_code,\n" +
-                        "\tdrug_spec,\n" +
-                        "\tunits,\n" +
-                        "  type,\n" +
-                        "\tSUM (total) total,\n" +
-                        "\tSUM (quantity) amount,\n" +
-                        "  sum(patient_amount) patient_amount\n" +
+                String sql = "SELECT\n" +
+                        "\t*\n" +
                         "FROM\n" +
                         "\t(\n" +
                         "\t\tSELECT\n" +
-                        "\t\t\tordered_by dept_code,\n" +
-                        "\t\t\tA .prescribed_by doctor,\n" +
-                        "\t\t\tb.drug_name,\n" +
-                        "\t\t\tb.drug_code,\n" +
-                        "\t\t\tb.drug_spec,\n" +
-                        "\t\t\tb.package_units units,\n" +
-                        "      'outp' AS TYPE,\n" +
-                        "\t\t\tSUM (b.costs) total,\n" +
-                        "\t\t\tSUM (b.quantity) quantity,\n" +
-                        "      COUNT(PATIENT_ID) patient_amount\n" +
+                        "\t\t\tdept_code,\n" +
+                        "\t\t\tdoctor,\n" +
+                        "\t\t\tdrug_name,\n" +
+                        "\t\t\tdrug_code,\n" +
+                        "\t\t\tdrug_spec,\n" +
+                        "\t\t\tunits,\n" +
+                        "\t\t\tTYPE,\n" +
+                        "\t\t\tSUM (total) total,\n" +
+                        "\t\t\tSUM (quantity) amount,\n" +
+                        "\t\t\tSUM (patient_amount) patient_amount,\n" +
+                        "\t\t\tchargeType\n" +
                         "\t\tFROM\n" +
-                        "\t\t\tdrug_presc_master A,\n" +
-                        "\t\t\tdrug_presc_detail b\n" +
-                        "\t\tWHERE\n" +
-                        "\t\t\tA .presc_date >= TO_DATE ('" + beginDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
-                        "\t\tAND A .presc_date <= TO_DATE ('" + endDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
-                        "\t\tAND A .presc_date = b.presc_date\n" +
-                        "\t\tAND A .presc_no = b.presc_no\n" +
+                        "\t\t\t(\n" +
+                        "\t\t\t\tSELECT\n" +
+                        "\t\t\t\t\tordered_by dept_code,\n" +
+                        "\t\t\t\t\tA .prescribed_by doctor,\n" +
+                        "\t\t\t\t\tb.drug_name,\n" +
+                        "\t\t\t\t\tb.drug_code,\n" +
+                        "\t\t\t\t\tb.drug_spec,\n" +
+                        "\t\t\t\t\tb.package_units units,\n" +
+                        "\t\t\t\t\t'outp' AS TYPE,\n" +
+                        "\t\t\t\t\tSUM (b.costs) total,\n" +
+                        "\t\t\t\t\tSUM (b.quantity) quantity,\n" +
+                        "\t\t\t\t\tCOUNT (C.PATIENT_ID) patient_amount,\n" +
+                        "\t\t\t\t\tC.CHARGE_TYPE chargeType\n" +
+                        "\t\t\t\tFROM\n" +
+                        "\t\t\t\t\tdrug_presc_master A,\n" +
+                        "\t\t\t\t\tdrug_presc_detail b,\n" +
+                        "\t\t\t\t\tpat_master_index C\n" +
+                        "\t\t\t\tWHERE\n" +
+                        "\t\t\t\t\tA .presc_date >= TO_DATE ('" + beginDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
+                        "\t\t\t\tAND A .presc_date <= TO_DATE ('" + endDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
+                        "\t\t\t\tAND A .presc_date = b.presc_date\n" +
+                        "\t\t\t\tAND A .presc_no = b.presc_no\n" +
+                        "\t\t\t\tAND A .PATIENT_ID = C.PATIENT_ID\n" +
+                        "\t\t\t\tGROUP BY\n" +
+                        "\t\t\t\t\tordered_by,\n" +
+                        "\t\t\t\t\tA .prescribed_by,\n" +
+                        "\t\t\t\t\tb.drug_name,\n" +
+                        "\t\t\t\t\tb.drug_code,\n" +
+                        "\t\t\t\t\tb.drug_spec,\n" +
+                        "\t\t\t\t\tb.package_units,\n" +
+                        "\t\t\t\t\tC.CHARGE_TYPE\n" +
+                        "\t\t\t\tUNION\n" +
+                        "\t\t\t\t\tSELECT\n" +
+                        "\t\t\t\t\t\tc.ordering_dept dept_code,\n" +
+                        "\t\t\t\t\t\tc.doctor,\n" +
+                        "\t\t\t\t\t\tD .ITEM_NAME drug_name,\n" +
+                        "\t\t\t\t\t\tD .ITEM_CODE drug_code,\n" +
+                        "\t\t\t\t\t\tD .ITEM_SPEC drug_spec,\n" +
+                        "\t\t\t\t\t\tD .UNITS units,\n" +
+                        "\t\t\t\t\t\t'inp' AS TYPE,\n" +
+                        "\t\t\t\t\t\tSUM (D .costs) total,\n" +
+                        "\t\t\t\t\t\tSUM (D .total_amount) quantity,\n" +
+                        "\t\t\t\t\t\tCOUNT (D .PATIENT_ID) patient_amount,\n" +
+                        "\t\t\t\t\t\tE .CHARGE_TYPE chargeType\n" +
+                        "\t\t\t\t\tFROM\n" +
+                        "\t\t\t\t\t\torders c,\n" +
+                        "\t\t\t\t\t\torders_costs D,\n" +
+                        "\t\t\t\t\t\tpat_master_index E\n" +
+                        "\t\t\t\t\tWHERE\n" +
+                        "\t\t\t\t\t\tc.patient_id = D .patient_id\n" +
+                        "\t\t\t\t\tAND D .PATIENT_ID = E .PATIENT_ID\n" +
+                        "\t\t\t\t\tAND c.visit_id = D .visit_id\n" +
+                        "\t\t\t\t\tAND c.order_no = D .order_no\n" +
+                        "\t\t\t\t\tAND c.order_sub_no = D .order_sub_no\n" +
+                        "\t\t\t\t\tAND D .item_class = 'A'\n" +
+                        "\t\t\t\t\tAND c.enter_date_time >= TO_DATE ('" + beginDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
+                        "\t\t\t\t\tAND c.enter_date_time <= TO_DATE ('" + endDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
+                        "\t\t\t\t\tGROUP BY\n" +
+                        "\t\t\t\t\t\tc.ordering_dept,\n" +
+                        "\t\t\t\t\t\tc.doctor,\n" +
+                        "\t\t\t\t\t\tD .ITEM_NAME,\n" +
+                        "\t\t\t\t\t\tD .ITEM_CODE,\n" +
+                        "\t\t\t\t\t\tD .ITEM_SPEC,\n" +
+                        "\t\t\t\t\t\tD .UNITS,\n" +
+                        "\t\t\t\t\t\tE .CHARGE_TYPE\n" +
+                        "\t\t\t)\n" +
                         "\t\tGROUP BY\n" +
-                        "\t\t\tordered_by,\n" +
-                        "\t\t\tA .prescribed_by,\n" +
-                        "\t\t\tb.drug_name,\n" +
-                        "\t\t\tb.drug_code,\n" +
-                        "\t\t\tb.drug_spec,\n" +
-                        "\t\t\tb.package_units\n" +
-                        "\t\tUNION\n" +
-                        "\t\t\tSELECT\n" +
-                        "\t\t\t\tc.ordering_dept dept_code,\n" +
-                        "\t\t\t\tc.doctor,\n" +
-                        "\t\t\t\tD .ITEM_NAME drug_name,\n" +
-                        "\t\t\t\tD .ITEM_CODE drug_code,\n" +
-                        "\t\t\t\tD .ITEM_SPEC drug_spec,\n" +
-                        "\t\t\t\tD .UNITS units,\n" +
-                        "        'inp' AS TYPE,\n" +
-                        "\t\t\t\tSUM (D .costs) total,\n" +
-                        "\t\t\t\tSUM (D .total_amount) quantity,\n" +
-                        "        COUNT(D.PATIENT_ID) patient_amount\n" +
-                        "\t\t\tFROM\n" +
-                        "\t\t\t\torders c,\n" +
-                        "\t\t\t\torders_costs D\n" +
-                        "\t\t\tWHERE\n" +
-                        "\t\t\t\tc.patient_id = D .patient_id\n" +
-                        "\t\t\tAND c.visit_id = D .visit_id\n" +
-                        "\t\t\tAND c.order_no = D .order_no\n" +
-                        "\t\t\tAND c.order_sub_no = D .order_sub_no\n" +
-                        "\t\t\tAND D .item_class = 'A'\n" +
-                        "\t\t\tAND c.enter_date_time >= TO_DATE ('" + beginDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
-                        "\t\t\tAND c.enter_date_time <= TO_DATE ('" + endDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
-                        "\t\t\tGROUP BY\n" +
-                        "\t\t\t\tc.ordering_dept,\n" +
-                        "\t\t\t\tc.doctor,\n" +
-                        "\t\t\t\tD .ITEM_NAME,\n" +
-                        "\t\t\t\tD .ITEM_CODE,\n" +
-                        "\t\t\t\tD .ITEM_SPEC,\n" +
-                        "\t\t\t\tD .UNITS\n" +
-                        "\t)\n" +
-                        "GROUP BY\n" +
-                        "  type,\n" +
-                        "\tdept_code,\n" +
-                        "\tdoctor,\n" +
-                        "\tdrug_name,\n" +
-                        "\tdrug_code,\n" +
-                        "\tdrug_spec,\n" +
-                        "\tunits)x WHERE x.AMOUNT>0 AND x.TOTAL>0 AND x.DOCTOR is not NULL AND x.DEPT_CODE is not NULL";
+                        "\t\t\tTYPE,\n" +
+                        "\t\t\tdept_code,\n" +
+                        "\t\t\tdoctor,\n" +
+                        "\t\t\tdrug_name,\n" +
+                        "\t\t\tdrug_code,\n" +
+                        "\t\t\tdrug_spec,\n" +
+                        "\t\t\tunits,\n" +
+                        "\t\t\tchargeType\n" +
+                        "\t) x\n" +
+                        "WHERE\n" +
+                        "\tx.AMOUNT > 0\n" +
+                        "AND x.TOTAL > 0\n" +
+                        "AND x.DOCTOR IS NOT NULL\n" +
+                        "AND x.DEPT_CODE IS NOT NULL";
                 statement = con.prepareStatement(sql);
                 ResultSet resultSet = statement.executeQuery();
                 List<DrugAmountDoctor> drugAmountDoctors = new ArrayList<>();
@@ -228,6 +258,7 @@ public class CalculateDrugAmount {
                     drugAmountDoctor.setTotal(resultSet.getFloat(8));
                     drugAmountDoctor.setAmount(resultSet.getInt(9));
                     drugAmountDoctor.setPatientAmount(resultSet.getInt(10));
+                    drugAmountDoctor.setChargeType(resultSet.getString(11));
                     drugAmountDoctor.setDeptCode(resultSet.getString(1));
                     drugAmountDoctor.setDoctor(resultSet.getString(2));
                     drugAmountDoctor.setTime(DateFormatUtils.parse(beginDate, DateFormatUtils.FORMAT_DATE));
@@ -248,23 +279,30 @@ public class CalculateDrugAmount {
                         "FROM\n" +
                         "\t(\n" +
                         "\t\tSELECT\n" +
-                        "\t\t\titem_code drug_code,\n" +
-                        "\t\t\titem_name drug_name,\n" +
-                        "\t\t\titem_spec drug_spec,\n" +
-                        "\t\t\tunits,\n" +
-                        "\t\t\tSUM (costs) total,\n" +
-                        "\t\t\tSUM (amount) amount\n" +
+                        "\t\t\tA.item_code drug_code,\n" +
+                        "\t\t\tA.item_name drug_name,\n" +
+                        "\t\t\tA.item_spec drug_spec,\n" +
+                        "\t\t\tA.units,\n" +
+                        "\t\t\tSUM (A.costs) total,\n" +
+                        "\t\t\tSUM (A.amount) amount,\n" +
+                        "      C.CHARGE_TYPE chargeType\n" +
                         "\t\tFROM\n" +
-                        "\t\t\toutp_bill_items\n" +
+                        "\t\t\toutp_bill_items A,\n" +
+                        "      outp_order_desc B,\n" +
+                        "      pat_master_index C\n" +
                         "\t\tWHERE\n" +
-                        "\t\t\tvisit_date >= TO_DATE ('" + beginDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
-                        "\t\tAND visit_date <= TO_DATE ('" + endDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
-                        "\t\tAND item_class = 'A'\n" +
+                        "      A.VISIT_DATE = B.VISIT_DATE\n" +
+                        "    AND A.VISIT_NO = B.VISIT_NO\n" +
+                        "    AND B.PATIENT_ID = C.PATIENT_ID\n" +
+                        "\t\tAND\tA.visit_date >= TO_DATE ('" + beginDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
+                        "\t\tAND A.visit_date <= TO_DATE ('" + endDate + "', '" + StaUtil.oracleDateFormatStr + "')\n" +
+                        "\t\tAND A.item_class = 'A'\n" +
                         "\t\tGROUP BY\n" +
-                        "\t\t\titem_code,\n" +
-                        "\t\t\titem_name,\n" +
-                        "\t\t\titem_spec,\n" +
-                        "\t\t\tunits\n" +
+                        "\t\t\tA.item_code,\n" +
+                        "\t\t\tA.item_name,\n" +
+                        "\t\t\tA.item_spec,\n" +
+                        "\t\t\tA.units,\n" +
+                        "      C.CHARGE_TYPE\n" +
                         "\t) x\n" +
                         "WHERE\n" +
                         "\tx.AMOUNT > 0\n" +
@@ -280,6 +318,7 @@ public class CalculateDrugAmount {
                     drugAmountGlobal.setUnits(resultSet.getString(4));
                     drugAmountGlobal.setTotal(resultSet.getFloat(5));
                     drugAmountGlobal.setAmount(resultSet.getInt(6));
+                    drugAmountGlobal.setChargeType(resultSet.getString(7));
                     drugAmountGlobal.setType("outp");
                     drugAmountGlobal.setTime(DateFormatUtils.parse(beginDate, DateFormatUtils.FORMAT_DATE));
                     drugAmountGlobals.add(drugAmountGlobal);
@@ -304,12 +343,15 @@ public class CalculateDrugAmount {
                         "\t\t\tc.item_spec drug_spec,\n" +
                         "\t\t\tc.units,\n" +
                         "\t\t\tSUM (c.costs) total,\n" +
-                        "\t\t\tSUM (c.total_amount) amount\n" +
+                        "\t\t\tSUM (c.total_amount) amount,\n" +
+                        "      E.CHARGE_TYPE chargeType\n" +
                         "\t\tFROM\n" +
                         "\t\t\torders_costs c,\n" +
-                        "\t\t\torders D\n" +
+                        "\t\t\torders D,\n" +
+                        "      pat_master_index E\n" +
                         "\t\tWHERE\n" +
                         "\t\t\tc.patient_id = D .patient_id\n" +
+                        "    AND E.PATIENT_ID = D.PATIENT_ID\n" +
                         "\t\tAND c.visit_id = D .visit_id\n" +
                         "\t\tAND c.order_no = D .order_no\n" +
                         "\t\tAND c.order_sub_no = D .order_sub_no\n" +
@@ -321,7 +363,8 @@ public class CalculateDrugAmount {
                         "\t\t\tc.item_code,\n" +
                         "\t\t\tc.item_name,\n" +
                         "\t\t\tc.item_spec,\n" +
-                        "\t\t\tc.units\n" +
+                        "\t\t\tc.units,\n" +
+                        "      E.CHARGE_TYPE\n" +
                         "\t) x\n" +
                         "WHERE\n" +
                         "\tx.AMOUNT > 0\n" +
@@ -337,6 +380,7 @@ public class CalculateDrugAmount {
                     drugAmountGlobal.setUnits(resultSet.getString(4));
                     drugAmountGlobal.setTotal(resultSet.getFloat(5));
                     drugAmountGlobal.setAmount(resultSet.getInt(6));
+                    drugAmountGlobal.setChargeType(resultSet.getString(7));
                     drugAmountGlobal.setType("inp");
                     drugAmountGlobal.setTime(DateFormatUtils.parse(beginDate, DateFormatUtils.FORMAT_DATE));
                     drugAmountGlobals.add(drugAmountGlobal);

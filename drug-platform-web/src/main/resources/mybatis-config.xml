@@ -16,6 +16,7 @@
         <typeAlias alias="DrugAmountDept" type="com.drug.platform.model.DrugAmountDept"/>
         <typeAlias alias="DrugAmountDoctor" type="com.drug.platform.model.DrugAmountDoctor"/>
         <typeAlias alias="Par" type="com.drug.platform.model.Par"/>
+        <typeAlias alias="ParByDoctor" type="com.drug.platform.model.ParByDoctor"/>
     </typeAliases>
     <plugins>
         <!-- com.github.pagehelper为PageHelper类所在包名 -->

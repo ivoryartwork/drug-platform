@@ -32,4 +32,18 @@ public interface TaskConfigService {
      * @param execTime
      */
     public void updateDrugAmountTaskExecTime(String execTime);
+
+    /**
+     * 获取处方金额任务执行时间
+     *
+     * @return
+     */
+    public String getParTaskExecTime();
+
+    /**
+     * 更新处方金额任务执行时间
+     *
+     * @param execTime
+     */
+    public void updateParTaskExecTime(String execTime);
 }

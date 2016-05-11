@@ -121,10 +121,14 @@
             <list>
                 <!--药费比统计任务-->
                 <ref bean="drugsThanTask"/>
+                <!--药品用量统计任务-->
                 <ref bean="drugAmountTask"/>
+                <!--处方金额排名统计任务-->
+                <ref bean="parTask"/>
             </list>
         </property>
     </bean>
     <bean id="drugsThanTask" class="com.drug.platform.job.DrugsThanTask"></bean>
     <bean id="drugAmountTask" class="com.drug.platform.job.DrugAmountTask"></bean>
+    <bean id="parTask" class="com.drug.platform.job.ParTask"></bean>
 </beans>
