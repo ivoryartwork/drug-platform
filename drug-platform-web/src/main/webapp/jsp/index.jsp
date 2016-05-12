@@ -33,7 +33,8 @@
 <body>
 <script>
     var userInfo = {
-        userName: '${sessionScope.session_user.userName}'
+        userName: '${sessionScope.session_user.userName}',
+        timestamp: '${sessionScope.session_user.timestamp}'
     }
 </script>
 <nav class="navbar navbar-inverse navbar-fixed-top">

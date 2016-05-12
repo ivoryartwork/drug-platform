@@ -27,6 +27,9 @@ public class SessionUser implements Serializable {
      */
     private String userType;
 
+    //登陆时间戳
+    private long timestamp;
+
     public String getUserName() {
         return userName;
     }
@@ -57,5 +60,13 @@ public class SessionUser implements Serializable {
 
     public void setUserType(String userType) {
         this.userType = userType;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }

@@ -38,6 +38,7 @@ public class LoginController {
     public String loginCheck(HttpServletRequest request) {
         SessionUser sessionUser = new SessionUser();
         sessionUser.setUserName("admin");
+        sessionUser.setTimestamp(System.currentTimeMillis());
         sessionUser.setUserType(UserType.ADMIN.toString());
         ControllerUtil.putSessionUser(request, sessionUser);
         return ControllerUtil.SUCCESS;

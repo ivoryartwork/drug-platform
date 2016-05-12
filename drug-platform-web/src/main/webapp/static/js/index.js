@@ -3,11 +3,13 @@
  */
 var Main = function () {
 
+    var userFlag = userInfo.userName + userInfo.timestamp
+
     //初始化侧边栏
     var initSidebar = function () {
         $(".nav-sidebar").each(function (i) {
-            var activeItemIndex = sessionStorage.getItem(userInfo.userName + "itemIndex");
-            var active = sessionStorage.getItem(userInfo.userName + "itemIndexHead" + i);
+            var activeItemIndex = sessionStorage.getItem(userFlag + "itemIndex");
+            var active = sessionStorage.getItem(userFlag + "itemIndexHead" + i);
             if (active == 1) {
                 $(this).children(".active").siblings("li").show();
                 $(this).children(".active").addClass("fold");
@@ -25,15 +27,15 @@ var Main = function () {
             if ($(this).hasClass("fold")) {
                 $(this).siblings("li").hide(300);
                 $(this).removeClass("fold");
-                sessionStorage.setItem(userInfo.userName + "itemIndexHead" + index, 0);
+                sessionStorage.setItem(userFlag + "itemIndexHead" + index, 0);
             } else {
                 $(this).siblings("li").show(300);
                 $(this).addClass("fold");
-                sessionStorage.setItem(userInfo.userName + "itemIndexHead" + index, 1);
+                sessionStorage.setItem(userFlag + "itemIndexHead" + index, 1);
             }
         });
         $(".nav-sidebar .sidebar-item").click(function () {
-            sessionStorage.setItem(userInfo.userName + "itemIndex", $(this).attr("index"));
+            sessionStorage.setItem(userFlag + "itemIndex", $(this).attr("index"));
         })
     }
 
