@@ -11,4 +11,12 @@ public interface DrugService {
      * @return json格式
      */
     public String searchDrugsByInputCode(String inputCode);
+
+    /**
+     * 根据药品名称获取规格
+     *
+     * @param drugName
+     * @return
+     */
+    public String searchSpecByName(String drugName);
 }

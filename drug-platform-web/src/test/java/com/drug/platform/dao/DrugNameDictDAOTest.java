@@ -19,7 +19,7 @@ public class DrugNameDictDAOTest extends BaseTestBean {
 
     @Test
     public void testSearchByInputCode() throws Exception {
-        List<DrugNameDict> drugNameDicts = drugNameDictDAO.searchByInputCode("%X%");
+        List<String> drugNameDicts = drugNameDictDAO.searchByInputCode("%X%");
         System.out.println(drugNameDicts.size());
     }
 }

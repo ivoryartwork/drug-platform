@@ -4,16 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.drug.platform.dao.DrugNameDictDAO">
     <sql id="drug_name_dict_table_name">
-        drug_name_dict
+        drug_dict
     </sql>
-    <resultMap id="DrugNameDictMap" type="DrugNameDict">
-        <result property="drugCode" column="DRUG_CODE"></result>
-        <result property="drugName" column="DRUG_NAME"></result>
-        <result property="inputCode" column="INPUT_CODE"></result>
-    </resultMap>
-    <select id="searchByInputCode" parameterType="string" resultMap="DrugNameDictMap">
-        SELECT DRUG_CODE,DRUG_NAME FROM
+    <select id="searchByInputCode" parameterType="string" resultType="string">
+        SELECT DRUG_NAME FROM
         <include refid="drug_name_dict_table_name"/>
-        WHERE INPUT_CODE like #{0} AND <![CDATA[ROWNUM<20]]>
+        WHERE INPUT_CODE like #{0} AND <![CDATA[ROWNUM<20]]> GROUP BY DRUG_NAME
+    </select>
+    <select id="searchSpecByName" parameterType="string" resultType="java.util.HashMap">
+        SELECT DRUG_CODE,DRUG_SPEC FROM DRUG_DICT WHERE DRUG_NAME=#{0}
     </select>
 </mapper>

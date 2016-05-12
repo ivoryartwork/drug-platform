@@ -1,8 +1,7 @@
 package com.drug.platform.dao;
 
-import com.drug.platform.model.DrugNameDict;
-
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Yaochao on 2016/5/5.
@@ -16,5 +15,13 @@ public interface DrugNameDictDAO {
      * @param inputCode
      * @return
      */
-    public List<DrugNameDict> searchByInputCode(String inputCode);
+    public List<String> searchByInputCode(String inputCode);
+
+    /**
+     * 根据药品名称获取规格
+     *
+     * @param drugName
+     * @return
+     */
+    public List<Map<String, Object>> searchSpecByName(String drugName);
 }

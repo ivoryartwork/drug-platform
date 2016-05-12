@@ -11,8 +11,8 @@ $(function () {
 function initBtn() {
 
     $(".search-panel .search-btn").click(function () {
-        var dcode = $("#drugName input").attr("name");
-        if (typeof dcode == 'undefined' || dcode == '') {
+        var drug_name = $("#drugName input").val();
+        if (typeof drug_name == 'undefined' || drug_name == '') {
             $("#drugName input").focus();
             return;
         }
@@ -28,9 +28,12 @@ function initBtn() {
             $endDateInput.focus();
             return;
         }
-        drugName = $("#drugName input").val();
-        drugSpec = $("#drugSpec").children("option:selected").val();
-        drugCode = dcode;
+        drugName = drug_name;
+        drugCode = $("#drugSpec").children("option:selected").val();
+        if (drugCode == 'none') {
+            return;
+        }
+        drugSpec = $("#drugSpec").children("option:selected").html();
         beginDate = begin;
         endDate = end;
         $("#rankList").removeClass("hide");

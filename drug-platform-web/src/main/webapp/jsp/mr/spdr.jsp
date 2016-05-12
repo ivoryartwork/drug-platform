@@ -23,12 +23,10 @@
                             </ul>
                         </span>
             </div>
-            <div class="form-group">
+            <div class="form-group drugSpec">
                 <label>规格厂家：</label>
                 <select class="form-control" id="drugSpec">
-                    <option value="0.25g哈药总厂">0.25g哈药总厂</option>
-                    <option value="0.5g华北制药">0.5g华北制药</option>
-                    <option value="1g晋博康">1g晋博康</option>
+                    <option value="none">无</option>
                 </select>
             </div>
             <div class="form-group">

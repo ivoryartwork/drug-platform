@@ -34,8 +34,12 @@ function initBtn() {
         beginDate = begin;
         endDate = end;
         drugName = drug_name;
-        drugCode = $("#drugName input").attr("name");
-        drugSpec = $(this).parent().find('.drugSpec').find('option:selected').val();
+        var $drugSpecSelected = $(this).parent().find('.drugSpec').find('option:selected');
+        drugCode = $drugSpecSelected.val();
+        if (drugCode == 'none') {
+            return;
+        }
+        drugSpec = $drugSpecSelected.html();
 
         type = $(this).parent().find('.type').find('option:selected').val();
         var $dept = $(this).parent().find('.dept').find('option:selected');

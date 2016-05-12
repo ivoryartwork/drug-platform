@@ -109,7 +109,7 @@ var Main = function () {
                 data = JSON.parse(data);
                 var list = "";
                 for (var i = 0; i < data.length; i++) {
-                    list += "<li onclick=selectDrug('" + data[i].drugCode + "','" + data[i].drugName + "',this)>" + data[i].drugName + "</li>";
+                    list += "<li onclick=selectDrug('" + data[i] + "',this)>" + data[i] + "</li>";
                 }
                 $drugName.children("ul").html(list);
                 $drugName.children("ul").show();
@@ -126,11 +126,26 @@ var Main = function () {
     }
 }();
 
-function selectDrug(drugCode, drugName, target) {
+function selectDrug(drugName, target) {
     var $input = $(target).parent().parent().children("input");
     $(target).parent().hide();
     $input.val(drugName);
-    $input.attr("name", drugCode);
+    var $drugSpecSelect = $(target).parent().parent().parent().parent().find(".drugSpec select");
+    $.ajax({
+        url: 'drug/searchSpecByName',
+        type: 'post',
+        data: {
+            drugName: drugName
+        },
+        success: function (data) {
+            data = JSON.parse(data);
+            var list = "";
+            for (var i = 0; i < data.length; i++) {
+                list += "<option value='" + data[i].DRUG_CODE + "'>" + data[i].DRUG_SPEC + "</option>";
+            }
+            $drugSpecSelect.html(list);
+        }
+    })
 }
 
 //显示当前页面路径

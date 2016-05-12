@@ -34,9 +34,7 @@
                     <div class="form-group drugSpec">
                         <label>规格厂家：</label>
                         <select class="form-control">
-                            <option>0.25g哈药总厂</option>
-                            <option>0.5g华北制药</option>
-                            <option>1g晋博康</option>
+                            <option value="none">无</option>
                         </select>
                     </div>
                     <div class="form-group">

@@ -23,4 +23,9 @@ public class DrugController {
     public String searchByInputCode(@RequestParam String inputCode, HttpServletRequest request) {
         return drugService.searchDrugsByInputCode(inputCode);
     }
+
+    @RequestMapping(value = "/searchSpecByName", method = RequestMethod.POST)
+    public String searchSpecByName(@RequestParam String drugName, HttpServletRequest request) {
+        return drugService.searchSpecByName(drugName);
+    }
 }
