@@ -77,25 +77,39 @@ function singleSwitchToAll(drugCode, drugName, drugSpec) {
     }
     S.drugAmount.singleGlobal(params, bindSingleGlobalData);
     function bindSingleGlobalData(data) {
-        alert(data);
-    }
+        alert(data)
+        data = JSON.parse(data);
+        var rate = data.rate;
+        var deptRates = data.deptRates;
+        var trend = data.trend;
+        trend = trend.split("#");
+        $("#drugAmount-0").html(rate.AMOUNT + rate.UNITS);
+        $("#drugTotal-0").html(rate.TOTAL);
 
-    var categories = [
-        '4月',
-        '5月',
-        '6月',
-        '7月',
-        '8月',
-        '9月'
-    ]
-    var series = [{
-        name: '全部',
-        data: [1, 2, 3, 4, 5, 6],
-        dataLabels: {
-            enabled: true,
+        var trendArray = trend[1].split(",");
+        var trendData = [];
+        for (var i = 0; i < trendArray.length; i++) {
+            trendData[i] = Number(trendArray[i]);
         }
-    }]
-    chartHelper.column('singleDrugAmountColumn', categories, series, "%");
+        var trendDate = trend[0].split(",");
+        var series = [{
+            name: '全部',
+            data: trendData,
+            dataLabels: {
+                enabled: true,
+            }
+        }]
+        chartHelper.column('singleDrugAmountColumn', trendDate, series, "%");
+
+        var deptRatesList = '';
+        if (deptRates.length > 0) {
+            for (var i = 0; i < deptRates.length; i++) {
+                deptRatesList += '<tr><td>' + deptRates[i].NUM + '</td>  <td><a onclick=singleSwitchToDepartment("肾病科")>' + deptRates[i].DEPT_NAME + '</a></td> <td>' + deptRates[i].AMOUNT + '</td> <td>' + deptRates[i].TOTAL + '</td> </tr>';
+            }
+            $("#units-0").html(deptRates[0].UNITS);
+            $("#panel-1 table tbody").html(deptRatesList);
+        }
+    }
 }
 
 function singleSwitchToDepartment() {

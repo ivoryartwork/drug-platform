@@ -91,7 +91,7 @@
             <div id="panel-0" class="panel">
                 <div class="row">
                     <div class="col-md-12">
-                        <p class="explanation">全院2015年9月用药列表</p>
+                        <p class="explanation"><span class="des">全院2015年9月用药列表</span></p>
                         <table class="table table-bordered">
                             <thead>
                             <tr>
@@ -123,7 +123,7 @@
             <div id="panel-1" class="panel hide">
                 <div class="row">
                     <div class="col-md-6">
-                        <p class="explanation">全院2015年9月用量</p>
+                        <p class="explanation"><span class="des">全院2015年9月用量</span></p>
                         <br>
                         <br>
 
@@ -131,44 +131,37 @@
                             <h2 class="text-right">药品用量：</h2>
                         </div>
                         <div class="col-md-6">
-                            <h2 class="text-left">1265盒</h2>
+                            <h2 class="text-left"><span id="drugAmount-0">1265盒</span></h2>
                         </div>
                         <div class="col-md-6">
                             <h2 class="text-right">用药金额：</h2>
                         </div>
                         <div class="col-md-6">
-                            <h2 class="text-left">1265123元</h2>
+                            <h2 class="text-left"><span id="drugTotal-0">1265123</span>元</h2>
                         </div>
                     </div>
                     <div class="col-md-6" style="position: relative">
 
-                        <p class="explanation">全院2015年9月用量趋势图</p>
+                        <p class="explanation"><span class="des">全院2015年9月用量趋势图</span></p>
 
                         <div id="singleDrugAmountColumn" class="x-column"></div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <p class="explanation">2015年9月各科室用量</p>
+                        <p class="explanation"><span class="des">2015年9月各科室用量</span></p>
                         <table class="table table-bordered">
                             <thead>
                             <tr>
                                 <th>序号</th>
                                 <th>科室</th>
-                                <th>用量</th>
+                                <th>用量（<span id="units-0"></span>）</th>
                                 <th>金额（元）</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td><a onclick="singleSwitchToDepartment('肾病科')">肾病科</a></td>
-                                <td>282956</td>
-                                <td>363535</td>
-                                <td>4455411</td>
-                            </tr>
                             </tbody>
                         </table>
-                        <ul class="pagination-sm right thandrugs-pagination"></ul>
                     </div>
                 </div>
             </div>

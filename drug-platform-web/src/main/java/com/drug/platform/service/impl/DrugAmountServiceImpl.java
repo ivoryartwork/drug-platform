@@ -131,6 +131,7 @@ public class DrugAmountServiceImpl implements DrugAmountService {
                 deptRate.put("TOTAL", deptDrugAmount.get("TOTAL"));
                 deptRate.put("DEPT_NAME", deptDrugAmount.get("DEPT_NAME"));
                 deptRate.put("AMOUNT", deptDrugAmount.get("AMOUNT"));
+                deptRate.put("NUM", i + 1);
                 deptRates.add(deptRate);
             }
             result.put("deptRates", deptRates);
