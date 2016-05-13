@@ -342,4 +342,15 @@ $(function (s) {
             }
         });
     }
+
+    s.urm = {}
+    s.urm.authModules = function (callback) {
+        $.ajax({
+            url: 'urm/authModules',
+            type: 'get',
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
 }(window.S = {}))

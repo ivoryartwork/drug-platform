@@ -11,4 +11,7 @@
         <include refid="user_table_name"/>
         WHERE username=#{0}
     </select>
+    <select id="getAllAuthModules" resultType="AuthModule">
+        SELECT * FROM t_auth_module
+    </select>
 </mapper>

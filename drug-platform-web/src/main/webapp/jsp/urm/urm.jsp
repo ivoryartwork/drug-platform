@@ -14,7 +14,7 @@
 <body>
 <div class="row">
     <div class="panel">
-        <p class="explanation">用户列表</p>
+        <p class="explanation">用户列表<a class="right x-export-btn" onclick="createUser()">创建用户</a></p>
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -57,6 +57,93 @@
     </div>
 </div>
 
+<div class="modal fade" id="createUser" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">创建用户</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">登录名：</label>
+
+                        <div class="col-sm-7">
+                            <input type="text" id="username-0" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">昵称：</label>
+
+                        <div class="col-sm-7">
+                            <input type="text" id="nickname-0" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">用户密码：</label>
+
+                        <div class="col-sm-7">
+                            <input type="text" id="password-0" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">手机号：</label>
+
+                        <div class="col-sm-7">
+                            <input type="text" id="phoneNumber-0" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">电子邮箱：</label>
+
+                        <div class="col-sm-7">
+                            <input type="email" id="email-0" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">部门/科室：</label>
+
+                        <div class="col-sm-7">
+                            <select class="form-control" id="dept-0">
+                                <option value="0">药材处</option>
+                                <option value="2">骨科</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">授权模块：</label>
+
+                        <div class="col-sm-7">
+                            <div class="similar-drugs-panel">
+                                <label>已授权：</label>
+
+                                <div class="added-drugs">
+                                </div>
+                                <label>未授权：</label>
+
+                                <div class="similar-drugs">
+                                    <%--<span class="similar-drug" index="0">用药指标监控</span>--%>
+                                    <%--<span class="similar-drug" index="1">重点药品监控</span>--%>
+                                    <%--<span class="similar-drug" index="2">取药及处方查询</span>--%>
+                                    <%--<span class="similar-drug" index="3">用药排名</span>--%>
+                                    <%--<span class="similar-drug" index="4">月报表</span>--%>
+                                    <%--<span class="similar-drug" index="5">特殊药品监控</span>--%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary">创建</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="editUser" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -71,44 +158,44 @@
                         <label class="col-sm-3 control-label">登录名：</label>
 
                         <div class="col-sm-7">
-                            <input type="text" class="form-control">
+                            <input type="text" id="username-1" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">昵称：</label>
 
                         <div class="col-sm-7">
-                            <input type="text" class="form-control">
+                            <input type="text" id="nickname-1" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">用户密码：</label>
 
                         <div class="col-sm-7">
-                            <input type="text" class="form-control">
+                            <input type="text" id="password-1" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">手机号：</label>
 
                         <div class="col-sm-7">
-                            <input type="text" class="form-control">
+                            <input type="text" id="phoneNumber-1" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">电子邮箱：</label>
 
                         <div class="col-sm-7">
-                            <input type="email" class="form-control">
+                            <input type="email" id="email-1" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">部门/科室：</label>
 
                         <div class="col-sm-7">
-                            <select class="form-control">
-                                <option>药材处</option>
-                                <option>骨科</option>
+                            <select class="form-control" id="dept-1">
+                                <option value="0">药材处</option>
+                                <option value="2">骨科</option>
                             </select>
                         </div>
                     </div>
@@ -138,7 +225,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">添加</button>
+                <button type="button" class="btn btn-primary">保存</button>
             </div>
         </div>
     </div>
