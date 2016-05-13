@@ -15,12 +15,12 @@
 <div class="row">
     <div class="panel">
         <p class="explanation">用户列表<a class="right x-export-btn" onclick="createUser()">创建用户</a></p>
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="userList">
             <thead>
             <tr>
                 <th>序号</th>
                 <th>登录名</th>
-                <th>用户名</th>
+                <th>昵称</th>
                 <th>部门/科室</th>
                 <th>授权用户</th>
                 <th>手机号码</th>
@@ -46,7 +46,7 @@
                             操作 <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a onclick=editUser('12')>修改</a></li>
+                            <li><a onclick=editUser("12",this)>修改</a></li>
                             <li><a onclick=deleteUser("12",this)>删除</a></li>
                         </ul>
                     </div>
@@ -138,7 +138,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">创建</button>
+                <button type="button" id="createUserBtn" class="btn btn-primary">创建</button>
+                <p class="text-center red-color hide" id="createUserResult"></p>
             </div>
         </div>
     </div>
@@ -158,6 +159,7 @@
                         <label class="col-sm-3 control-label">登录名：</label>
 
                         <div class="col-sm-7">
+                            <input type="hidden" id="userId">
                             <input type="text" id="username-1" class="form-control">
                         </div>
                     </div>
