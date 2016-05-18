@@ -6,4 +6,8 @@ package com.drug.platform.service;
 public interface UserService {
 
     public String getAllAuthModules();
+
+    public int createUser(String userData) throws Exception;
+
+    public void deleteUser(String username);
 }

@@ -46,8 +46,8 @@
                             操作 <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a onclick=editUser("12",this)>修改</a></li>
-                            <li><a onclick=deleteUser("12",this)>删除</a></li>
+                            <li><a onclick=editUser("12312",this)>修改</a></li>
+                            <li><a onclick=deleteUser("12312",this)>删除</a></li>
                         </ul>
                     </div>
                 </td>
@@ -160,7 +160,7 @@
 
                         <div class="col-sm-7">
                             <input type="hidden" id="userId">
-                            <input type="text" id="username-1" class="form-control">
+                            <input type="text" id="username-1" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="form-group">

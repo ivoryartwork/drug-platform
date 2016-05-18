@@ -3,6 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.drug.platform.dao.UserDAO">
+    <sql id="user_base_column_list">
+        username,password,nickname,phoneNum,email,deptCode,deptName
+    </sql>
     <sql id="user_table_name">
         t_user
     </sql>
@@ -14,4 +17,47 @@
     <select id="getAllAuthModules" resultType="AuthModule">
         SELECT * FROM t_auth_module
     </select>
+
+    <insert id="save" parameterType="User">
+        INSERT INTO
+        <include refid="user_table_name"/>(
+        <include refid="user_base_column_list"/>
+        ) VALUES (#{username},#{password},#{nickname},#{phoneNum},#{email},#{deptCode},#{deptName})
+    </insert>
+
+    <select id="list" resultType="User">
+        SELECT * FROM
+        <include refid="user_table_name"/>
+    </select>
+
+    <insert id="saveUserAuthModules" parameterType="java.util.List">
+        INSERT INTO T_USER_AUTHMODULES(USERNAME,MODULECODE)
+        <foreach collection="list" item="item" index="index" separator="union all">
+            (SELECT
+            #{item.username},#{item.moduleCode}
+            FROM
+            dual)
+        </foreach>
+    </insert>
+
+    <select id="getUserAuthModules" parameterType="string" resultType="java.util.HashMap">
+        SELECT
+	A .USERNAME,
+	A .MODULECODE,
+	B.MODULENAME
+FROM
+	T_USER_AUTHMODULES A,
+	T_AUTH_MODULE B
+WHERE
+	A .MODULECODE = B.MODULECODE
+AND A .USERNAME = #{0}
+    </select>
+    <delete id="delete" parameterType="string">
+        DELETE FROM
+        <include refid="user_table_name"/>
+        WHERE USERNAME=#{0}
+    </delete>
+    <delete id="deleteUserAuthModules" parameterType="string">
+        DELETE FROM T_USER_AUTHMODULES WHERE USERNAME=#{0}
+    </delete>
 </mapper>

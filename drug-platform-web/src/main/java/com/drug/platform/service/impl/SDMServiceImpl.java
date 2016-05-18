@@ -2,13 +2,19 @@ package com.drug.platform.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.drug.platform.dao.PatientDAO;
 import com.drug.platform.dao.SDMDAO;
 import com.drug.platform.service.SDMService;
+import com.drug.platform.utils.Assert;
+import com.drug.platform.utils.DateFormatUtils;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +26,9 @@ public class SDMServiceImpl implements SDMService {
 
     @Resource
     private SDMDAO sdmdao;
+
+    @Resource
+    private PatientDAO patientDAO;
 
     private int pageSize = 15;
 
@@ -80,5 +89,46 @@ public class SDMServiceImpl implements SDMService {
             result.add(object);
         }
         return result.toJSONString();
+    }
+
+    /**
+     * 单病人用药统计
+     *
+     * @param patientId
+     * @param beginDate
+     * @param endDate
+     * @return
+     */
+    @Override
+    public String spta(String patientId, String beginDate, String endDate) {
+        try {
+            Map<String, Object> patientInfo = patientDAO.getPatientInfo(patientId);
+            if (Assert.isNull(patientInfo)) {
+                return null;
+            }
+            JSONObject result = new JSONObject();
+            result.put("patientName", patientInfo.get("NAME"));
+            Date birthday = (Date) patientInfo.get("DATE_OF_BIRTH");
+            Calendar calendar = Calendar.getInstance();
+            int nowYear = calendar.get(Calendar.YEAR);
+            calendar.setTime(birthday);
+            int age = nowYear - calendar.get(Calendar.YEAR);
+            result.put("patientAge", age);
+            result.put("citizenship", patientInfo.get("CITIZENSHIP"));
+            result.put("licenseNum", patientInfo.get("ID_NO"));
+            result.put("nation", patientInfo.get("NATION"));
+            result.put("sex", patientInfo.get("SEX"));
+            result.put("medicareType", patientInfo.get("CHARGE_TYPE"));
+            result.put("phone", patientInfo.get("PHONE_NUMBER_HOME"));
+            Date begin = DateFormatUtils.parse(beginDate + " 00:00:00", DateFormatUtils.FORMAT_TIMESTAMP);
+            Date end = DateFormatUtils.parse(endDate + " 23:59:5", DateFormatUtils.FORMAT_TIMESTAMP);
+            JSONArray records = (JSONArray) JSONArray.toJSON(sdmdao.spta(patientId, begin, end));
+            result.put("records",records);
+            System.out.println(result);
+            return result.toJSONString();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

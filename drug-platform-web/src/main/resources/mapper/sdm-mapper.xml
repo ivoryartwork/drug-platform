@@ -68,4 +68,87 @@ ORDER BY
 	firm_id,
 	batch_no
 	</select>
+
+	<select id="spta" resultType="java.util.HashMap">
+		SELECT
+		x.patient_id,
+		z. NAME,
+		x.drug_name,
+		x.drug_spec,
+		x.units,
+		y.dept_name,
+		SUM (amount) total_amount
+		FROM
+		(
+		SELECT
+		E .patient_id,
+		D .item_code drug_code,
+		D .item_name drug_name,
+		D .item_spec drug_spec,
+		D .units,
+		ordered_by_dept dept_code,
+		SUM (amount) amount
+		FROM
+		outp_bill_items D,
+		outp_order_desc E
+		WHERE
+		D .visit_date = E .visit_date
+		AND D .visit_no = E .visit_no
+		AND D .visit_date >= #{1}
+		<![CDATA[AND D .visit_date <= #{2}]]>
+		AND item_class = 'A'
+		AND D .item_code LIKE '23%'
+		AND E .patient_id = #{0}
+		GROUP BY
+		E .patient_id,
+		D .item_code,
+		D .item_name,
+		D .item_spec,
+		D .units,
+		ordered_by_dept
+		UNION
+		SELECT
+		A .patient_id,
+		A .item_code drug_code,
+		A .item_name drug_name,
+		A .item_spec drug_spec,
+		A .units,
+		A .ordered_by dept_code,
+		SUM (A .amount) amount
+		FROM
+		inp_bill_detail A
+		WHERE
+		A .billing_date_time >=#{1}
+		<![CDATA[AND A .billing_date_time <= #{2}]]>
+		AND A .item_class = 'A'
+		AND A .item_code LIKE '23%'
+		AND A .patient_id = #{0}
+		GROUP BY
+		A .patient_id,
+		A .item_code,
+		A .item_name,
+		A .item_spec,
+		A .units,
+		A .ordered_by
+		) x,
+		dept_dict y,
+		pat_master_index z
+		WHERE
+		x.dept_code = y.dept_code
+		AND x.patient_id = z.patient_id
+		GROUP BY
+		x.patient_id,
+		z. NAME,
+		x.drug_name,
+		x.drug_spec,
+		x.units,
+		y.dept_name
+		ORDER BY
+		x.patient_id,
+		z. NAME,
+		x.drug_name,
+		x.drug_spec,
+		x.units,
+		y.dept_name
+	</select>
 </mapper>

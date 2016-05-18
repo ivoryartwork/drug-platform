@@ -23,4 +23,13 @@ public interface SDMService {
      * @return
      */
     public String drugStockInHospitalDetail(String drugCode, String drugName, String drugSpec, String firmId);
+
+    /**
+     * 单病人用药统计
+     * @param patientId
+     * @param beginDate
+     * @param endDate
+     * @return
+     */
+    public String spta(String patientId,String beginDate,String endDate);
 }

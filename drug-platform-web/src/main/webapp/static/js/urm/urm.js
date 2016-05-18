@@ -36,20 +36,41 @@ function initBtn() {
             return;
         }
         //保存用户并获取用户Id
-
-        var addedUserId;
-        //将用户信息添加到前台表中
-        var modulesStr = '';
-        for (var i = 0; i < modulesCode.length; i++) {
-            modulesStr += '<span name="' + modulesCode[i] + '">[' + modulesName[i] + ']</span>';
+        var userData = {
+            username: username,
+            password: password,
+            nickname: nickname,
+            phoneNum: phoneNumber,
+            email: email,
+            deptCode: deptCode,
+            deptName: deptName,
+            modulesCode: modulesCode
         }
-        var user = '<tr> <td>1</td> <td>' + username + '</td> <td>' + nickname + '</td> <td>' + deptName + '</td> <td>' + userInfo.userName + '</td> <td>' + phoneNumber + '</td> <td>' + email + '</td> <td>' + modulesStr + '</td> <td> <div class="btn-group"> <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">操作 <span class="caret"></span> </button> <ul class="dropdown-menu"> <li><a onclick=editUser("' + addedUserId + '",this)>修改</a></li> <li><a onclick=deleteUser("' + addedUserId + '",this)>删除</a></li> </ul> </div> </td> </tr>'
-        $("#userList tbody").prepend(user);
-        $("#userList tbody tr").each(function (i) {
-            $(this).children("td").eq(0).html(i + 1);
-        })
-        alert("用户创建成功");
-        $("#createUser").modal('hide');
+        var params = {
+            userData: JSON.stringify(userData)
+        }
+        S.urm.createUser(params, createUserCallback);
+        function createUserCallback(status) {
+            var status = Number(status);
+            if (status == 0) {
+                //将用户信息添加到前台表中
+                var modulesStr = '';
+                for (var i = 0; i < modulesCode.length; i++) {
+                    modulesStr += '<span name="' + modulesCode[i] + '">[' + modulesName[i] + ']</span>';
+                }
+                var user = '<tr> <td>1</td> <td>' + username + '</td> <td>' + nickname + '</td> <td name="' + deptCode + '">' + deptName + '</td> <td>' + userInfo.userName + '</td> <td>' + phoneNumber + '</td> <td>' + email + '</td> <td>' + modulesStr + '</td> <td> <div class="btn-group"> <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">操作 <span class="caret"></span> </button> <ul class="dropdown-menu"> <li><a onclick=editUser("' + addedUserId + '",this)>修改</a></li> <li><a onclick=deleteUser("' + username + '",this)>删除</a></li> </ul> </div> </td> </tr>'
+                $("#userList tbody").prepend(user);
+                $("#userList tbody tr").each(function (i) {
+                    $(this).children("td").eq(0).html(i + 1);
+                })
+                alert("用户创建成功");
+                $("#createUser").modal('hide');
+            } else if (status == 1) {
+                createUserResult("登录名已存在")
+            } else if (status == 2) {
+                createUserResult("创建失败，请重新尝试")
+            }
+        }
     })
 }
 
@@ -64,7 +85,27 @@ function removeDrug(remove) {
     $(".similar-drug[index='" + index + "']").removeClass("disabled")
 }
 
-function editUser(userId, target) {
+function editUser(username, target) {
+    $(target).parent().parent().parent().parent().parent().children("td").each(function (i) {
+        if (i = 1) {
+            var username = $(this).html();
+        }else if(i=2){
+            var nickname = $(this).html();
+        }
+        else if(i=3){
+            var deptCode = $(this).attr("name");
+        }
+        else if(i=4){
+            var nickname = $(this).html();
+        }
+        else if(i=2){
+            var nickname = $(this).html();
+        }
+        else if(i=2){
+            var nickname = $(this).html();
+        }
+
+    })
     $("#editUser").modal('show');
 }
 
@@ -127,6 +168,14 @@ function bindAuthModuleSelectEvent(target) {
     //})
 }
 
-function deleteUser(userId, target) {
-    $(target).parent().parent().parent().parent().parent().remove();
+function deleteUser(username, target) {
+    var params = {
+        username: username
+    }
+    S.urm.deleteUser(params, function (status) {
+        status = Number(status);
+        if (status == 0) {
+            $(target).parent().parent().parent().parent().parent().remove();
+        }
+    })
 }

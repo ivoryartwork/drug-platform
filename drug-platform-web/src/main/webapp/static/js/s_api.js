@@ -276,6 +276,18 @@ $(function (s) {
         });
     }
 
+    s.sdm.spta = function (params, callback) {
+        $.ajax({
+            url: 'sdm/spta',
+            data: params,
+            type: 'post',
+            timeout: 10000,
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
+
     s.drugAmount = {}
     s.drugAmount.rank = function (params, callback) {
         $.ajax({
@@ -348,6 +360,28 @@ $(function (s) {
         $.ajax({
             url: 'urm/authModules',
             type: 'get',
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
+
+    s.urm.createUser = function (params, callback) {
+        $.ajax({
+            url: 'urm/createUser',
+            type: 'post',
+            data: params,
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
+
+    s.urm.deleteUser = function (params, callback) {
+        $.ajax({
+            url: 'urm/deleteUser',
+            type: 'post',
+            data: params,
             success: function (data) {
                 callback(data);
             }

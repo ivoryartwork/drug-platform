@@ -1,5 +1,6 @@
 package com.drug.platform.dao;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -25,4 +26,14 @@ public interface SDMDAO {
      * @return
      */
     public List<Map<String, Object>> drugStockInHospitalDetail(String drugCode, String drugName, String drugSpec, String firmId);
+
+    /**
+     * 单病人用药统计
+     *
+     * @param patiendId
+     * @param beginDate
+     * @param endDate
+     * @return
+     */
+    public List<Map<String, Object>> spta(String patiendId, Date beginDate, Date endDate);
 }

@@ -9,6 +9,16 @@ public class User {
 
     private String password;
 
+    private String nickname;
+
+    private long phoneNum;
+
+    private String email;
+
+    private String deptCode;
+
+    private String deptName;
+
     public String getUsername() {
         return username;
     }
@@ -23,5 +33,45 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public long getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(long phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
     }
 }
