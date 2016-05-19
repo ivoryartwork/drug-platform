@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.drug.platform.dao.UserDAO">
     <sql id="user_base_column_list">
-        username,password,nickname,phoneNum,email,deptCode,deptName
+        username,password,nickname,phoneNum,email,deptCode,deptName,authUser
     </sql>
     <sql id="user_table_name">
         t_user
@@ -22,7 +22,7 @@
         INSERT INTO
         <include refid="user_table_name"/>(
         <include refid="user_base_column_list"/>
-        ) VALUES (#{username},#{password},#{nickname},#{phoneNum},#{email},#{deptCode},#{deptName})
+        ) VALUES (#{username},#{password},#{nickname},#{phoneNum},#{email},#{deptCode},#{deptName},#{authUser})
     </insert>
 
     <select id="list" resultType="User">
@@ -60,4 +60,30 @@ AND A .USERNAME = #{0}
     <delete id="deleteUserAuthModules" parameterType="string">
         DELETE FROM T_USER_AUTHMODULES WHERE USERNAME=#{0}
     </delete>
+
+    <update id="update" parameterType="User">
+        UPDATE
+        <include refid="user_table_name"/>
+        <set>
+            <if test="nickname!=null">
+                nickname=#{nickname},
+            </if>
+            <if test="password!=null">
+                password=#{password},
+            </if>
+            <if test="phoneNum>0">
+                phoneNum = #{phoneNum},
+            </if>
+            <if test="email!=null">
+                email=#{email},
+            </if>
+            <if test="deptCode">
+                deptCode=#{deptCode},
+            </if>
+            <if test="deptName">
+                deptName=#{deptName},
+            </if>
+        </set>
+        WHERE username=#{username}
+    </update>
 </mapper>

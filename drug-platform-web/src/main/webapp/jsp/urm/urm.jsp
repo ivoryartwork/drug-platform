@@ -30,28 +30,6 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>admin</td>
-                <td>刘虎</td>
-                <td>药材处</td>
-                <td>胡子的</td>
-                <td>1524683565</td>
-                <td>874686535@qq.com</td>
-                <td>所有权限</td>
-                <td>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                            操作 <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a onclick=editUser("12312",this)>修改</a></li>
-                            <li><a onclick=deleteUser("12312",this)>删除</a></li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
             </tbody>
         </table>
     </div>
@@ -227,7 +205,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">保存</button>
+                <button type="button" class="btn btn-primary" id="editUserBtn">保存</button>
+                <p class="text-center red-color hide" id="editUserResult"></p>
             </div>
         </div>
     </div>

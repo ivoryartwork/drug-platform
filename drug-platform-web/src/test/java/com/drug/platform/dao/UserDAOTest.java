@@ -1,5 +1,6 @@
 package com.drug.platform.dao;
 
+import com.drug.platform.model.User;
 import com.drug.platform.model.UserAuthModules;
 import org.junit.Test;
 
@@ -52,5 +53,18 @@ public class UserDAOTest extends BaseTestBean {
     @Test
     public void testGetUserAuthModules() throws Exception {
         System.out.println(userDAO.getUserAuthModules("test"));
+    }
+
+    @Test
+    public void testUpdate() throws Exception {
+        User user = new User();
+        user.setUsername("test");
+        user.setPassword("test");
+        user.setNickname("test");
+        user.setPhoneNum(1);
+        user.setEmail("test");
+        user.setDeptCode("test");
+        user.setDeptName("test");
+        userDAO.update(user);
     }
 }

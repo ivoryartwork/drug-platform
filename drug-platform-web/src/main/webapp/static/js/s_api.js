@@ -387,4 +387,36 @@ $(function (s) {
             }
         });
     }
+
+    s.urm.userList = function (callback) {
+        $.ajax({
+            url: 'urm/userList',
+            type: 'get',
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
+
+    s.urm.userInfo = function (params, callback) {
+        $.ajax({
+            url: 'urm/userInfo',
+            type: 'get',
+            data: params,
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
+
+    s.urm.updateUser = function (params, callback) {
+        $.ajax({
+            url: 'urm/updateUser',
+            type: 'post',
+            data: params,
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
 }(window.S = {}))

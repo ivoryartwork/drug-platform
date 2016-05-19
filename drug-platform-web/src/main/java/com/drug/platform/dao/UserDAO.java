@@ -53,4 +53,6 @@ public interface UserDAO {
     public void delete(String username);
 
     public void deleteUserAuthModules(String username);
+
+    public void update(User user);
 }

@@ -19,6 +19,9 @@ public class User {
 
     private String deptName;
 
+    //授权用户
+    private String authUser;
+
     public String getUsername() {
         return username;
     }
@@ -73,5 +76,13 @@ public class User {
 
     public void setDeptName(String deptName) {
         this.deptName = deptName;
+    }
+
+    public String getAuthUser() {
+        return authUser;
+    }
+
+    public void setAuthUser(String authUser) {
+        this.authUser = authUser;
     }
 }

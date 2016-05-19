@@ -45,4 +45,25 @@ public class UserManagerController {
         userService.deleteUser(username);
         return "0";
     }
+
+    @RequestMapping(value = "/userList")
+    public String userList(HttpServletRequest request) {
+        return userService.userList();
+    }
+
+    @RequestMapping(value = "/userInfo")
+    public String userInfo(@RequestParam String username, HttpServletRequest request) {
+        return userService.userInfo(username);
+    }
+
+    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+    public String updateUser(@RequestParam String userData, HttpServletRequest request) {
+        try {
+            userService.updateUser(userData);
+            return "0";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "1";
+    }
 }
