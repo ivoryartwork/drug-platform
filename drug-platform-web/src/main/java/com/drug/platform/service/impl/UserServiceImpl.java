@@ -24,6 +24,11 @@ public class UserServiceImpl implements UserService {
     private UserDAO userDAO;
 
     @Override
+    public User getByUserName(String username) {
+        return userDAO.getByUserName(username);
+    }
+
+    @Override
     public String getAllAuthModules() {
         List<AuthModule> authModules = userDAO.getAllAuthModules();
         return JSONObject.toJSONString(authModules);

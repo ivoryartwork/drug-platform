@@ -2,12 +2,16 @@ package com.drug.platform.controller;
 
 import com.drug.platform.controller.annotation.UserType;
 import com.drug.platform.model.SessionUser;
+import com.drug.platform.model.User;
+import com.drug.platform.service.UserService;
 import com.drug.platform.utils.Assert;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -16,6 +20,9 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping
 public class LoginController {
+
+    @Resource
+    private UserService userService;
 
     /**
      * 登录
@@ -35,13 +42,20 @@ public class LoginController {
      */
     @RequestMapping(value = "/login/check", method = RequestMethod.POST)
     @ResponseBody
-    public String loginCheck(HttpServletRequest request) {
+    public String loginCheck(@RequestParam String username, @RequestParam String password, HttpServletRequest request) {
+        User user = userService.getByUserName(username);
+        if (Assert.isNull(user)) {
+            return "1";
+        }
+        if (!password.equals(user.getPassword())) {
+            return "2";
+        }
         SessionUser sessionUser = new SessionUser();
-        sessionUser.setUserName("admin");
+        sessionUser.setUserName(user.getUsername());
         sessionUser.setTimestamp(System.currentTimeMillis());
         sessionUser.setUserType(UserType.ADMIN.toString());
         ControllerUtil.putSessionUser(request, sessionUser);
-        return ControllerUtil.SUCCESS;
+        return "0";
     }
 
     /**

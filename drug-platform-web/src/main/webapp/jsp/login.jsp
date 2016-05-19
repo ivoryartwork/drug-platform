@@ -58,6 +58,14 @@
 <script src="<c:url value="/static/js/jquery-1.11.2.min.js"/>"></script>
 <script>
     function login() {
+        if ($(".login input[name='username']").val() == '') {
+            error("请输入用户名")
+            return;
+        }
+        if ($(".login input[name='password']").val() == '') {
+            error("请输入密码")
+            return;
+        }
         var data = $(".login input").serialize();
         $.ajax({
             url: "login/check",
@@ -66,11 +74,22 @@
             dataType: "text",
             data: data,
             success: function (data) {
-                if (data == "success") {
+                data = Number(data);
+                if (data == 0) {
                     window.location.href = ""
+                } else if (data == 1) {
+                    //用户名不存在
+                    error("用户名不存在")
+                } else if (data == 2) {
+                    //密码错误
+                    error("密码错误")
                 }
             }
         })
+    }
+
+    function error(msg) {
+        $(".error").html(msg);
     }
 
 </script>
