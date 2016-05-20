@@ -264,4 +264,16 @@ public class IndexPageController {
     public String urm(HttpServletRequest request) {
         return Pages.URM.URM;
     }
+
+    /**
+     * 用户日志管理
+     *
+     * @param request
+     * @return
+     */
+    @UserAuthenticate({UserType.ADMIN})
+    @RequestMapping("/uolm")
+    public String uolm(HttpServletRequest request) {
+        return Pages.URM.UOLM;
+    }
 }

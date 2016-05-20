@@ -90,8 +90,10 @@ public class Pages {
         public static final String SPTA = "sdm.spta.page";
     }
 
-    public class URM{
-        public static final String URM="urm.urm.page";
+    public class URM {
+        public static final String URM = "urm.urm.page";
+
+        public static final String UOLM = "urm.uolm.page";
     }
 
     public class ERROR {

@@ -419,4 +419,20 @@ $(function (s) {
             }
         });
     }
+
+    s.urm.userOptLogList = function (params, callback, init) {
+        $.ajax({
+            url: 'urm/userOptLogList',
+            type: 'get',
+            data: params,
+            success: function (data) {
+                if (init) {
+                    callback(data);
+                } else {
+                    data = JSON.parse(data);
+                    callback(data.pageData);
+                }
+            }
+        });
+    }
 }(window.S = {}))

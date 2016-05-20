@@ -2,6 +2,7 @@ package com.drug.platform.controller.mmi;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.drug.platform.controller.annotation.UserOptLog;
 import com.drug.platform.model.QueryParams;
 import com.drug.platform.service.DrugsThanService;
 import com.drug.platform.utils.DateFormatUtils;
@@ -34,6 +35,7 @@ public class ThanDrugsController {
      * @param request
      * @return
      */
+    @UserOptLog(optDes = "用户查询全院药费比")
     @RequestMapping(value = "/global", method = RequestMethod.GET)
     public String global(@RequestParam int type, @RequestParam String beginDate,
                          @RequestParam String endDate, @RequestParam(required = false) String costType,
@@ -62,6 +64,7 @@ public class ThanDrugsController {
      * @param request
      * @return
      */
+    @UserOptLog(optDes = "用户查询科室药费比")
     @RequestMapping(value = "/dept", method = RequestMethod.GET)
     public String dept(@RequestParam int type, @RequestParam String beginDate,
                        @RequestParam String endDate, @RequestParam String deptCode, @RequestParam(required = false) String costType,
@@ -107,6 +110,7 @@ public class ThanDrugsController {
      * @param request
      * @return
      */
+    @UserOptLog(optDes = "用户查询病区药费比")
     @RequestMapping(value = "/ward", method = RequestMethod.GET)
     public String ward(@RequestParam int type, @RequestParam String beginDate,
                        @RequestParam String endDate, @RequestParam String deptCode, @RequestParam String wardCode,

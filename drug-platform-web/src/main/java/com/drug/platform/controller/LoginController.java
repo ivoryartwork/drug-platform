@@ -1,5 +1,6 @@
 package com.drug.platform.controller;
 
+import com.drug.platform.controller.annotation.UserOptLog;
 import com.drug.platform.controller.annotation.UserType;
 import com.drug.platform.model.SessionUser;
 import com.drug.platform.model.User;
@@ -40,6 +41,7 @@ public class LoginController {
      * @param request
      * @return
      */
+    @UserOptLog(optDes = "用户登录系统")
     @RequestMapping(value = "/login/check", method = RequestMethod.POST)
     @ResponseBody
     public String loginCheck(@RequestParam String username, @RequestParam String password, HttpServletRequest request) {

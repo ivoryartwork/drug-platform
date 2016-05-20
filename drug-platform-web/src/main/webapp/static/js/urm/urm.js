@@ -2,7 +2,7 @@
  * Created by Yaochao on 2016/4/28.
  */
 $(function () {
-    path("用户权限管理", "");
+    path("用户管理", "用户权限管理");
     initUserList();
     initBtn();
 })

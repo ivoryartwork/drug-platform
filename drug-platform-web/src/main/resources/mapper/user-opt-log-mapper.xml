@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drug.platform.dao.UserOptLogDAO">
+    <sql id="user_opt_log_column_list">
+        username,optDate,optDes
+    </sql>
+    <sql id="user_opt_log_table_name">
+        t_user_opt_log
+    </sql>
+
+    <insert id="save" parameterType="UserOptLog">
+        INSERT INTO<include refid="user_opt_log_table_name"/>(<include refid="user_opt_log_column_list"/>) VALUES
+        (#{username},#{optDate},#{optDes})
+    </insert>
+
+    <select id="getUserOptLogs" resultType="UserOptLog">
+        SELECT * FROM
+        <include refid="user_opt_log_table_name"/>
+        <where>
+            <if test="param1!=null">
+                AND username=#{0}
+            </if>
+            <if test="param2!=null and param3!=null">
+                <![CDATA[AND optDate>=#{1} AND optDate<=#{2}]]>
+            </if>
+        </where>
+    </select>
+</mapper>

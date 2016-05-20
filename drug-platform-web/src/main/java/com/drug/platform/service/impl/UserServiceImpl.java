@@ -3,14 +3,20 @@ package com.drug.platform.service.impl;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.drug.platform.dao.UserDAO;
+import com.drug.platform.dao.UserOptLogDAO;
 import com.drug.platform.model.AuthModule;
 import com.drug.platform.model.User;
 import com.drug.platform.model.UserAuthModules;
+import com.drug.platform.model.UserOptLog;
 import com.drug.platform.service.UserService;
+import com.drug.platform.utils.DateFormatUtils;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +28,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private UserDAO userDAO;
+
+    @Resource
+    private UserOptLogDAO userOptLogDAO;
 
     @Override
     public User getByUserName(String username) {
@@ -134,5 +143,26 @@ public class UserServiceImpl implements UserService {
             userAuthModulesList.add(userAuthModules);
         }
         userDAO.saveUserAuthModules(userAuthModulesList);
+    }
+
+    @Override
+    public String userOptLogList(String username, Date beginDate, Date endDate, int page) {
+        PageHelper.startPage(page, 15);
+        List<UserOptLog> userOptLogs = userOptLogDAO.getUserOptLogs(username, beginDate, endDate);
+        int offset = (page - 1) * 15 + 1;
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < userOptLogs.size(); i++) {
+            JSONObject object = new JSONObject();
+            UserOptLog userOptLog = userOptLogs.get(i);
+            object.put("num", offset + i);
+            object.put("username", userOptLog.getUsername());
+            object.put("optDes", userOptLog.getOptDes());
+            object.put("optDate", DateFormatUtils.format(userOptLog.getOptDate(), DateFormatUtils.FORMAT_TIMESTAMP));
+            jsonArray.add(object);
+        }
+        JSONObject result = new JSONObject();
+        result.put("totalPages", ((Page) userOptLogs).getPages());
+        result.put("pageData", jsonArray);
+        return result.toJSONString();
     }
 }
