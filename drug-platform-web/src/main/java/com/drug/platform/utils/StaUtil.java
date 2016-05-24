@@ -10,9 +10,8 @@ public class StaUtil {
 
     public static String oracleDateFormatStr = "yyyy-mm-dd hh24:mi:ss";
 
-    public static Date[][] getTrendTime() {
+    public static Date[][] getTrendTime(Date date) {
         Date[][] dates = new Date[6][2];
-        Date date = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.set(Calendar.DAY_OF_MONTH, 0);

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drug.platform.dao.DrugOutpatientDAO">
+    <sql id="drugsOutPatient_base_column_list">
+        deptCode,visits,totalCosts,chargeType,time
+    </sql>
+    <sql id="drugsOutPatient_table_name">
+        t_drug_outpatient
+    </sql>
+
+    <insert id="save" parameterType="java.util.List">
+        INSERT INTO
+        <include refid="drugsOutPatient_table_name"/>(<include refid="drugsOutPatient_base_column_list"/>)
+        <foreach collection="list" item="item" index="index" separator="union all">
+            (SELECT
+            #{item.deptCode},#{item.visits},#{item.totalCosts},#{item.chargeType},#{item.time}
+            FROM
+            dual)
+        </foreach>
+    </insert>
+
+    <select id="staDrugOutpatientGlobal" parameterType="QueryParams" resultType="java.util.HashMap">
+        SELECT
+        ROUND (
+        x.TOTALCOSTS / x.VISITS * 100,
+        1
+        ) timesDrugCost
+        FROM
+        (
+        SELECT
+        SUM (TOTALCOSTS) TOTALCOSTS,
+        SUM (VISITS) VISITS
+        FROM
+        T_DRUG_OUTPATIENT
+        WHERE time>=#{beginDate} AND <![CDATA[time<=#{endDate}]]>
+        <if test="chargeType!=null">
+            <if test="chargeType=='军队医改'">
+                AND chargeType=#{chargeType}
+            </if>
+            <if test="chargeType!='军队医改'">
+                AND chargeType!='军队医改'
+            </if>
+        </if>
+        <if test="deptCode!=null">
+            AND deptCode=#{deptCode}
+        </if>
+        ) x
+    </select>
+
+    <select id="staDrugOutpatientByDept" parameterType="QueryParams" resultType="java.util.HashMap">
+        SELECT
+        DEPTCODE,
+        DEPT_NAME,
+        TOTALCOSTS,
+        VISITS,
+        ROUND (TOTALCOSTS / VISITS, 1) timesDrugCost
+        FROM
+        (
+        SELECT
+        A .DEPTCODE,
+        B.DEPT_NAME,
+        SUM (A .TOTALCOSTS) TOTALCOSTS,
+        SUM (A .VISITS) VISITS
+        FROM
+        T_DRUG_OUTPATIENT A,
+        DEPT_DICT B
+        WHERE
+        A .DEPTCODE = B.DEPT_CODE
+        AND time>=#{beginDate} AND <![CDATA[time<=#{endDate}]]>
+        <if test="chargeType!=null">
+            <if test="chargeType=='军队医改'">
+                AND chargeType=#{chargeType}
+            </if>
+            <if test="chargeType!='军队医改'">
+                AND chargeType!='军队医改'
+            </if>
+        </if>
+        GROUP BY
+        A .DEPTCODE,
+        B.DEPT_NAME
+        ) x
+        ORDER BY timesDrugCost DESC
+    </select>
+</mapper>

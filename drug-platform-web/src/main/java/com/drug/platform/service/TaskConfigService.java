@@ -46,4 +46,14 @@ public interface TaskConfigService {
      * @param execTime
      */
     public void updateParTaskExecTime(String execTime);
+
+    /**
+     * 获取门诊次均药费任务执行时间
+     */
+    public String getDrugOutpatientTaskExecTime();
+
+    /**
+     * 更新门诊次均药费任务执行时间
+     */
+    public void updateDrugOutpatientTaskExecTime(String execTime);
 }

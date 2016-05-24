@@ -69,7 +69,7 @@ public class DrugsThanServiceImpl implements DrugsThanService {
             }
             result.put("deptRates", deptRates);
 
-            Date[][] dates = StaUtil.getTrendTime();
+            Date[][] dates = StaUtil.getTrendTime(queryParams.getEndDate());
             String rateTrend = "";
             String rateTrendDate = "";
             for (int i = 0; i < dates.length; i++) {
