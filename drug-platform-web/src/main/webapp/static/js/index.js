@@ -1,6 +1,9 @@
 /**
  * Created by Yaochao on 2016/4/18.
  */
+var SUCCESS = 'success';
+var ERROR = 'error';
+
 var Main = function () {
 
     var userFlag = userInfo.userName + userInfo.timestamp
@@ -132,7 +135,7 @@ function selectDrug(drugName, target) {
     var $input = $(target).parent().parent().children("input");
     $(target).parent().hide();
     $input.val(drugName);
-    var $drugSpecSelect = $(target).parent().parent().parent().parent().find(".drugSpec select");
+    var $drugSpecSelect = $(target).parent().parent().parent().parent().children(".drugSpec").find("select");
     $.ajax({
         url: 'drug/searchSpecByName',
         type: 'post',
@@ -146,6 +149,7 @@ function selectDrug(drugName, target) {
                 list += "<option value='" + data[i].DRUG_CODE + "'>" + data[i].DRUG_SPEC + "</option>";
             }
             $drugSpecSelect.html(list);
+            drugSelectCallBack($drugSpecSelect);
         }
     })
 }

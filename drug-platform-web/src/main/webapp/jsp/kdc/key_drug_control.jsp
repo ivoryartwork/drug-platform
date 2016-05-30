@@ -20,16 +20,20 @@
                 <option value="1">住院重点监管药品目录</option>
             </select>
             &nbsp;&nbsp;
-            <button id="addDrug" type="button" class="btn btn-warning x-btn" data-toggle="modal"
-                    data-target="#addDrugModal">
+            <button id="addDrug" type="button" class="btn btn-warning x-btn">
                 添加药品
             </button>
 
             <button class="btn btn-warning x-btn">导出</button>
             <button id="back" type="button" class="btn btn-info x-btn">返回</button>
-            <div class="form-group right">
-                <input type="text" class="form-control" placeholder="药品名称">
-                <button class="btn btn-primary">搜索</button>
+            <div class="form-group right" id="searchKeyDrug">
+                <%--<input type="text" class="form-control" placeholder="药品名称">--%>
+                <div id="drugName" style="display: inline-block">
+                    <input type="text" class="form-control">
+                    <ul>
+                    </ul>
+                </div>
+                <button type="button" class="btn btn-primary">搜索</button>
             </div>
         </form>
     </div>
@@ -48,7 +52,7 @@
                             <label class="col-sm-2 control-label">药品名称：</label>
 
                             <div class="col-sm-10" id="drugName">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control keyDrugName">
                                 <ul>
                                 </ul>
                             </div>
@@ -57,7 +61,7 @@
                             <label class="col-sm-2 control-label">规格厂家：</label>
 
                             <div class="col-sm-10">
-                                <select class="form-control">
+                                <select class="form-control keyDrugSpec">
                                 </select>
                             </div>
                         </div>
@@ -65,7 +69,7 @@
                             <label class="col-sm-2 control-label">指定目录：</label>
 
                             <div class="col-sm-10">
-                                <select class="form-control">
+                                <select class="form-control type">
                                     <option value="inp">住院</option>
                                     <option value="outp">门诊</option>
                                 </select>
@@ -74,7 +78,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">频次：</label>
 
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 frequency">
                                 <select class="form-control input-inline">
                                     <option value=">">&gt;</option>
                                     <option value="<">&lt;</option>
@@ -97,7 +101,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">用量：</label>
 
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 dose">
                                 <select class="form-control input-inline">
                                     <option value=">">&gt;</option>
                                     <option value="<">&lt;</option>
@@ -121,7 +125,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">单次用量：</label>
 
-                            <div class="col-sm-10">
+                            <div class="col-sm-10 singleDose">
                                 <select class="form-control input-inline">
                                     <option value=">">&gt;</option>
                                     <option value="<">&lt;</option>
@@ -146,7 +150,7 @@
                             <label class="col-sm-2 control-label">用药途径：</label>
 
                             <div class="col-sm-10">
-                                <select class="form-control">
+                                <select class="form-control routeOfAdmin">
                                     <option value="口服">口服</option>
                                     <option value="静滴">静滴</option>
                                     <option value="静推">静推</option>
@@ -205,13 +209,13 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary">添加</button>
+                    <button type="button" class="btn btn-primary" id="addKeyDrug">添加</button>
                 </div>
             </div>
         </div>
     </div>
     <div id="panel-0" class="panel">
-        <table id="drugList" class="table table-bordered">
+        <table class="table table-bordered">
             <thead>
             <tr>
                 <th>序号</th>
@@ -252,7 +256,7 @@
             <%--</tr>--%>
             </tbody>
         </table>
-        <%--<ul class="pagination-sm right thandrugs-pagination"></ul>--%>
+        <ul id="keyDrugPagination" class="pagination-sm right"></ul>
     </div>
     <div id="panel-1" class="panel hide">
         <div class="row" style="height: 800px">

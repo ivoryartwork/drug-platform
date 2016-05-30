@@ -435,4 +435,65 @@ $(function (s) {
             }
         });
     }
+
+    s.kdc = {}
+    s.kdc.addKeyDrug = function (params, callback) {
+        $.ajax({
+            url: 'kdc/addKeyDrug',
+            type: 'post',
+            data: params,
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
+
+    s.kdc.getKeyDrugStaInfo = function (params, callback, init) {
+        $.ajax({
+            url: 'kdc/getKeyDrugStaInfo',
+            type: 'get',
+            data: params,
+            success: function (data) {
+                if (init) {
+                    callback(data);
+                } else {
+                    data = JSON.parse(data);
+                    callback(data.pageData);
+                }
+            }
+        });
+    }
+
+    s.kdc.deleteKeyDrug = function (params, callback) {
+        $.ajax({
+            url: 'kdc/deleteKeyDrug',
+            type: 'post',
+            data: params,
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
+
+    s.kdc.getKeyDrugStaInfoByName = function (params, callback) {
+        $.ajax({
+            url: 'kdc/getKeyDrugStaInfoByName',
+            type: 'post',
+            data: params,
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
+
+    s.kdc.recommendSimilarKeyDrugList = function (params, callback) {
+        $.ajax({
+            url: 'kdc/recommendSimilarKeyDrugList',
+            type: 'post',
+            data: params,
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
 }(window.S = {}))

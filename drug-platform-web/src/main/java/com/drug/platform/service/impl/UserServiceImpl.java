@@ -150,6 +150,9 @@ public class UserServiceImpl implements UserService {
         PageHelper.startPage(page, 15);
         List<UserOptLog> userOptLogs = userOptLogDAO.getUserOptLogs(username, beginDate, endDate);
         int offset = (page - 1) * 15 + 1;
+        if (offset < 1) {
+            offset = 1;
+        }
         JSONArray jsonArray = new JSONArray();
         for (int i = 0; i < userOptLogs.size(); i++) {
             JSONObject object = new JSONObject();

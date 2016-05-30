@@ -22,9 +22,42 @@
         (#{drugCode},#{drugName},#{drugSpec},#{type},#{frequency},#{dose},#{singleDose},#{routeOfAdmin})
     </insert>
 
-    <insert id="saveSimilarKeyDrug" parameterType="SimilarKeyDrug">
+    <insert id="saveSimilarKeyDrug" parameterType="java.util.List">
         INSERT INTO<include refid="similar_key_drug_table_name"/>(<include refid="similar_key_drug_base_column_list"/>)
-        VALUES
-        (#{drugCode1},#{drugName1},#{drugSpec1},#{drugCode2},#{drugName2},#{drugSpec2})
+        <foreach collection="list" item="item" index="index" separator="union all">
+            (SELECT
+            #{item.drugCode1},#{item.drugName1},#{item.drugSpec1},#{item.drugCode2},#{item.drugName2},#{item.drugSpec2}
+            FROM
+            dual)
+        </foreach>
     </insert>
+
+    <select id="getKeyDrugList" parameterType="string" resultType="KeyDrug">
+        SELECT * FROM
+        <include refid="key_drug_table_name"/>
+        WHERE type=#{0}
+    </select>
+
+    <select id="getKeyDrugListByName" parameterType="string" resultType="KeyDrug">
+        SELECT * FROM
+        <include refid="key_drug_table_name"/>
+        WHERE drugName=#{0}
+    </select>
+
+    <select id="recommendSimilarKeyDrugList" parameterType="string" resultType="SimilarKeyDrug">
+        SELECT * FROM
+        <include refid="similar_key_drug_table_name"/>
+        WHERE drugCode2=#{0}
+    </select>
+
+    <delete id="deleteKeyDrug" parameterType="string">
+        DELETE FROM
+        <include refid="key_drug_table_name"/>
+        WHERE drugCode=#{0}
+    </delete>
+    <delete id="deleteSimilarKeyDrug" parameterType="string">
+        DELETE FROM
+        <include refid="similar_key_drug_table_name"/>
+        WHERE drugCode1=#{0}
+    </delete>
 </mapper>
