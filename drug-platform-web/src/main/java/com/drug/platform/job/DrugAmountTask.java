@@ -60,14 +60,14 @@ public class DrugAmountTask implements Task {
                 Date nowDate = DateFormatUtils.parse(now, DateFormatUtils.FORMAT_DATE);
                 if (execDate.compareTo(nowDate) < 0) {
                     List<DrugAmountGlobal> drugAmountGlobals = CalculateDrugAmount.calculateGlobal(execTime);
+                    List<DrugAmountDept> drugAmountDepts = CalculateDrugAmount.calculateDept(execTime);
+                    List<DrugAmountDoctor> drugAmountDoctors = CalculateDrugAmount.calculateDoctor(execTime);
                     if (drugAmountGlobals.size() > 0) {
                         drugAmountService.addDrugAmountGlobalBatch(drugAmountGlobals);
                     }
-                    List<DrugAmountDept> drugAmountDepts = CalculateDrugAmount.calculateDept(execTime);
                     if (drugAmountDepts.size() > 0) {
                         drugAmountService.addDrugAmountDeptBatch(drugAmountDepts);
                     }
-                    List<DrugAmountDoctor> drugAmountDoctors = CalculateDrugAmount.calculateDoctor(execTime);
                     if (drugAmountDoctors.size() > 0) {
                         drugAmountService.addDrugAmountDoctorBatch(drugAmountDoctors);
                     }

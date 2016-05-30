@@ -48,12 +48,12 @@ public interface TaskConfigService {
     public void updateParTaskExecTime(String execTime);
 
     /**
-     * 获取门诊次均药费任务执行时间
+     * 获取次均药费任务执行时间
      */
-    public String getDrugOutpatientTaskExecTime();
+    public String getAverageDrugFeeTaskExecTime();
 
     /**
-     * 更新门诊次均药费任务执行时间
+     * 更新次均药费任务执行时间
      */
-    public void updateDrugOutpatientTaskExecTime(String execTime);
+    public void updateAverageDrugFeeTaskExecTime(String execTime);
 }

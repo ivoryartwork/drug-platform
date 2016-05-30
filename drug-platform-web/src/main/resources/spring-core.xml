@@ -99,8 +99,8 @@
         </property>
         <property name="cronExpression">
             <!--每天20点开始执行统计任务  -->
-            <value>0 0 20 * * ?</value>
-            <!--<value>*/5 * * * * ?</value>-->
+            <!--<value>0 0 20 * * ?</value>-->
+            <value>*/5 * * * * ?</value>
         </property>
     </bean>
     <!-- 调度的配置结束 -->
@@ -134,5 +134,5 @@
     <bean id="drugsThanTask" class="com.drug.platform.job.DrugsThanTask"></bean>
     <bean id="drugAmountTask" class="com.drug.platform.job.DrugAmountTask"></bean>
     <bean id="parTask" class="com.drug.platform.job.ParTask"></bean>
-    <bean id="drugOutpatientTask" class="com.drug.platform.job.DrugOutpatientTask"></bean>
+    <bean id="drugOutpatientTask" class="com.drug.platform.job.DrugAverageDrugFee"></bean>
 </beans>

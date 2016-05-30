@@ -56,10 +56,10 @@ public class ParTask implements Task {
                 Date nowDate = DateFormatUtils.parse(now, DateFormatUtils.FORMAT_DATE);
                 if (execDate.compareTo(nowDate) < 0) {
                     List<Par> pars = CalculatePar.calculate(execTime);
+                    List<ParByDoctor> parByDoctors = CalculatePar.calculateByDoctor(execTime);
                     if (pars.size() > 0) {
                         parService.addParBatch(pars);
                     }
-                    List<ParByDoctor> parByDoctors = CalculatePar.calculateByDoctor(execTime);
                     if (parByDoctors.size() > 0) {
                         parService.addParByDoctorBatch(parByDoctors);
                     }

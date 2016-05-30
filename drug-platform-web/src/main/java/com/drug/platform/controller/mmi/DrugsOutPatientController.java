@@ -1,8 +1,7 @@
 package com.drug.platform.controller.mmi;
 
-import com.alibaba.fastjson.JSONObject;
 import com.drug.platform.model.QueryParams;
-import com.drug.platform.service.DrugOutpatientService;
+import com.drug.platform.service.AverageDrugFeeService;
 import com.drug.platform.utils.DateFormatUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 public class DrugsOutPatientController {
 
     @Resource
-    private DrugOutpatientService drugOutpatientService;
+    private AverageDrugFeeService averageDrugFeeService;
 
     /**
      * 全院门诊次均药费比
@@ -39,7 +38,8 @@ public class DrugsOutPatientController {
         QueryParams queryParams = new QueryParams();
         queryParams.setBeginDate(DateFormatUtils.parse(beginDate, "yyyy-MM-dd"));
         queryParams.setEndDate(DateFormatUtils.parse(endDate, "yyyy-MM-dd"));
-        return drugOutpatientService.getDrugOutpatientGlobal(queryParams);
+        queryParams.setType("outp");
+        return averageDrugFeeService.getAverageDrugFeeGlobal(queryParams);
 //        JSONObject result = new JSONObject();
 //        result.put("timesDrugCost", 5000);   //次均药费
 //        result.put("targetTimesDrugCost", 4000);
@@ -76,6 +76,6 @@ public class DrugsOutPatientController {
         QueryParams queryParams = new QueryParams();
         queryParams.setBeginDate(DateFormatUtils.parse(beginDate, "yyyy-MM-dd"));
         queryParams.setEndDate(DateFormatUtils.parse(endDate, "yyyy-MM-dd"));
-        return drugOutpatientService.getDrugOutpatientByDept(queryParams);
+        return averageDrugFeeService.getDrugOutpatientByDept(queryParams);
     }
 }

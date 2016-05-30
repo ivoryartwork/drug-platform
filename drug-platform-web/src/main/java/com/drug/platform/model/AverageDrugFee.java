@@ -4,9 +4,9 @@ import java.util.Date;
 
 /**
  * Created by Yaochao on 2016/5/24.
- * 门诊次均药费
+ * 次均药费
  */
-public class DrugOutpatient {
+public class AverageDrugFee {
 
     private String deptCode;
 
@@ -17,6 +17,9 @@ public class DrugOutpatient {
     private String chargeType;
 
     private Date time;
+
+    //门诊或住院 outp/inp
+    private String type;
 
     public String getDeptCode() {
         return deptCode;
@@ -56,5 +59,13 @@ public class DrugOutpatient {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

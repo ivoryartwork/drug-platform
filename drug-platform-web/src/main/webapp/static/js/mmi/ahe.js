@@ -15,9 +15,6 @@ $(function () {
  * 全院统计
  */
 function allAhe() {
-    $("#panel-1").addClass("hide");
-    $("#panel-2").addClass("hide");
-    $("#panel-0").removeClass("hide");
     var params = {
         beginDate: beginDate,
         endDate: endDate,
@@ -28,43 +25,46 @@ function allAhe() {
 }
 
 function bindGlobalData(data) {
-    data = JSON.parse(data);
-    var timesDrugCost = data.timesDrugCost;
-    var targetTimesDrugCost = data.targetTimesDrugCost;
-    var trend = data.trend;
-    var timesDrugCostList = data.timesDrugCostList;
-    $("#globalTarget").html(targetTimesDrugCost);
-    $("#globalTimesDrugCost").html('全院' + beginDate + '至' + endDate + '住院次均药费<span class="x-prom">' + timesDrugCost + '元</span>');
+    if (data == '') {
+        $("#panel-1").addClass("hide");
+        $("#panel-2").addClass("hide");
+        $("#panel-0").addClass("hide");
+    } else {
+        data = JSON.parse(data);
+        var timesDrugCost = data.timesDrugCost;
+        var targetTimesDrugCost = data.targetTimesDrugCost;
+        var trend = data.trend;
+        trend = trend.split("#");
+        var timesDrugCostList = data.timesDrugCostList;
+        $("#globalTarget").html(targetTimesDrugCost);
+        $("#globalTimesDrugCost").html('全院' + beginDate + '至' + endDate + '住院次均药费<span class="x-prom">' + timesDrugCost + '元</span>');
 
-    var trendArray = trend.split(",");
-    var trendData = [];
-    for (var i = 0; i < trendArray.length; i++) {
-        trendData[i] = Number(trendArray[i]);
-    }
-    var categories = [
-        '4月',
-        '5月',
-        '6月',
-        '7月',
-        '8月',
-        '9月'
-    ]
-    var series = [{
-        name: '次均药费',
-        data: trendData,
-        dataLabels: {
-            enabled: true,
+        var trendArray = trend[1].split(",");
+        var trendData = [];
+        for (var i = 0; i < trendArray.length; i++) {
+            trendData[i] = Number(trendArray[i]);
         }
-    }]
-    chartHelper.column('aheColumn', categories, series, "元");
+        var trendDate = trend[0].split(",");
+        var series = [{
+            name: '次均药费',
+            data: trendData,
+            dataLabels: {
+                enabled: true,
+            }
+        }]
+        chartHelper.column('aheColumn', trendDate, series, "元");
 
-    var timesDrugCostListStr = '';
-    for (var i = 0; i < timesDrugCostList.length; i++) {
-        timesDrugCostListStr += '<tr><td><a onclick=switchToDepartment("' + timesDrugCostList[i].deptCode + '","' + timesDrugCostList[i].deptName + '")>' + timesDrugCostList[i].deptName + '</a>' +
-            '</td><td>' + timesDrugCostList[i].times + '</td><td>' + timesDrugCostList[i].totalDrugCost + '</td> <td>' + timesDrugCostList[i].timesDrugCost + '</td> ' +
-            '<td>' + timesDrugCostList[i].targetTimesDrugCost + '</td> <td>' + timesDrugCostList[i].rank + '</td> </tr>';
+        var timesDrugCostListStr = '';
+        for (var i = 0; i < timesDrugCostList.length; i++) {
+            timesDrugCostListStr += '<tr><td><a onclick=switchToDepartment("' + timesDrugCostList[i].deptCode + '","' + timesDrugCostList[i].deptName + '")>' + timesDrugCostList[i].deptName + '</a>' +
+                '</td><td>' + timesDrugCostList[i].times + '</td><td>' + timesDrugCostList[i].totalDrugCost + '</td> <td>' + timesDrugCostList[i].timesDrugCost + '</td> ' +
+                '<td>' + timesDrugCostList[i].targetTimesDrugCost + '</td> <td>' + timesDrugCostList[i].rank + '</td> </tr>';
+        }
+        $("#panel-0 table tbody").html(timesDrugCostListStr);
+        $("#panel-1").addClass("hide");
+        $("#panel-2").addClass("hide");
+        $("#panel-0").removeClass("hide");
     }
-    $("#panel-0 table tbody").html(timesDrugCostListStr);
 }
 
 /**

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drug.platform.dao.KeyDrugControllDAO">
+    <sql id="key_drug_base_column_list">
+        drugCode,drugName,drugSpec,type,frequency,dose,singleDose,routeOfAdmin
+    </sql>
+    <sql id="key_drug_table_name">
+        T_KEY_DRUG
+    </sql>
+
+    <sql id="similar_key_drug_base_column_list">
+        drugCode1,drugName1,drugSpec1,drugCode2,drugName2,drugSpec2
+    </sql>
+    <sql id="similar_key_drug_table_name">
+        T_SIMILAR_KEY_DRUG
+    </sql>
+
+    <insert id="saveKeyDrug" parameterType="KeyDrug">
+        INSERT INTO<include refid="key_drug_table_name"/>(<include refid="key_drug_base_column_list"/>) VALUES
+        (#{drugCode},#{drugName},#{drugSpec},#{type},#{frequency},#{dose},#{singleDose},#{routeOfAdmin})
+    </insert>
+
+    <insert id="saveSimilarKeyDrug" parameterType="SimilarKeyDrug">
+        INSERT INTO<include refid="similar_key_drug_table_name"/>(<include refid="similar_key_drug_base_column_list"/>)
+        VALUES
+        (#{drugCode1},#{drugName1},#{drugSpec1},#{drugCode2},#{drugName2},#{drugSpec2})
+    </insert>
+</mapper>

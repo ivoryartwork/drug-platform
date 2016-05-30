@@ -1,6 +1,6 @@
 package com.drug.platform.service;
 
-import com.drug.platform.model.DrugOutpatient;
+import com.drug.platform.model.AverageDrugFee;
 import com.drug.platform.model.QueryParams;
 
 import java.util.List;
@@ -8,14 +8,14 @@ import java.util.List;
 /**
  * Created by Yaochao on 2016/5/24.
  */
-public interface DrugOutpatientService {
+public interface AverageDrugFeeService {
 
     /**
-     * 批量添加门诊次均药费统计结果
+     * 批量添加次均药费统计结果
      *
-     * @param drugOutpatients
+     * @param averageDrugFees
      */
-    public void addDrugOutpatientBatch(List<DrugOutpatient> drugOutpatients);
+    public void addAverageDrugFeeBatch(List<AverageDrugFee> averageDrugFees);
 
     /**
      * 获取全院门诊次均药费统计结果
@@ -23,10 +23,10 @@ public interface DrugOutpatientService {
      * @param queryParams
      * @return
      */
-    public String getDrugOutpatientGlobal(QueryParams queryParams);
+    public String getAverageDrugFeeGlobal(QueryParams queryParams);
 
     /**
-     * 获取某科室次均药费统计结果
+     * 获取某科室门诊次均药费统计结果
      *
      * @param queryParams
      * @return

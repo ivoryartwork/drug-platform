@@ -2,11 +2,15 @@ package com.drug.platform.controller.mmi;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.drug.platform.model.QueryParams;
+import com.drug.platform.service.AverageDrugFeeService;
+import com.drug.platform.utils.DateFormatUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -16,6 +20,9 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/mmi/ahe")
 public class AheController {
+
+    @Resource
+    private AverageDrugFeeService averageDrugFeeService;
 
     /**
      * 住院次均药费
@@ -28,23 +35,28 @@ public class AheController {
      */
     @RequestMapping(value = "/global", method = RequestMethod.GET)
     public String global(@RequestParam String beginDate, @RequestParam String endDate, @RequestParam(required = false) String costType,
-                         HttpServletRequest request) {
-        JSONObject result = new JSONObject();
-        result.put("timesDrugCost", 5000);   //次均药费
-        result.put("targetTimesDrugCost", 4000);
-        result.put("trend", "1,2,3,4,5,6");
-        JSONArray timesDrugCostList = new JSONArray();
-        JSONObject deptTimesDrugCost = new JSONObject();
-        deptTimesDrugCost.put("deptName", "肾病科");
-        deptTimesDrugCost.put("deptCode", "123445");
-        deptTimesDrugCost.put("times", 12321);
-        deptTimesDrugCost.put("totalDrugCost", 123552);
-        deptTimesDrugCost.put("timesDrugCost", 1232);
-        deptTimesDrugCost.put("targetTimesDrugCost", 75.3);
-        deptTimesDrugCost.put("rank", 75);
-        timesDrugCostList.add(deptTimesDrugCost);
-        result.put("timesDrugCostList", timesDrugCostList);
-        return result.toJSONString();
+                         HttpServletRequest request) throws Exception {
+        QueryParams queryParams = new QueryParams();
+        queryParams.setBeginDate(DateFormatUtils.parse(beginDate, "yyyy-MM-dd"));
+        queryParams.setEndDate(DateFormatUtils.parse(endDate, "yyyy-MM-dd"));
+        queryParams.setType("inp");
+        return averageDrugFeeService.getAverageDrugFeeGlobal(queryParams);
+//        JSONObject result = new JSONObject();
+//        result.put("timesDrugCost", 5000);   //次均药费
+//        result.put("targetTimesDrugCost", 4000);
+//        result.put("trend", "1,2,3,4,5,6");
+//        JSONArray timesDrugCostList = new JSONArray();
+//        JSONObject deptTimesDrugCost = new JSONObject();
+//        deptTimesDrugCost.put("deptName", "肾病科");
+//        deptTimesDrugCost.put("deptCode", "123445");
+//        deptTimesDrugCost.put("times", 12321);
+//        deptTimesDrugCost.put("totalDrugCost", 123552);
+//        deptTimesDrugCost.put("timesDrugCost", 1232);
+//        deptTimesDrugCost.put("targetTimesDrugCost", 75.3);
+//        deptTimesDrugCost.put("rank", 75);
+//        timesDrugCostList.add(deptTimesDrugCost);
+//        result.put("timesDrugCostList", timesDrugCostList);
+//        return result.toJSONString();
     }
 
     /**

@@ -48,7 +48,7 @@
     </div>
 </div>
 <div class="row">
-    <div id="panel-0" class="panel">
+    <div id="panel-0" class="panel hide">
         <div class="row">
             <div class="col-md-6">
                 <p class="explanation"><span class="des"></span></p>

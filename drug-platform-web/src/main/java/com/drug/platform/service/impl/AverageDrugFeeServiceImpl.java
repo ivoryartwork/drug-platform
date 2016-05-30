@@ -2,10 +2,10 @@ package com.drug.platform.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.drug.platform.dao.DrugOutpatientDAO;
-import com.drug.platform.model.DrugOutpatient;
+import com.drug.platform.dao.AverageDrugFeeDAO;
+import com.drug.platform.model.AverageDrugFee;
 import com.drug.platform.model.QueryParams;
-import com.drug.platform.service.DrugOutpatientService;
+import com.drug.platform.service.AverageDrugFeeService;
 import com.drug.platform.utils.Assert;
 import com.drug.platform.utils.DateFormatUtils;
 import com.drug.platform.utils.StaUtil;
@@ -20,35 +20,35 @@ import java.util.Map;
  * Created by Yaochao on 2016/5/24.
  */
 @Service("drugOutpatientService")
-public class DrugOutpatientServiceImpl implements DrugOutpatientService {
+public class AverageDrugFeeServiceImpl implements AverageDrugFeeService {
 
     @Resource
-    private DrugOutpatientDAO drugOutpatientDAO;
+    private AverageDrugFeeDAO averageDrugFeeDAO;
 
     /**
-     * 批量添加门诊次均药费统计结果
+     * 批量添加次均药费统计结果
      *
-     * @param drugOutpatients
+     * @param averageDrugFees
      */
     @Override
-    public void addDrugOutpatientBatch(List<DrugOutpatient> drugOutpatients) {
-        drugOutpatientDAO.save(drugOutpatients);
+    public void addAverageDrugFeeBatch(List<AverageDrugFee> averageDrugFees) {
+        averageDrugFeeDAO.save(averageDrugFees);
     }
 
     /**
-     * 获取全局门诊次均药费统计结果
+     * 获取全局次均药费统计结果
      *
      * @param queryParams
      * @return
      */
     @Override
-    public String getDrugOutpatientGlobal(QueryParams queryParams) {
-        Map<String, Object> rateMap = drugOutpatientDAO.staDrugOutpatientGlobal(queryParams);
+    public String getAverageDrugFeeGlobal(QueryParams queryParams) {
+        Map<String, Object> rateMap = averageDrugFeeDAO.staAverageDrugFeeGlobal(queryParams);
         if (Assert.notNull(rateMap)) {
             JSONObject result = new JSONObject();
             result.put("timesDrugCost", rateMap.get("TIMESDRUGCOST"));
             result.put("targetTimesDrugCost", 4000);
-            List<Map<String, Object>> deptDrugOutpatientList = drugOutpatientDAO.staDrugOutpatientByDept(queryParams);
+            List<Map<String, Object>> deptDrugOutpatientList = averageDrugFeeDAO.staDrugOutpatientByDept(queryParams);
             JSONArray timesDrugCostList = new JSONArray();
             for (int i = 0; i < deptDrugOutpatientList.size(); i++) {
                 Map<String, Object> deptDrugOutpatient = deptDrugOutpatientList.get(i);
@@ -70,7 +70,7 @@ public class DrugOutpatientServiceImpl implements DrugOutpatientService {
             for (int i = 0; i < dates.length; i++) {
                 queryParams.setBeginDate(dates[i][0]);
                 queryParams.setEndDate(dates[i][1]);
-                Map<String, Object> rateMap1 = drugOutpatientDAO.staDrugOutpatientGlobal(queryParams);
+                Map<String, Object> rateMap1 = averageDrugFeeDAO.staAverageDrugFeeGlobal(queryParams);
                 rateTrendDate += "," + DateFormatUtils.format(dates[i][0], "yyyy-MM");
                 if (Assert.isNull(rateMap1)) {
                     rateTrend += ",0";
@@ -85,7 +85,7 @@ public class DrugOutpatientServiceImpl implements DrugOutpatientService {
     }
 
     /**
-     * 获取某科室次均药费统计结果
+     * 获取某科室门诊次均药费统计结果
      *
      * @param queryParams
      * @return
@@ -98,7 +98,7 @@ public class DrugOutpatientServiceImpl implements DrugOutpatientService {
         for (int i = 0; i < dates.length; i++) {
             queryParams.setBeginDate(dates[i][0]);
             queryParams.setEndDate(dates[i][1]);
-            Map<String, Object> rateMap1 = drugOutpatientDAO.staDrugOutpatientGlobal(queryParams);
+            Map<String, Object> rateMap1 = averageDrugFeeDAO.staAverageDrugFeeGlobal(queryParams);
             rateTrendDate += "," + DateFormatUtils.format(dates[i][0], "yyyy-MM");
             if (Assert.isNull(rateMap1)) {
                 rateTrend += ",0";

@@ -39,6 +39,33 @@ function initBtn() {
         $(".added-drugs").append(added);
         $(this).addClass("disabled");
     })
+
+    $("#addSimilarKeyDrug").click(function () {
+        var $target = $(this).parent().parent();
+        var $drugNameSelect = $target.find("#drugName input");
+        var drugName = $drugNameSelect.val();
+        if (drugName == '') {
+            return;
+        }
+        var $drugSpecSelect = $target.find(".drugSpec option:selected");
+        var drugSpec = $drugSpecSelect.html();
+        var drugCode = $drugSpecSelect.val();
+        if (drugCode == '' || drugSpec == '') {
+            return;
+        }
+        var flag = true;
+        $(".added-drugs .x-glyphicon-remove").each(function () {
+            if ($(this).attr("index") == drugCode) {
+                flag = false;
+            }
+        })
+        if (flag) {
+            var added = '<span class="similar-drug-selected">' + drugName + "(" + drugSpec + ")" + '<span onclick="removeDrug(this)" class="glyphicon glyphicon-remove x-glyphicon-remove" index="' + drugCode + '"></span></span>';
+            $(".added-drugs").append(added);
+        }
+        $drugNameSelect.val("");
+        $target.find(".drugSpec select").val("");
+    })
 }
 
 function removeDrug(remove) {

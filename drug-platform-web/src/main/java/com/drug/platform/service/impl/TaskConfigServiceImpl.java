@@ -76,18 +76,18 @@ public class TaskConfigServiceImpl implements TaskConfigService {
     }
 
     /**
-     * 获取门诊次均药费任务执行时间
+     * 获取次均药费任务执行时间
      */
     @Override
-    public String getDrugOutpatientTaskExecTime() {
-        return taskConfigDAO.getItem("drugAmount", "execTime");
+    public String getAverageDrugFeeTaskExecTime() {
+        return taskConfigDAO.getItem("averageDrugFee", "execTime");
     }
 
     /**
-     * 更新门诊次均药费任务执行时间
+     * 更新次均药费任务执行时间
      */
     @Override
-    public void updateDrugOutpatientTaskExecTime(String execTime) {
-        taskConfigDAO.updateItem("drugAmount", "execTime", execTime);
+    public void updateAverageDrugFeeTaskExecTime(String execTime) {
+        taskConfigDAO.updateItem("averageDrugFee", "execTime", execTime);
     }
 }

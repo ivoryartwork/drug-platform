@@ -1,6 +1,6 @@
 package com.drug.platform.dao;
 
-import com.drug.platform.model.DrugOutpatient;
+import com.drug.platform.model.AverageDrugFee;
 import com.drug.platform.model.QueryParams;
 import com.drug.platform.utils.DateFormatUtils;
 import org.junit.Test;
@@ -14,31 +14,31 @@ import java.util.Map;
 /**
  * Created by Yaochao on 2016/5/24.
  */
-public class DrugOutpatientDAOTest extends BaseTestBean {
+public class AverageDrugFeeDAOTest extends BaseTestBean {
 
     @Resource
-    private DrugOutpatientDAO drugOutpatientDAO;
+    private AverageDrugFeeDAO averageDrugFeeDAO;
 
     @Test
     public void testSave() throws Exception {
-        List<DrugOutpatient> drugOutpatients = new ArrayList<>();
-        DrugOutpatient drugOutpatient = new DrugOutpatient();
-        drugOutpatient.setDeptCode("test");
-        drugOutpatient.setChargeType("全包");
-        drugOutpatient.setVisits(1);
-        drugOutpatient.setTotalCosts(123);
-        drugOutpatient.setTime(new Date());
+        List<AverageDrugFee> averageDrugFees = new ArrayList<>();
+        AverageDrugFee averageDrugFee = new AverageDrugFee();
+        averageDrugFee.setDeptCode("test");
+        averageDrugFee.setChargeType("全包");
+        averageDrugFee.setVisits(1);
+        averageDrugFee.setTotalCosts(123);
+        averageDrugFee.setTime(new Date());
 
-        DrugOutpatient drugOutpatient1 = new DrugOutpatient();
-        drugOutpatient1.setDeptCode("test");
-        drugOutpatient1.setChargeType("全包");
-        drugOutpatient1.setVisits(1);
-        drugOutpatient1.setTotalCosts(123);
-        drugOutpatient1.setTime(new Date());
+        AverageDrugFee averageDrugFee1 = new AverageDrugFee();
+        averageDrugFee1.setDeptCode("test");
+        averageDrugFee1.setChargeType("全包");
+        averageDrugFee1.setVisits(1);
+        averageDrugFee1.setTotalCosts(123);
+        averageDrugFee1.setTime(new Date());
 
-        drugOutpatients.add(drugOutpatient);
-        drugOutpatients.add(drugOutpatient1);
-        drugOutpatientDAO.save(drugOutpatients);
+        averageDrugFees.add(averageDrugFee);
+        averageDrugFees.add(averageDrugFee1);
+        averageDrugFeeDAO.save(averageDrugFees);
     }
 
     @Test
@@ -47,7 +47,7 @@ public class DrugOutpatientDAOTest extends BaseTestBean {
         queryParams.setBeginDate(DateFormatUtils.parse("2010-01-01", "yyyy-MM-dd"));
         queryParams.setEndDate(DateFormatUtils.parse("2010-04-01", "yyyy-MM-dd"));
         queryParams.setChargeType("军队医改te");
-        Map<String, Object> map = drugOutpatientDAO.staDrugOutpatientGlobal(queryParams);
+        Map<String, Object> map = averageDrugFeeDAO.staAverageDrugFeeGlobal(queryParams);
         System.out.println(map);
     }
 

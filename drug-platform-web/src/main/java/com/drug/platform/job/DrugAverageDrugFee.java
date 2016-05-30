@@ -1,8 +1,8 @@
 package com.drug.platform.job;
 
-import com.drug.platform.job.calculate.CalculateDrugOutpatient;
-import com.drug.platform.model.DrugOutpatient;
-import com.drug.platform.service.DrugOutpatientService;
+import com.drug.platform.job.calculate.CalculateAverageDrugFee;
+import com.drug.platform.model.AverageDrugFee;
+import com.drug.platform.service.AverageDrugFeeService;
 import com.drug.platform.service.TaskConfigService;
 import com.drug.platform.utils.DateFormatUtils;
 import org.apache.log4j.Logger;
@@ -14,16 +14,16 @@ import java.util.List;
 
 /**
  * Created by Yaochao on 2016/5/3.
- * 统计门诊此君药费比
+ * 统计次均药费
  */
-public class DrugOutpatientTask implements Task {
+public class DrugAverageDrugFee implements Task {
 
-    private Logger logger = Logger.getLogger(DrugOutpatientTask.class);
+    private Logger logger = Logger.getLogger(DrugAverageDrugFee.class);
 
     private boolean isRunning = false;
 
     @Resource
-    private DrugOutpatientService drugOutpatientService;
+    private AverageDrugFeeService averageDrugFeeService;
 
     @Resource
     private TaskConfigService taskConfigService;
@@ -49,26 +49,26 @@ public class DrugOutpatientTask implements Task {
         isRunning = true;
         try {
             while (true) {
-                String execTime = taskConfigService.getDrugOutpatientTaskExecTime();
+                String execTime = taskConfigService.getAverageDrugFeeTaskExecTime();
                 String now = DateFormatUtils.format(new Date(), DateFormatUtils.FORMAT_DATE);
                 Date execDate = DateFormatUtils.parse(execTime, DateFormatUtils.FORMAT_DATE);
                 Date nowDate = DateFormatUtils.parse(now, DateFormatUtils.FORMAT_DATE);
                 if (execDate.compareTo(nowDate) < 0) {
-                    List<DrugOutpatient> drugOutpatients = CalculateDrugOutpatient.calculate(execTime);
-                    if (drugOutpatients.size() > 0) {
-                        drugOutpatientService.addDrugOutpatientBatch(drugOutpatients);
+                    List<AverageDrugFee> averageDrugFees = CalculateAverageDrugFee.calculate(execTime);
+                    if (averageDrugFees.size() > 0) {
+                        averageDrugFeeService.addAverageDrugFeeBatch(averageDrugFees);
                     }
                     Calendar calendar = Calendar.getInstance();
                     calendar.setTime(execDate);
                     calendar.add(Calendar.DAY_OF_MONTH, 1);
-                    taskConfigService.updateDrugOutpatientTaskExecTime(DateFormatUtils.format(calendar.getTime(), DateFormatUtils.FORMAT_DATE));
-                    logger.info(execTime + "：完成门诊次均药费统计统计");
+                    taskConfigService.updateAverageDrugFeeTaskExecTime(DateFormatUtils.format(calendar.getTime(), DateFormatUtils.FORMAT_DATE));
+                    logger.info(execTime + "：完成次均药费统计");
                 } else {
                     break;
                 }
             }
         } catch (Exception e) {
-            logger.error("门诊次均药费统计出错:" + e.getMessage());
+            logger.error("次均药费统计出错:" + e.getMessage());
             e.printStackTrace();
         } finally {
             isRunning = false;

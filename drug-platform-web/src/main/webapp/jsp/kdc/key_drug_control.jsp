@@ -47,19 +47,17 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">药品名称：</label>
 
-                            <div class="col-sm-10">
+                            <div class="col-sm-10" id="drugName">
                                 <input type="text" class="form-control">
+                                <ul>
+                                </ul>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group drugSpec">
                             <label class="col-sm-2 control-label">规格厂家：</label>
 
                             <div class="col-sm-10">
                                 <select class="form-control">
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
                                 </select>
                             </div>
                         </div>
@@ -68,8 +66,8 @@
 
                             <div class="col-sm-10">
                                 <select class="form-control">
-                                    <option>住院</option>
-                                    <option>门诊</option>
+                                    <option value="inp">住院</option>
+                                    <option value="outp">门诊</option>
                                 </select>
                             </div>
                         </div>
@@ -78,21 +76,21 @@
 
                             <div class="col-sm-10">
                                 <select class="form-control input-inline">
-                                    <option>&gt;</option>
-                                    <option>&lt;</option>
-                                    <option>&gt;=</option>
-                                    <option>&lt;=</option>
-                                    <option><></option>
-                                    <option>=</option>
+                                    <option value=">">&gt;</option>
+                                    <option value="<">&lt;</option>
+                                    <option value="≥">&gt;=</option>
+                                    <option value="≤">&lt;=</option>
+                                    <option value="<>"><></option>
+                                    <option value="=">=</option>
                                 </select>
                                 <select class="form-control input-inline">
-                                    <option>1/日</option>
-                                    <option>2/日</option>
-                                    <option>3/日</option>
-                                    <option>4/日</option>
-                                    <option>6/日</option>
-                                    <option>1/晚</option>
-                                    <option>1/隔日</option>
+                                    <option value="1/日">1/日</option>
+                                    <option value="2/日">2/日</option>
+                                    <option value="3/日">3/日</option>
+                                    <option value="4/日">4/日</option>
+                                    <option value="6/日">6/日</option>
+                                    <option value="1/晚">1/晚</option>
+                                    <option value="1/隔日">1/隔日</option>
                                 </select>
                             </div>
                         </div>
@@ -101,22 +99,22 @@
 
                             <div class="col-sm-10">
                                 <select class="form-control input-inline">
-                                    <option>&gt;</option>
-                                    <option>&lt;</option>
-                                    <option>&gt;=</option>
-                                    <option>&lt;=</option>
-                                    <option><></option>
-                                    <option>=</option>
+                                    <option value=">">&gt;</option>
+                                    <option value="<">&lt;</option>
+                                    <option value="≥">&gt;=</option>
+                                    <option value="≤">&lt;=</option>
+                                    <option value="<>"><></option>
+                                    <option value="=">=</option>
                                 </select>
                                 <input type="text" class="form-control input-inline">
                                 <select class="form-control input-inline">
-                                    <option>ml</option>
-                                    <option>mg</option>
-                                    <option>g</option>
-                                    <option>支</option>
-                                    <option>枚</option>
-                                    <option>片</option>
-                                    <option>粒</option>
+                                    <option value="ml">ml</option>
+                                    <option value="mg">mg</option>
+                                    <option value="g">g</option>
+                                    <option value="支">支</option>
+                                    <option value="枚">枚</option>
+                                    <option value="片">片</option>
+                                    <option value="粒">粒</option>
                                 </select>
                             </div>
                         </div>
@@ -125,22 +123,22 @@
 
                             <div class="col-sm-10">
                                 <select class="form-control input-inline">
-                                    <option>&gt;</option>
-                                    <option>&lt;</option>
-                                    <option>&gt;=</option>
-                                    <option>&lt;=</option>
-                                    <option><></option>
-                                    <option>=</option>
+                                    <option value=">">&gt;</option>
+                                    <option value="<">&lt;</option>
+                                    <option value="≥">&gt;=</option>
+                                    <option value="≤">&lt;=</option>
+                                    <option value="<>"><></option>
+                                    <option value="=">=</option>
                                 </select>
                                 <input type="text" class="form-control input-inline">
                                 <select class="form-control input-inline">
-                                    <option>ml</option>
-                                    <option>mg</option>
-                                    <option>g</option>
-                                    <option>支</option>
-                                    <option>枚</option>
-                                    <option>片</option>
-                                    <option>粒</option>
+                                    <option value="ml">ml</option>
+                                    <option value="mg">mg</option>
+                                    <option value="g">g</option>
+                                    <option value="支">支</option>
+                                    <option value="枚">枚</option>
+                                    <option value="片">片</option>
+                                    <option value="粒">粒</option>
                                 </select>
                             </div>
                         </div>
@@ -149,10 +147,10 @@
 
                             <div class="col-sm-10">
                                 <select class="form-control">
-                                    <option>口服</option>
-                                    <option>静滴</option>
-                                    <option>静推</option>
-                                    <option>肌肉注射</option>
+                                    <option value="口服">口服</option>
+                                    <option value="静滴">静滴</option>
+                                    <option value="静推">静推</option>
+                                    <option value="肌肉注射">肌肉注射</option>
                                 </select>
                             </div>
                         </div>
@@ -161,6 +159,29 @@
 
                             <div class="col-sm-10">
                                 <div id="addSimilarDrugs" class="similar-drugs-panel">
+                                    <div class="row">
+                                        <div class="form-group col-lg-5">
+                                            <label class="col-sm-5 control-label">药品名称：</label>
+
+                                            <div class="col-sm-7" id="drugName">
+                                                <input type="text" class="form-control">
+                                                <ul>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-5 drugSpec">
+                                            <label class="col-sm-5 control-label">规格厂家：</label>
+
+                                            <div class="col-sm-7">
+                                                <select class="form-control">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <a class="btn btn-primary" id="addSimilarKeyDrug">添加</a>
+                                        </div>
+                                    </div>
+                                    <br>
                                     <label>已添加：</label>
 
                                     <div class="added-drugs">
@@ -168,7 +189,7 @@
                                     <label>快速选择同类药品</label>
 
                                     <div class="similar-drugs">
-                                        <span class="similar-drug" index="0">阿莫西林胶囊</span>
+                                        <span class="similar-drug" index="0">阿莫西林胶囊(哈尔滨1g)</span>
                                         <span class="similar-drug" index="1">注射用替考拉宁</span>
                                         <span class="similar-drug" index="2">头孢唑林钠</span>
                                         <span class="similar-drug" index="3">哌拉西林钠</span>
