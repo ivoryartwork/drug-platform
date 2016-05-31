@@ -1,7 +1,5 @@
 package com.drug.platform.dao;
 
-import com.drug.platform.model.KeyDrug;
-import com.drug.platform.model.SimilarKeyDrug;
 import org.junit.Test;
 
 import javax.annotation.Resource;
@@ -16,16 +14,16 @@ public class KeyDrugControllDAOTest extends BaseTestBean {
 
     @Test
     public void testSaveKeyDrug() throws Exception {
-//        KeyDrug keyDrug = new KeyDrug();
-//        keyDrug.setType("test");
-//        keyDrug.setDose("tes");
-//        keyDrug.setDrugCode("test");
-//        keyDrug.setDrugName("test");
-//        keyDrug.setDrugSpec("test");
-//        keyDrug.setFrequency("test");
-//        keyDrug.setRouteOfAdmin("test");
-//        keyDrug.setSingleDose("test");
-//        keyDrugControllDAO.saveKeyDrug(keyDrug);
+//        KeyDrug KeyDrug = new KeyDrug();
+//        KeyDrug.setType("test");
+//        KeyDrug.setDose("tes");
+//        KeyDrug.setDrugCode("test");
+//        KeyDrug.setDrugName("test");
+//        KeyDrug.setDrugSpec("test");
+//        KeyDrug.setFrequency("test");
+//        KeyDrug.setRouteOfAdmin("test");
+//        KeyDrug.setSingleDose("test");
+//        keyDrugControllDAO.saveKeyDrug(KeyDrug);
     }
 
     @Test

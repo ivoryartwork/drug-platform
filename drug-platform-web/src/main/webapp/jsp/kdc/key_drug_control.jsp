@@ -12,6 +12,10 @@
     <title>Title</title>
 </head>
 <body>
+<form id="export" method="post" action="kdc/export" style="display: none">
+    <input name="pageNum" value="0">
+    <input name="type" id="type">
+</form>
 <div class="row">
     <div class="panel">
         <form class="form-inline search-from">
@@ -24,7 +28,7 @@
                 添加药品
             </button>
 
-            <button class="btn btn-warning x-btn">导出</button>
+            <button class="btn btn-warning x-btn" type="button" id="exportBtn">导出</button>
             <button id="back" type="button" class="btn btn-info x-btn">返回</button>
             <div class="form-group right" id="searchKeyDrug">
                 <%--<input type="text" class="form-control" placeholder="药品名称">--%>

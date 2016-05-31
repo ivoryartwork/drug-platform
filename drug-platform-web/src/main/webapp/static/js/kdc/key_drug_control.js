@@ -9,6 +9,18 @@ $(function () {
 })
 
 function initBtn() {
+
+    //导出按钮
+    $("#exportBtn").click(function () {
+        var type = $("#drugsMonitorSwitch option:selected").val();
+        if (type == 0) {
+            $("#type").val("outp")
+        } else {
+            $("#type").val("inp")
+        }
+        $("#export").submit();
+    })
+
     $('#back').click(function () {
         back();
     })

@@ -1,6 +1,5 @@
 package com.drug.platform.dao;
 
-import com.drug.platform.model.KeyDrug;
 import com.drug.platform.model.SimilarKeyDrug;
 
 import java.util.List;
