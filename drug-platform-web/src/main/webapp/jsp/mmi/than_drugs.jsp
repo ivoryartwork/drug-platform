@@ -37,11 +37,7 @@
             <div class="form-group dept">
                 <label>科室名称：</label>
                 <select class="form-control">
-                    <option value="none">不分科室</option>
-                    <option value="112">骨科</option>
-                    <option value="12">妇产科</option>
-                    <option value="23213">外科</option>
-                    <option value="23432">内科</option>
+
                 </select>
             </div>
             <div class="form-group dept-ward hide">

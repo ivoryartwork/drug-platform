@@ -12,8 +12,21 @@
     <title>Title</title>
 </head>
 <body>
-
+<div class="row">
+    <div class="panel">
+        <form class="form-inline search-from">
+            <div class="form-group">
+                <label>选择时间：</label>
+                <input type="text" class="form-control x-datepicker-month">
+            </div>
+            <div class="form-group dept">
+                <label>科室名称：</label>
+                <select class="form-control">
+                </select>
+            </div>
+        </form>
+    </div>
+</div>
 <script src="<c:url value="/static/js/mReport/than_drugs_report.js"/>"></script>
-than_drugs_report.jsp
 </body>
 </html>

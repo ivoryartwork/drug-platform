@@ -48,6 +48,13 @@ var Main = function () {
             language: "zh-CN",
             autoclose: true
         });
+
+        $(".x-datepicker-month").datepicker({
+            format: "yyyy-mm",
+            language: "zh-CN",
+            minViewMode: 1,
+            autoclose: true
+        });
     }
 
     var searchFormInit = function () {
