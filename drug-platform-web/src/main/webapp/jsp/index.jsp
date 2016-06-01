@@ -88,17 +88,17 @@
             </ul>
             <ul class="nav nav-sidebar">
                 <li class="active"><a>月报表</a></li>
-                <li class="sidebar-item"><a href="">科室药费比</a></li>
-                <li class="sidebar-item"><a href="">科室门诊次均药费</a></li>
-                <li class="sidebar-item"><a href="">病区住院次均药费</a></li>
-                <li class="sidebar-item"><a href="">病区抗菌药物使用强度</a></li>
-                <li class="sidebar-item"><a href="">病区住院抗菌药物使用率</a></li>
-                <li class="sidebar-item"><a href="">科室门诊抗菌药物处方比例</a></li>
-                <li class="sidebar-item"><a href="">急诊抗菌药物处方比例</a></li>
-                <li class="sidebar-item"><a href="">I类切口预防使用抗菌药物比例</a></li>
-                <li class="sidebar-item"><a href="">不合理用药记录</a></li>
-                <li class="sidebar-item"><a href="">药品用量统计</a></li>
-                <li class="sidebar-item"><a href="">联合用药统计</a></li>
+                <li class="sidebar-item"><a href="than_drugs_report.html">科室药费比</a></li>
+                <li class="sidebar-item"><a href="drugs_outpatient_report.html">科室门诊次均药费</a></li>
+                <li class="sidebar-item"><a href="ahe_report.html">病区住院次均药费</a></li>
+                <li class="sidebar-item"><a href="aud_report.html">病区抗菌药物使用强度</a></li>
+                <li class="sidebar-item"><a href="uaa_report.html">病区住院抗菌药物使用率</a></li>
+                <li class="sidebar-item"><a href="poap_report.html">科室门诊抗菌药物处方比例</a></li>
+                <li class="sidebar-item"><a href="paed_report.html">急诊抗菌药物处方比例</a></li>
+                <li class="sidebar-item"><a href="ipuaa_report.html">I类切口预防使用抗菌药物比例</a></li>
+                <li class="sidebar-item"><a href="idr_report.html">不合理用药记录</a></li>
+                <li class="sidebar-item"><a href="dus_report.html">药品用量统计</a></li>
+                <li class="sidebar-item"><a href="sc_report.html">联合用药统计</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li class="active"><a>特殊管理药品监控</a></li>

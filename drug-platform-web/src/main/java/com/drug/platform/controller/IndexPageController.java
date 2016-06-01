@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by Yaochao on 2016/4/18.
@@ -275,5 +276,126 @@ public class IndexPageController {
     @RequestMapping("/uolm")
     public String uolm(HttpServletRequest request) {
         return Pages.URM.UOLM;
+    }
+
+    /**
+     * 科室药费比月报表
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping("/than_drugs_report")
+    public String than_drugs_report(HttpServletRequest request) {
+        return Pages.MREPORT.THAN_DRUGS_REPORT;
+    }
+
+    /**
+     * 科室门诊次均药费月报表
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping("/drugs_outpatient_report")
+    public String drugs_outpatient_report(HttpServletRequest request) {
+        return Pages.MREPORT.DRUGS_OUTPATIENT_REPORT;
+    }
+
+    /**
+     * 病区住院次均药费月报表
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping("/ahe_report")
+    public String ahe_report(HttpServletRequest request) {
+        return Pages.MREPORT.AHE_REPORT;
+    }
+
+    /**
+     * 病区抗菌药物使用强度月报表
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping("/aud_report")
+    public String aud_report(HttpServletRequest request) {
+        return Pages.MREPORT.AUD_REPORT;
+    }
+
+    /**
+     * 病区住院抗菌药物使用率月报表
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping("/uaa_report")
+    public String uaa_report(HttpServletRequest request) {
+        return Pages.MREPORT.UAA_REPORT;
+    }
+
+    /**
+     * 科室门诊抗菌药物处方比例月报表
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping("/poap_report")
+    public String poap_report(HttpServletRequest request) {
+        return Pages.MREPORT.POAP_REPORT;
+    }
+
+    /**
+     * 急诊抗菌药物处方比例月报表
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping("/paed_report")
+    public String paed_report(HttpServletRequest request) {
+        return Pages.MREPORT.PAED_REPORT;
+    }
+
+    /**
+     * i类切口预防使用抗菌药物比例月报表
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping("/ipuaa_report")
+    public String ipuaa_report(HttpServletRequest request) {
+        return Pages.MREPORT.IPUAA_REPORT;
+    }
+
+    /**
+     * 不合理用药记录月报表
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping("/idr_report")
+    public String idr_report(HttpServletRequest request) {
+        return Pages.MREPORT.IDR_REPORT;
+    }
+
+    /**
+     * 药品用量统计月报表
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping("/dus_report")
+    public String dus_report(HttpServletRequest request) {
+        return Pages.MREPORT.DUS_REPORT;
+    }
+
+    /**
+     * 联合用药统计月报表
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping("/sc_report")
+    public String sc_report(HttpServletRequest request) {
+        return Pages.MREPORT.SC_REPORT;
     }
 }

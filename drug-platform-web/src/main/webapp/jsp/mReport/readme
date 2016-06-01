@@ -1,0 +1,12 @@
+月报表
+than_drugs_report.jsp 科室药费比
+drugs_outpatient_report.jsp 科室门诊次均药费
+ahe_report.jsp 病区住院次均药费
+aud_report.jsp 病区抗菌药物使用强度
+uaa_report.jsp 病区住院抗菌药物使用率
+poap_report.jsp 科室门诊抗菌药物处方比例
+paed_report.jsp 急诊抗菌药物处方比例
+ipuaa_report.jsp i类切口预防使用抗菌药物比例
+idr_report.jsp 不合理用药记录
+dus_report.jsp 药品用量统计
+sc_report.jsp 联合用药统计

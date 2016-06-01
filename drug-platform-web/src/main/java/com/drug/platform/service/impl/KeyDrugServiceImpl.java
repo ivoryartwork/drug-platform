@@ -3,6 +3,7 @@ package com.drug.platform.service.impl;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.drug.platform.dao.KeyDrugControllDAO;
+import com.drug.platform.model.KeyDrug;
 import com.drug.platform.model.SimilarKeyDrug;
 import com.drug.platform.service.KeyDrugService;
 import com.github.pagehelper.Page;

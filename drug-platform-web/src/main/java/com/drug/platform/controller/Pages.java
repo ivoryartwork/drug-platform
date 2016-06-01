@@ -102,4 +102,32 @@ public class Pages {
 
         public static final String AUTHENTICATION_FAILED = "authentication_failed";
     }
+
+    /**
+     * 月报表
+     */
+    public class MREPORT {
+
+        public static final String THAN_DRUGS_REPORT = "mReport.than_drugs_report.page";
+
+        public static final String DRUGS_OUTPATIENT_REPORT = "mReport.drugs_outpatient_report.page";
+
+        public static final String AHE_REPORT = "mReport.ahe_report.page";
+
+        public static final String AUD_REPORT = "mReport.aud_report.page";
+
+        public static final String UAA_REPORT = "mReport.uaa_report.page";
+
+        public static final String POAP_REPORT = "mReport.poap_report.page";
+
+        public static final String PAED_REPORT = "mReport.paed_report.page";
+
+        public static final String IPUAA_REPORT = "mReport.ipuaa_report.page";
+
+        public static final String IDR_REPORT = "mReport.idr_report.page";
+
+        public static final String DUS_REPORT = "mReport.dus_report.page";
+
+        public static final String SC_REPORT = "mReport.sc_report.page";
+    }
 }
