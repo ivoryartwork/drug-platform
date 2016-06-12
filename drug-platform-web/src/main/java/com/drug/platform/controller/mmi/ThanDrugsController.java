@@ -2,11 +2,14 @@ package com.drug.platform.controller.mmi;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.drug.platform.controller.ControllerUtil;
 import com.drug.platform.controller.annotation.UserOptLog;
 import com.drug.platform.model.QueryParams;
 import com.drug.platform.service.DrugsThanService;
 import com.drug.platform.utils.DateFormatUtils;
 import com.drug.platform.utils.StaUtil;
+import jxl.write.Label;
+import jxl.write.WritableCell;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Yaochao on 2016/4/20.
@@ -145,5 +151,40 @@ public class ThanDrugsController {
         queryParams.setEndDate(dates[1]);
         JSONArray result = drugsThanService.staDeptDrugsThan(queryParams);
         return result.toJSONString();
+    }
+
+    /**
+     * 月报表导出
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/mReport/export", method = RequestMethod.POST)
+    public void mReportExport(@RequestParam String time, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Date[] dates = StaUtil.getMReportTime(time);
+        QueryParams queryParams = new QueryParams();
+        queryParams.setBeginDate(dates[0]);
+        queryParams.setEndDate(dates[1]);
+        JSONArray result = drugsThanService.staDeptDrugsThan(queryParams);
+        String header[] = {"科室名称", "药费（元）", "治疗费（元）", "总数（元）", "药占比（%）", "目标值（%）", "排名"};
+        List<WritableCell> cells = new ArrayList<>();
+        for (int i = 0; i < result.size(); i++) {
+            JSONObject data = result.getJSONObject(i);
+            Label label0 = new Label(0, i + 1, data.getString("deptName"));
+            Label label1 = new Label(1, i + 1, data.getString("drugCost"));
+            Label label2 = new Label(2, i + 1, data.getString("treatCost"));
+            Label label3 = new Label(3, i + 1, data.getString("totalCost"));
+            Label label4 = new Label(4, i + 1, data.getString("rate"));
+            Label label5 = new Label(5, i + 1, data.getString("targetRate"));
+            Label label6 = new Label(6, i + 1, data.getString("rank"));
+            cells.add(label0);
+            cells.add(label1);
+            cells.add(label2);
+            cells.add(label3);
+            cells.add(label4);
+            cells.add(label5);
+            cells.add(label6);
+        }
+        ControllerUtil.exportExcel(cells, header, time + "各科室药费比", response);
     }
 }

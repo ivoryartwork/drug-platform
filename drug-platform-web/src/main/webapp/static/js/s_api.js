@@ -38,6 +38,18 @@ $(function (s) {
         });
     }
 
+    //月报表
+    s.thanDrugs.mReport = function (params, callback) {
+        $.ajax({
+            url: 'mmi/thanDrugs/mReport',
+            data: params,
+            type: 'get',
+            success: function (data) {
+                callback(data);
+            }
+        });
+    }
+
     //用药记录
     s.drugTakeRecords = {};
     s.drugTakeRecords.byTime = function (params, callback) {
