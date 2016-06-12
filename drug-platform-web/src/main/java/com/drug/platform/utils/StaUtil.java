@@ -1,5 +1,6 @@
 package com.drug.platform.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -43,6 +44,19 @@ public class StaUtil {
         dates[0][1] = calendar.getTime();
         calendar.set(Calendar.DAY_OF_MONTH, 1);
         dates[0][0] = calendar.getTime();
+        return dates;
+    }
+
+    public static Date[] getMReportTime(String time) throws Exception {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
+        Date date = dateFormat.parse(time);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
+        calendar.set(Calendar.DAY_OF_MONTH, 0);
+        Date[] dates = new Date[2];
+        dates[1] = calendar.getTime();
+        dates[0] = date;
         return dates;
     }
 }

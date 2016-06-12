@@ -52,21 +52,7 @@ public class DrugsThanServiceImpl implements DrugsThanService {
             rate.put("totalCost", rateMap.get("TOTALCOST"));  //总费用
             rate.put("rate", rateMap.get("FATE"));  //药费比
             result.put("rate", rate);
-            List<Map<String, Object>> deptDrugsThanList = drugsThanDAO.staDeptDrugsThan(queryParams);
-            JSONArray deptRates = new JSONArray();
-            for (int i = 0; i < deptDrugsThanList.size(); i++) {
-                Map<String, Object> deptDrugsThan = deptDrugsThanList.get(i);
-                JSONObject deptRate = new JSONObject();
-                deptRate.put("deptName", deptDrugsThan.get("DEPT_NAME"));
-                deptRate.put("deptCode", deptDrugsThan.get("DEPTCODE"));
-                deptRate.put("drugCost", deptDrugsThan.get("TOTALDRUGCOST"));
-                deptRate.put("treatCost", deptDrugsThan.get("TOTALTREATCOST"));
-                deptRate.put("totalCost", deptDrugsThan.get("TOTALCOST"));
-                deptRate.put("rate", deptDrugsThan.get("FATE"));
-                deptRate.put("targetRate", "75");
-                deptRate.put("rank", i + 1);
-                deptRates.add(deptRate);
-            }
+            JSONArray deptRates = staDeptDrugsThan(queryParams);
             result.put("deptRates", deptRates);
 
             Date[][] dates = StaUtil.getTrendTime(queryParams.getEndDate());
@@ -87,5 +73,31 @@ public class DrugsThanServiceImpl implements DrugsThanService {
             return result.toJSONString();
         }
         return "";
+    }
+
+    /**
+     * 统计各科室药费比
+     *
+     * @param queryParams
+     * @return json格式
+     */
+    @Override
+    public JSONArray staDeptDrugsThan(QueryParams queryParams) {
+        List<Map<String, Object>> deptDrugsThanList = drugsThanDAO.staDeptDrugsThan(queryParams);
+        JSONArray deptRates = new JSONArray();
+        for (int i = 0; i < deptDrugsThanList.size(); i++) {
+            Map<String, Object> deptDrugsThan = deptDrugsThanList.get(i);
+            JSONObject deptRate = new JSONObject();
+            deptRate.put("deptName", deptDrugsThan.get("DEPT_NAME"));
+            deptRate.put("deptCode", deptDrugsThan.get("DEPTCODE"));
+            deptRate.put("drugCost", deptDrugsThan.get("TOTALDRUGCOST"));
+            deptRate.put("treatCost", deptDrugsThan.get("TOTALTREATCOST"));
+            deptRate.put("totalCost", deptDrugsThan.get("TOTALCOST"));
+            deptRate.put("rate", deptDrugsThan.get("FATE"));
+            deptRate.put("targetRate", "75");
+            deptRate.put("rank", i + 1);
+            deptRates.add(deptRate);
+        }
+        return deptRates;
     }
 }

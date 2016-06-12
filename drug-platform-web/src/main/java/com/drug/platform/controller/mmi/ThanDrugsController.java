@@ -6,6 +6,7 @@ import com.drug.platform.controller.annotation.UserOptLog;
 import com.drug.platform.model.QueryParams;
 import com.drug.platform.service.DrugsThanService;
 import com.drug.platform.utils.DateFormatUtils;
+import com.drug.platform.utils.StaUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 /**
  * Created by Yaochao on 2016/4/20.
@@ -126,6 +128,22 @@ public class ThanDrugsController {
 
         //趋势
         result.put("trend", "1,2,3,4,5,6");
+        return result.toJSONString();
+    }
+
+    /**
+     * 月报表
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/mReport")
+    public String mReport(@RequestParam String time, HttpServletRequest request) throws Exception {
+        Date[] dates = StaUtil.getMReportTime(time);
+        QueryParams queryParams = new QueryParams();
+        queryParams.setBeginDate(dates[0]);
+        queryParams.setEndDate(dates[1]);
+        JSONArray result = drugsThanService.staDeptDrugsThan(queryParams);
         return result.toJSONString();
     }
 }

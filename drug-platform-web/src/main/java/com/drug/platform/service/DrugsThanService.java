@@ -1,5 +1,6 @@
 package com.drug.platform.service;
 
+import com.alibaba.fastjson.JSONArray;
 import com.drug.platform.model.DrugsThan;
 import com.drug.platform.model.QueryParams;
 
@@ -24,4 +25,12 @@ public interface DrugsThanService {
      * @return json格式
      */
     public String staGlobalDrugsThan(QueryParams queryParams);
+
+    /**
+     * 统计各科室药费比
+     *
+     * @param queryParams
+     * @return json格式
+     */
+    public JSONArray staDeptDrugsThan(QueryParams queryParams);
 }
